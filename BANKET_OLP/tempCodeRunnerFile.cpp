@@ -1,2 +1,0 @@
-
-    vector<ll> tmp(n);
