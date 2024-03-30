@@ -1,48 +1,43 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
+
+#define NAME "NAME"
+#define ln '\n'
 
 typedef long long ll;
 typedef long double ld;
 
-#define NAME "NAME"
-
-const ll MAXN = 2e5 + 5;
+void docfile() {
+    if (ifstream(NAME".inp")) {
+        freopen(NAME".inp", "r", stdin);
+        freopen(NAME".out", "w", stdout);
+    }
+}
 
 int main() {
-    ios_base::sync_with_stdio(0);
-    cin.tie(0);cout.tie(0);
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+    docfile();
 
-    string s;
-    cin >> s;
-    
-    ll q;
-    cin >> q;
+    string S = "a";
+    string st;
+    getline(cin, st);
+    S += st;
 
-    ll n = s.length();
-    s = " " + s;
-    ll tmp = (n + 1) / 2;
+    ll Q;
+    cin >> Q;
+    ll l = S.length() - 1;
 
-    vector<ll> vec(MAXN, 0);
-    while(q--) {
+    while (Q--) {
         ll x;
         cin >> x;
-
-        if (x >= tmp) 
-            x = n - x + 1;
-
-        vec[tmp + 1]--;
-        vec[x]++;
-    }  
-
-    for (ll i = 1; i <= n; ++i) 
-        vec[i] += vec[i - 1];
-
-    for (ll i = 1;i <= tmp; ++i) {
-        if (vec[i] % 2 != 0) 
-            swap(s[i], s[n - i + 1]);
+		
+		swap(S[x], S[l - x + 1]);
     }
-    s.erase(0,1);
-    cout << s;
+
+	S.erase(0, 1);
+    cout << S;
 
     return 0;
 }
