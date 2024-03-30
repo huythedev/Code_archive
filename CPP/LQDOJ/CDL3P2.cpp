@@ -8,7 +8,7 @@ typedef long long ll;
 typedef long double ld;
 
 void docfile() {
-    if (ifstream(NAME".inp")) {
+    if(ifstream(NAME".inp")) {
         freopen(NAME".inp", "r", stdin);
         freopen(NAME".out", "w", stdout);
     }
@@ -21,21 +21,12 @@ int main() {
 
     int n;
     cin >> n;
-    vector<int> a(n);
-    for(int i = 0; i < n; ++i) {
-        cin >> a[i];
-    }
 
-    set<int> s;
-    for(int i = 0; i < n; ++i) {
-        auto it = s.lower_bound(a[i]);
-        if(it != s.end()) {
-            s.erase(it);
-        }
-        s.insert(a[i]);
-    }
+    ll res = 0;
+    for(ll i = 3; i <= n; i += 3)
+        res += i;
 
-    cout << s.size();
+    cout << res;
 
     return 0;
 }
