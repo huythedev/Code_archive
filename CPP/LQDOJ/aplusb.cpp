@@ -19,10 +19,10 @@ int main() {
     cin.tie(NULL); cout.tie(NULL);
     docfile();
 
-    int q;
-    cin >> q;
+    ll T;
+    cin >> T;
 
-    while(q--) {
+    while(T--) {
         ll a, b;
         cin >> a >> b;
         cout << a + b << ln;
