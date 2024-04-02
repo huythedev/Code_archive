@@ -30,8 +30,9 @@ int main() {
     }
     
     int res = 0;
-    for(int i : a) 
-        res += freq[i];
+    for(int i : a) {
+        
+    }
 
     cout << res;
 

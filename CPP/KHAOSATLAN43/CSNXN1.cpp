@@ -7,6 +7,8 @@ using namespace std;
 typedef long long ll;
 typedef long double ld;
 
+int x,n,m, mod;
+
 void docfile() {
     if(ifstream(NAME".inp")) {
         freopen(NAME".inp", "r", stdin);
@@ -14,25 +16,22 @@ void docfile() {
     }
 }
 
-ll power(ll a, ll b) {
-    ll res = (ll)pow(a, b);
-    cout << res << ln;
-    return res;
+int powMod(int _n,int _k) {
+    if (_k == 0) return 1;
+    int tmp = powMod(_n,_k >> 1LL);
+    tmp = tmp * tmp % m;
+    if (_k & 1LL) tmp = tmp * _n % mod;
+    return tmp;
 }
 
 int main() {
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL); cout.tie(NULL);
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);cout.tie(0);
     docfile();
 
-    ll x, n, m;
     cin >> x >> n >> m;
+    mod = m;
 
-    ll res = 0;
-    for(ll i = 0; i <= n; ++i)
-        res = (res + power(x, i));
-    
-    cout << res;
-
+    cout << (powMod(x, n + 1) - 1 + m * m) % m * powMod(x - 1,m - 2) % m;
     return 0;
 }
