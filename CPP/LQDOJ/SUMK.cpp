@@ -37,8 +37,10 @@ int main() {
 
     vector<ll> prefixsum = buildprefixsum(a);
     ll res = 0;
-    for(int i = 0; i < N - K; i += K) 
-        res = max(res, prefixsum[i + K] - prefixsum[i]); 
+    for(int i = 1; i < N - K; i += K) {
+        int l = i, r = i - 1 + K;
+        res = max(res, prefixsum[r] - prefixsum[l - 1]);
+    }
 
     cout << res;
 
