@@ -14,34 +14,25 @@ void docfile() {
     }
 }
 
-ll cntdiv(ll n) {
-    ll res = 0;
-    for(ll i = 1; i*i <= n; i++) {
-        if(n%i == 0) {
-            if(i*i == n) res++;
-            else res += 2;
-        }
-    }
-    return res;
-}
-
 int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL); cout.tie(NULL);
     docfile();
 
-    ll N;
-    cin >> N;
+    string s;
+    getline(cin, s);
 
-    ll res = 0;
-    for (ll i = 0; i < N; ++i) {
-        ll a;
-        cin >> a;
-        res += a * cntdiv(a);
+    string res;
+    for (int i = 0; i < s.length(); i++) {
+        char c = s[i];
+        if (res.empty() || res.back() != c) {
+            res.push_back(c);
+        } else {
+            res.pop_back();
+        }
     }
-
-    cout << res;
-
+    
+    cout << res << endl;
 
     return 0;
 }

@@ -14,15 +14,19 @@ void docfile() {
     }
 }
 
-ll cntdiv(ll n) {
-    ll res = 0;
-    for(ll i = 1; i*i <= n; i++) {
-        if(n%i == 0) {
-            if(i*i == n) res++;
-            else res += 2;
-        }
+int maxk(int n, int m) {
+    int k = 0;
+    int p = m;
+    while (n >= p) {
+        k += n / p;
+        p *= m;
     }
-    return res;
+    
+    if (k == 0) {
+        return -1;
+    } else {
+        return k;
+    }
 }
 
 int main() {
@@ -30,18 +34,10 @@ int main() {
     cin.tie(NULL); cout.tie(NULL);
     docfile();
 
-    ll N;
-    cin >> N;
+    int n, m;
+    cin >> n >> m;
 
-    ll res = 0;
-    for (ll i = 0; i < N; ++i) {
-        ll a;
-        cin >> a;
-        res += a * cntdiv(a);
-    }
-
-    cout << res;
-
+    cout << maxk(n, m);
 
     return 0;
 }

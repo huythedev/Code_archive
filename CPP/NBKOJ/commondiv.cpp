@@ -14,34 +14,27 @@ void docfile() {
     }
 }
 
-ll cntdiv(ll n) {
-    ll res = 0;
-    for(ll i = 1; i*i <= n; i++) {
-        if(n%i == 0) {
-            if(i*i == n) res++;
-            else res += 2;
-        }
-    }
-    return res;
-}
-
 int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL); cout.tie(NULL);
     docfile();
 
-    ll N;
-    cin >> N;
+    ll n;
+    cin >> n;
 
-    ll res = 0;
-    for (ll i = 0; i < N; ++i) {
-        ll a;
-        cin >> a;
-        res += a * cntdiv(a);
+    vector<ll> x(n);
+    for (ll i = 0; i < n; ++i) {
+        cin >> x[i];
     }
 
-    cout << res;
+    ll maxgcd = 1;
+    for(ll i = 0; i < n - 1; ++i) {
+        for(ll j = i + 1; j < n; ++j) {
+            maxgcd = max(maxgcd, __gcd(x[i], x[j]));
+        }
+    }
 
+    cout << maxgcd;
 
     return 0;
 }
