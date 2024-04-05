@@ -27,7 +27,7 @@ int main() {
         cin >> a[i];
         a[i + n] = a[i];
         if (a[i] >= X) {
-            cout << 0;
+            cout << 1;
             return 0;
         }
     }
@@ -37,7 +37,7 @@ int main() {
         sum += a[i];
 
     if (sum < X) {
-        cout << 0;
+        cout << -1;
         return 0;
     }
 
