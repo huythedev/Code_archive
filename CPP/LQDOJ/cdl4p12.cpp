@@ -19,10 +19,13 @@ int main() {
     cin.tie(NULL); cout.tie(NULL);
     docfile();
 
-    ll a, b;
-    cin >> a >> b;
+    double w, h;
+    cin >> w >> h;
+    h /= 100;
 
-    cout << (b / 3) - ((a - 1) / 3);
+    double bmi = w / (h * h);
+
+    cout << fixed << setprecision(2) << "Chi so BMI: " << bmi;
 
     return 0;
 }

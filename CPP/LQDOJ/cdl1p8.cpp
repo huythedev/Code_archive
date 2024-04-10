@@ -19,10 +19,10 @@ int main() {
     cin.tie(NULL); cout.tie(NULL);
     docfile();
 
-    ll a, b;
-    cin >> a >> b;
+    int a, b, u, v, x, y;
+    cin >> a >> b >> u >> v >> x >> y;
 
-    cout << (b / 3) - ((a - 1) / 3);
+    cout << "Tong so tien ve: " << (a + u) * (x - y) + (b + v) * y << " nghin dong.";
 
     return 0;
 }

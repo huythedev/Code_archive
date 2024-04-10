@@ -19,10 +19,17 @@ int main() {
     cin.tie(NULL); cout.tie(NULL);
     docfile();
 
-    ll a, b;
-    cin >> a >> b;
+    int N;
+    cin >> N;
 
-    cout << (b / 3) - ((a - 1) / 3);
+    ld res = 0;
+    for(int i = 0; i < N; ++i) {
+        ld x;
+        cin >> x;
+        res += x;
+    }
+
+    cout << fixed << setprecision(2) << res / N;
 
     return 0;
 }

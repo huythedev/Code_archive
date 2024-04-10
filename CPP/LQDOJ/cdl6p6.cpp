@@ -19,10 +19,15 @@ int main() {
     cin.tie(NULL); cout.tie(NULL);
     docfile();
 
-    ll a, b;
-    cin >> a >> b;
+    int N;
+    cin >> N;
 
-    cout << (b / 3) - ((a - 1) / 3);
+    int cnt = 0, t;
+    while(cin >> t)
+        if(t <= 100)
+            cnt++;
+
+    cout << cnt;
 
     return 0;
 }

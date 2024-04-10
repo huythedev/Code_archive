@@ -14,15 +14,33 @@ void docfile() {
     }
 }
 
+ll minN(ll k) {
+    ll low = 1, high = k;
+    ll result = -1;
+
+    while (low <= high) {
+        ll mid = low + (high - low) / 2;
+        ll sum = mid * (mid + 1);
+
+        if (sum > k) {
+            result = mid;
+            high = mid - 1;
+        } else {
+            low = mid + 1;
+        }
+    }
+
+    return result;
+}
+
 int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL); cout.tie(NULL);
     docfile();
 
-    ll a, b;
-    cin >> a >> b;
-
-    cout << (b / 3) - ((a - 1) / 3);
+    ll k;
+    cin >> k;
+    cout << minN(k);
 
     return 0;
 }
