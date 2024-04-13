@@ -19,6 +19,7 @@ int main() {
     cin.tie(NULL); cout.tie(NULL);
     docfile();
 
+<<<<<<< Updated upstream
     int n, q;
     cin >> n >> q;
     vector<ll> a(n + 1);
@@ -47,5 +48,30 @@ int main() {
     }
 
 
+=======
+    int N, Q; cin >> N >> Q;
+    vector<int> A(N);
+    for(int i = 0; i < N; ++i)
+        cin >> A[i];
+
+    while(Q--) {
+        int type; cin >> type;
+
+        if(type == 1) {
+            int p, x; cin >> p >> x;
+            A[p - 1] += x;
+        }
+        else {
+            int l, r; cin >> l >> r;
+            l--; r--;
+
+            ll sum = 0;
+            for(int i = l; i <= r; ++i)
+                sum += A[i];
+            cout << sum << ln;
+        }
+    }
+
+>>>>>>> Stashed changes
     return 0;
 }
