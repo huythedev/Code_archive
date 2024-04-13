@@ -14,21 +14,23 @@ void docfile() {
     }
 }
 
+bool check(const string st) {
+    int cnt = 0;
+    for (int l = 0, r = st.size() - 1; l < r; ++l, --r)
+        cnt += (st[l] != st[r]);
+
+    return cnt <= 2;
+}
+
 int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL); cout.tie(NULL);
     docfile();
 
-    string st; cin >> st;
-
-    while(st.size() > 1) {
-        int t = 0;
-        for(char c : st) 
-            t += c - '0';
-        st = to_string(t);
+    string st;
+    while(cin >> st) {
+        cout << (check(st) ? "YES" : "NO") << ln;
     }
-
-    cout << st;
 
     return 0;
 }

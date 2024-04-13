@@ -14,21 +14,28 @@ void docfile() {
     }
 }
 
+ll solve(ll N) {
+    vector<ll> dp(N + 1, 1e18 + 5);
+
+    dp[0] = 0;
+    for (int i = 1; i <= N; i++) {
+        ll tmp = i;
+        while (tmp) {
+            ll d = tmp % 10;
+            dp[i] = min(dp[i], 1 + dp[i - d]);
+            tmp /= 10;
+        }
+    }
+    return dp[N];
+}
+
 int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL); cout.tie(NULL);
     docfile();
 
-    string st; cin >> st;
-
-    while(st.size() > 1) {
-        int t = 0;
-        for(char c : st) 
-            t += c - '0';
-        st = to_string(t);
-    }
-
-    cout << st;
+    int n; cin >> n;
+    cout << solve(n);
 
     return 0;
 }

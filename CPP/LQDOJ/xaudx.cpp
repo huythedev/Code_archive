@@ -19,16 +19,17 @@ int main() {
     cin.tie(NULL); cout.tie(NULL);
     docfile();
 
-    string st; cin >> st;
+    map<char, int> freq;
+    string s; cin >> s;
+    for(char c : s) 
+        freq[c]++;
+    
+    int res = 0;
+    for(auto &kv : freq) 
+        if(kv.second % 2 == 1) 
+            res++;
 
-    while(st.size() > 1) {
-        int t = 0;
-        for(char c : st) 
-            t += c - '0';
-        st = to_string(t);
-    }
-
-    cout << st;
+    cout << res - 1;
 
     return 0;
 }

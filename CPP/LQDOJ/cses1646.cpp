@@ -14,26 +14,30 @@ void docfile() {
     }
 }
 
+vector<ll> buildprefixsum(vector<ll> &a) {
+    vector<ll> res(a.size() + 1, 0);
+    res[0] = 0;
+    for(ll i = 1; i <= a.size(); ++i) 
+        res[i] = res[i - 1] + a[i - 1];
+    
+    return res;
+}
+
 int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL); cout.tie(NULL);
     docfile();
 
-    ll n, m; cin >> n >> m;
+    int n, q; cin >> n >> q;
     vector<ll> a(n);
     for(ll i = 0; i < n; ++i) cin >> a[i];
 
-    sort(a.begin(), a.end());
-    ll res = 0;
-    for(ll i = 0; i < n - 1; ++i) {
-        ll tmp = m - a[i];
-        if(tmp <= 0)
-            continue;
-        ll t = upper_bound(a.begin() + i + 1, a.end(), tmp) - a.begin();
-        res += max(0LL, t - i - 1);
+    vector<ll> prefixsum = buildprefixsum(a);
+    while(q--) {
+        int l, r; cin >> l >> r;
+        l--; r--;
+        cout << prefixsum[r + 1] - prefixsum[l] << ln;
     }
-
-    cout << res;
 
     return 0;
 }

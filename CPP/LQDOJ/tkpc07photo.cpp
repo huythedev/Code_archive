@@ -19,19 +19,23 @@ int main() {
     cin.tie(NULL); cout.tie(NULL);
     docfile();
 
-    ll n, m; cin >> n >> m;
-    vector<ll> a(n);
-    for(ll i = 0; i < n; ++i) cin >> a[i];
-
-    sort(a.begin(), a.end());
-    ll res = 0;
-    for(ll i = 0; i < n - 1; ++i) {
-        ll tmp = m - a[i];
-        if(tmp <= 0)
-            continue;
-        ll t = upper_bound(a.begin() + i + 1, a.end(), tmp) - a.begin();
-        res += max(0LL, t - i - 1);
+    ll N, M; cin >> N >> M;
+    map<ll, ll> freq;
+    ll maxfreq = 0;
+    for(ll i = 0; i < M; ++i) {
+        ll a, b; cin >> a >> b;
+        for(int j = a; j <= b; ++j) {
+            freq[j]++;
+            maxfreq = max(maxfreq, freq[j]);
+        }
     }
+
+    ll res = 0;
+    for(auto &kv : freq) 
+        if(kv.second == maxfreq) {
+            ++res;
+            cout << kv.first << ln;
+        }
 
     cout << res;
 
