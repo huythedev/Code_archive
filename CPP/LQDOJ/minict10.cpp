@@ -19,9 +19,21 @@ int main() {
     cin.tie(NULL); cout.tie(NULL);
     docfile();
 
-    int n; cin >> n;
+    string st;
+    cin >> st;
 
-    cout << n * (n + 1) / 2;
+    vector<int> a;
+    for(char c : st) {
+        if(c != '+')
+            a.push_back(c - '0');
+    }
+
+    sort(a.begin(), a.end());
+
+    for(int i = 0; i < a.size() - 1; ++i)
+        cout << a[i] << "+";
+
+    cout << a[a.size() - 1];
 
     return 0;
 }

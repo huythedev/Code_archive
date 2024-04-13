@@ -19,9 +19,17 @@ int main() {
     cin.tie(NULL); cout.tie(NULL);
     docfile();
 
-    int n; cin >> n;
+    int n, m, k; cin >> n >> m >> k;
+    vector<int> a;
+    for(int i = 1; i <= n; ++i) {
+        for(int j = 1; j <= m; ++j) {
+            a.push_back(i * j);
+        }
+    }
 
-    cout << n * (n + 1) / 2;
+    sort(a.begin(), a.end());
+
+    cout << a[k - 1];
 
     return 0;
 }

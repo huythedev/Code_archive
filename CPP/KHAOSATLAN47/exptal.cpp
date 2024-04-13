@@ -14,14 +14,16 @@ void docfile() {
     }
 }
 
+const int MOD = 1e9 + 7;
+
 int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL); cout.tie(NULL);
     docfile();
 
-    int n; cin >> n;
+    ll a, b, c, d, n, m, p, q; cin >> a >> b >> c >> d >> n >> m >> p >> q;
 
-    cout << n * (n + 1) / 2;
+    cout << (ll)pow(a, n) % MOD + (ll)pow(b, m) % MOD + (ll)pow(c, p) % MOD + (ll)pow(d, q) % MOD;
 
     return 0;
 }

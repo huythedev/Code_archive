@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-#define NAME "NAME"
+#define NAME "demkt"
 #define ln '\n'
 
 typedef long long ll;
@@ -19,9 +19,15 @@ int main() {
     cin.tie(NULL); cout.tie(NULL);
     docfile();
 
-    int n; cin >> n;
+    string st;
+    cin >> st;
 
-    cout << n * (n + 1) / 2;
+    int res = 0;
+    for(char c : st)
+        if(c - '0' == 9)
+            ++res;
+
+    cout << res;
 
     return 0;
 }

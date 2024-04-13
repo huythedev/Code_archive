@@ -21,7 +21,8 @@ int main() {
 
     int n; cin >> n;
 
-    cout << n * (n + 1) / 2;
+    for(int i = 0; i < n; ++i)
+        cout << "Hello world!" << ln;
 
     return 0;
 }

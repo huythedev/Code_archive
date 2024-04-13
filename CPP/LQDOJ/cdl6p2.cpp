@@ -19,9 +19,13 @@ int main() {
     cin.tie(NULL); cout.tie(NULL);
     docfile();
 
-    int n; cin >> n;
-
-    cout << n * (n + 1) / 2;
+    int N, x; cin >> N >> x;
+    for(int i = 0; i < N; ++i) {
+        int a; cin >> a;
+        if(i != x) {
+            cout << a << ' ';
+        }
+    }
 
     return 0;
 }
