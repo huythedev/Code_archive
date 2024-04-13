@@ -19,9 +19,9 @@ int main() {
     cin.tie(NULL); cout.tie(NULL);
     docfile();
 
-    int n; cin >> n;
+    ll a, b; cin >> a >> b;
 
-    cout << n * (n + 1) / 2;
+    cout << "So gao can du tru: " << a * b;
 
     return 0;
 }

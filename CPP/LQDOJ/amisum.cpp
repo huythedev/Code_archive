@@ -21,7 +21,7 @@ int main() {
 
     int n; cin >> n;
 
-    cout << n * (n + 1) / 2;
+    cout << 0 << " " << n;
 
     return 0;
 }
