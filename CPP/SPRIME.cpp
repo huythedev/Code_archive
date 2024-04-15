@@ -1,10 +1,5 @@
-#include <iostream>
-#include <fstream>
-#include <vector>
-#include <algorithm>
-#include <cmath>
-#include <string>
-#include <iomanip>
+#include <bits/stdc++.h>
+using namespace std;
 
 #define NAME "SPRIME"
 #define ln '\n'
@@ -13,58 +8,46 @@ typedef long long ll;
 typedef long double ld;
 
 void docfile() {
-    if(std::ifstream(NAME".inp")) {
-        std::freopen(NAME".inp", "r", stdin);
-        std::freopen(NAME".out", "w", stdout);
-    }
-}
-
-bool isPrime(ll n) {
-	for(ll i = 2; i * i <= n; ++i) {
-		if(n % i == 0) {
-			return false;
-		}
+	if(ifstream(NAME".inp")) {
+		freopen(NAME".inp", "r", stdin);
+		freopen(NAME".out", "w", stdout);
 	}
-	return n > 1;
 }
 
-ll tongcs(ll n) {
-	ll res = 0; 
+bool isPrime(int n) {
+	if(n < 2) return false;
+	for(int i = 2; i <= sqrt(n); i++) {
+		if(n % i == 0) return false;
+	}
+	return true;
+}
+
+int sum(int n) {
+	int s = 0;
 	while(n > 0) {
-		res += n % 10;
+		s += n % 10;
 		n /= 10;
 	}
-	
-	return res;
-}
-
-bool dacbiet(ll n) {
-	if(isPrime(n) && tongcs(n) % 5 == 0) {
-		return true;
-	}
-	return false;
+	return s;
 }
 
 int main() {
-    std::ios_base::sync_with_stdio(false);
-    std::cin.tie(NULL); std::cout.tie(NULL);
-    docfile();
-    
-    ll Tests;
-    std::cin >> Tests;
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL); cout.tie(NULL);
+	docfile();
 
-	while(Tests--) {
-		ll L, R;
-		std::cin >> L >> R;
-		
-		ll res = 0;
-		for(ll i = L; i <= R; ++i) {
-			if(dacbiet(i)) 
-				++res;
+	int T; cin >> T;
+	while(T--) {
+		int L, R; cin >> L >> R;
+		int res = 0;
+		for(int i = L; i <= R; i++) {
+			if(isPrime(i)) 
+				if(sum(i) % 5 == 0)
+					++res;
 		}
-		
-		std::cout << res << ln;
+
+		cout << res << ln;
 	}
 
-    return 0;
+	return 0;
 }

@@ -19,15 +19,8 @@ int main() {
     cin.tie(NULL); cout.tie(NULL);
     docfile();
 
-    string st;
-    cin >> st;
-
-    int res = 0;
-    for(char c : st) 
-        if(c != '0' && c != '1') 
-            res++;
-
-    cout << res;
+    int n; cin >> n;
+    cout << (n + 1) * n / 2;
 
     return 0;
 }

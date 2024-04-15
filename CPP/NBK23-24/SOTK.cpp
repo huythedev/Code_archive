@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-#define NAME "NAME"
+#define NAME "SOTK"
 #define ln '\n'
 
 typedef long long ll;
@@ -19,15 +19,20 @@ int main() {
     cin.tie(NULL); cout.tie(NULL);
     docfile();
 
-    string st;
-    cin >> st;
+    string N; cin >> N;
+    int K; cin >> K;
 
-    int res = 0;
-    for(char c : st) 
-        if(c != '0' && c != '1') 
-            res++;
+    set<int> nums;
+    for(char c : N) 
+        nums.insert(c - '0');
 
-    cout << res;
+    vector<int> vec;
+    for(int x : nums) 
+        vec.push_back(x);
+
+    sort(vec.rbegin(), vec.rend());
+    
+    cout << vec[K - 1];
 
     return 0;
 }

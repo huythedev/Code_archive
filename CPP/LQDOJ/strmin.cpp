@@ -19,26 +19,22 @@ int main() {
     cin.tie(NULL); cout.tie(NULL);
     docfile();
 
-    int n, m; cin >> n >> m;
+    int k; cin >> k;
+    string st; cin >> st;
 
-    vector<int> a(n);
-    vector<int> b(m);
-    for(int i = 0; i < n; ++i) cin >> a[i];
-    for(int i = 0; i < m; ++i) cin >> b[i];
-
-    sort(a.begin(), a.end());
-    sort(b.begin(), b.end());
-
-    int res = 0;
-    int j = 0;
-    for (int i = 0; i < n && j < m; ++i) {
-        if (a[i] > b[j]) {
-            res++;
-            j++;
+    int left = st.length() - k + 1, right = 0;
+    for(int i = 1; i <= k; ++i) {
+        int minnum = 10, n;
+        for(int j = right; j < left; ++j) {
+            if(minnum > st[j] - '0') {
+                minnum = st[j] - '0';
+                n = j;
+            }
         }
+        ++left;
+        right = n + 1;
+        cout << minnum;
     }
-
-    cout << res;
 
     return 0;
 }

@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-#define NAME "NAME"
+#define NAME "SUMSOCP"
 #define ln '\n'
 
 typedef long long ll;
@@ -14,31 +14,33 @@ void docfile() {
     }
 }
 
+bool isCP(int n) {
+    return (int)sqrt(n) * (int)sqrt(n) == n;
+}
+
 int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL); cout.tie(NULL);
     docfile();
 
-    int n, m; cin >> n >> m;
-
-    vector<int> a(n);
-    vector<int> b(m);
-    for(int i = 0; i < n; ++i) cin >> a[i];
-    for(int i = 0; i < m; ++i) cin >> b[i];
+    int N; cin >> N;
+    vector<int> a(N);
+    for(int &x : a) {
+        cin >> x;
+    }
 
     sort(a.begin(), a.end());
-    sort(b.begin(), b.end());
-
-    int res = 0;
-    int j = 0;
-    for (int i = 0; i < n && j < m; ++i) {
-        if (a[i] > b[j]) {
-            res++;
-            j++;
+    ll res = 0;
+    for(int i = 0; i < N - 1; ++i) {
+        if(a[i + 1] != a[i] + 1) {
+            for(int j = a[i]; j <= a[i + 1]; ++j) {
+                if(isCP(j)) 
+                    res += j;
+            }
         }
     }
 
     cout << res;
-
+    
     return 0;
 }

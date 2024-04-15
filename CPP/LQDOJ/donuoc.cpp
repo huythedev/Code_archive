@@ -19,15 +19,10 @@ int main() {
     cin.tie(NULL); cout.tie(NULL);
     docfile();
 
-    string st;
-    cin >> st;
+    int a, b; cin >> a >> b;
+    ll N; cin >> N;
 
-    int res = 0;
-    for(char c : st) 
-        if(c != '0' && c != '1') 
-            res++;
-
-    cout << res;
-
+    cout << (ll)a + (N - 1) * (b - a);
+    
     return 0;
 }

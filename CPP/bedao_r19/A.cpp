@@ -14,20 +14,19 @@ void docfile() {
     }
 }
 
+ll min_y(ll x, ll k) {
+    ll g = gcd(x, k);
+    return k / g;
+}
+
 int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL); cout.tie(NULL);
     docfile();
 
-    string st;
-    cin >> st;
+    ll x, k; cin >> x >> k;
 
-    int res = 0;
-    for(char c : st) 
-        if(c != '0' && c != '1') 
-            res++;
-
-    cout << res;
+    cout << min_y(x, k) << ln;
 
     return 0;
 }

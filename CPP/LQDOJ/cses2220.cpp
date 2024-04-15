@@ -14,28 +14,24 @@ void docfile() {
     }
 }
 
+bool isNoTwoAdjacent(ll n) {
+    string s = to_string(n);
+    for(ll i = 1; i < s.size(); ++i) {
+        if(s[i] == s[i-1]) return false;
+    }
+    return true;
+}
+
 int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL); cout.tie(NULL);
     docfile();
 
-    int n, m; cin >> n >> m;
+    ll a, b; cin >> a >> b;
 
-    vector<int> a(n);
-    vector<int> b(m);
-    for(int i = 0; i < n; ++i) cin >> a[i];
-    for(int i = 0; i < m; ++i) cin >> b[i];
-
-    sort(a.begin(), a.end());
-    sort(b.begin(), b.end());
-
-    int res = 0;
-    int j = 0;
-    for (int i = 0; i < n && j < m; ++i) {
-        if (a[i] > b[j]) {
-            res++;
-            j++;
-        }
+    ll res = 0;
+    for(ll i = a; i <= b; ++i) {
+        if(isNoTwoAdjacent(i)) res++;
     }
 
     cout << res;

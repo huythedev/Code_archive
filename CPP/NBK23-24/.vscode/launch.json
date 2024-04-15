@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "c:/Users/huythedev/Documents/GitHub/Code/CPP",
-      "program": "c:/Users/huythedev/Documents/GitHub/Code/CPP/build/Debug/outDebug",
+      "cwd": "c:/Users/huythedev/Documents/GitHub/Code/CPP/NBK23-24",
+      "program": "c:/Users/huythedev/Documents/GitHub/Code/CPP/NBK23-24/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
