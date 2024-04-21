@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-#define NAME "SUMSOCP"
+#define NAME "NAME"
 #define ln '\n'
 
 typedef long long ll;
@@ -14,9 +14,7 @@ void docfile() {
     }
 }
 
-bool isCP(int n) {
-    return (int)sqrt(n) * (int)sqrt(n) == n;
-}
+int A[1001], B[1001], res;
 
 int main() {
     ios_base::sync_with_stdio(false);
@@ -24,24 +22,22 @@ int main() {
     docfile();
 
     int N; cin >> N;
-    vector<int> a(N);
-    int maxnum = 0;
-    map<int, int> freq;
-    for(int &x : a) {
-        cin >> x;
-        maxnum = max(maxnum, x);
-        freq[x]++;
+    for(int i = 0; i < N; i++) {
+        cin >> A[i];
+        B[A[i]]++;
     }
 
-    ll res = 0;
-    for(int i = 0; i <= maxnum; ++i) {
-        if(freq[i] == 0) {
-            if(isCP(i))
-                res += i;
-        }
+    for(int i = 0; i <= 1000; ++i) {
+        if(B[i] > 0) 
+            ++res;
     }
 
     cout << res << ln;
-    
+
+    for(int i = 0; i <= 1000; ++i) {
+        if(B[i] > 0) 
+            cout << i << ' ';
+    }
+
     return 0;
 }

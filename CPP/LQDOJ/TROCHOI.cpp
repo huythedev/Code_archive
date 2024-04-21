@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-#define NAME "NAME"
+#define NAME "TROCHOI"
 #define ln '\n'
 
 typedef long long ll;
@@ -16,19 +16,13 @@ void docfile() {
 
 ll sumdiv(int n) {
     ll res = 0;
-    for(int i = 1; i * i <= n; ++i) {
-        if(n % i == 0) {
+    for (ll i = 1; i <= sqrt(n); i++) {
+        if (n % i == 0) {
             res += i;
-            if(i * i != n)
-                res += n / i;
+            if (i != n / i) res += n / i;
         }
     }
-
-    return res - n;
-}
-
-bool isSpecial(int n) {
-    return sumdiv(n) > n;
+    return res;
 }
 
 int main() {
@@ -36,14 +30,15 @@ int main() {
     cin.tie(NULL); cout.tie(NULL);
     docfile();
 
-    int L, R; cin >> L >> R;
+    int q; cin >> q;
+    vector<int> a(q);
+    for (int i = 0; i < q; i++) {
+        cin >> a[i];
+    }
 
-    int res = 0;
-    for(int i = L; i <= R; ++i)
-        if(isSpecial(i))
-            ++res;
-
-    cout << res;
+    for (int i = 0; i < q; i++) {
+        cout << sumdiv(a[i]) << ' ';
+    }
 
     return 0;
 }

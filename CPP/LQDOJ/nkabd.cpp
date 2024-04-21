@@ -14,21 +14,12 @@ void docfile() {
     }
 }
 
-ll sumdiv(int n) {
-    ll res = 0;
-    for(int i = 1; i * i <= n; ++i) {
-        if(n % i == 0) {
-            res += i;
-            if(i * i != n)
-                res += n / i;
-        }
-    }
+ll sumdiv[1000000 + 5];
 
-    return res - n;
-}
-
-bool isSpecial(int n) {
-    return sumdiv(n) > n;
+void pre_calc() {
+    for (int i = 1; i <= 1e6; ++i)
+        for (int j = i; j <= 1e6; j += i)
+            sumdiv[j] += i;
 }
 
 int main() {
@@ -40,7 +31,7 @@ int main() {
 
     int res = 0;
     for(int i = L; i <= R; ++i)
-        if(isSpecial(i))
+        if(sumdiv[i] - i > i)
             ++res;
 
     cout << res;

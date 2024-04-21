@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-#define NAME "NAME"
+#define NAME "VISIT"
 #define ln '\n'
 
 typedef long long ll;
@@ -20,25 +20,30 @@ int main() {
     docfile();
 
     int n, m; cin >> n >> m;
-    vector<int> distance(n), consumption(m);
-    for(int &x : distance) cin >> x;
-    for(int &x : consumption) cin >> x;
+    int distance[n], consumption[m], arr[m];
+    for(int i = 0; i < n; ++i) 
+        cin >> distance[i];
 
-    vector<int> vec = consumption;
-    sort(distance.rbegin(), distance.rend());
-    sort(consumption.begin(), consumption.end());
-    
+    pair<int, int> pos[m];
+    for(int i = 0; i < m; ++i) {
+        cin >> consumption[i];
+        pos[i] = {consumption[i], i};
+    }
+
+    sort(distance, distance + n, greater<int>());
+    sort(pos, pos + m);
+
     ll res = 0;
-    vector<int> pos;
+    int position[n] = {0};
     for(int i = 0; i < n; ++i) {
-        res += distance[i] * consumption[i];
-        auto it = find(vec.begin(), vec.end(), consumption[i]);
-        pos.push_back(it - vec.begin());
+        res += distance[i] * pos[i].first;
+        position[i] = pos[i].second;
     }
 
     cout << res << ln;
-    for(int x : pos) 
-        cout << x + 1 << ' ';
+    for(int i = 0; i < n; ++i) {
+        cout << position[i] + 1 << " ";
+    }
 
     return 0;
 }
