@@ -20,33 +20,23 @@ int main() {
     docfile();
 
     int m; cin >> m;
-    vector<int> p(m), k(m);
+    int p[m], k[m];
     for(int i = 0; i < m; ++i) 
         cin >> p[i] >> k[i];
     
     for(int i = 0; i < 3; ++i) {
-        int res = 0;
         int A, B; cin >> A >> B;
+
+        int res = 0;
         for(int j = A; j <= B; ++j) {
-            if(j == 1)
-                ++res;
-            
-            auto it = find(p.begin(), p.end(), j);
-            if(it != p.end()) 
-                ++res;
-            else {
-                for(int k = 2; k <= sqrt(j); ++k) {
-                    if(j % k == 0) {
-                        it = find(p.begin(), p.end(), k);
-                        if(it != p.end()) {
-                            ++res;
-                            break;
-                        }
-                    }
+            for(int &k : p) {
+                if(j % k == 0) {
+                    res++;
+                    break;
                 }
             }
         }
-        
+
         cout << res << ln;
     }
 

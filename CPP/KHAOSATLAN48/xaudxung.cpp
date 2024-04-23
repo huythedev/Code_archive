@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-#define NAME "SOK"
+#define NAME "NAME"
 #define ln '\n'
 
 typedef long long ll;
@@ -19,17 +19,18 @@ int main() {
     cin.tie(NULL); cout.tie(NULL);
     docfile();
 
-    int N, K; cin >> N >> K;
-    set<int> a;
-    for(int i = 0; i < N; ++i) {
-        int x; cin >> x;
-        a.insert(x);
+    int tests; cin >> tests;
+    while(tests--) {
+        string s;
+        cin >> s;
+
+        string s2 = s;
+        reverse(s2.begin(), s2.end());
+        if(s == s2 && s.size() % 2 == 0) 
+            cout << "YES" << ln;
+        else 
+            cout << "NO" << ln;
     }
-
-    vector<int> vec;
-    for(auto x : a) vec.push_back(x);
-
-    cout << vec[K - 1];
 
     return 0;
 }

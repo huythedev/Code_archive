@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-#define NAME "SOK"
+#define NAME "NAME"
 #define ln '\n'
 
 typedef long long ll;
@@ -14,22 +14,29 @@ void docfile() {
     }
 }
 
+ll sumdiv(int n) {
+    ll sum = 0;
+    for(int i = 1; i <= sqrt(n); i++) {
+        if(n % i == 0) {
+            sum += i;
+            if(i != n / i) sum += n / i;
+        }
+    }
+    return sum;
+}
+
 int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL); cout.tie(NULL);
     docfile();
 
-    int N, K; cin >> N >> K;
-    set<int> a;
-    for(int i = 0; i < N; ++i) {
-        int x; cin >> x;
-        a.insert(x);
+    int q; cin >> q;
+    vector<int> a(q);
+    for(int &i : a) cin >> i;
+
+    for(int i : a) {
+        cout << sumdiv(i) << ' ';
     }
-
-    vector<int> vec;
-    for(auto x : a) vec.push_back(x);
-
-    cout << vec[K - 1];
 
     return 0;
 }
