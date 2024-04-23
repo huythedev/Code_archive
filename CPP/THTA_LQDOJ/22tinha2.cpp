@@ -14,25 +14,14 @@ void docfile() {
     }
 }
 
-ll amodb(string a, ll b) {
-    ll res = 0;
-    for(int i = 0; i < a.length(); i++) {
-        int num = a[i] - '0';
-        ll tmp = res * 10 + num;
-        res = tmp % b;
-    }
-
-    return res;
-}
-
 int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL); cout.tie(NULL);
     docfile();
 
-    string a; ll b; cin >> a >> b;
+    int a, b, c; cin >> a >> b >> c;
     
-    cout << amodb(a, b);
+    cout << max(a*b*c, max(a*b, max(a*c, b*c)));
 
     return 0;
 }

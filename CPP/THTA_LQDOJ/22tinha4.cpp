@@ -14,13 +14,24 @@ void docfile() {
     }
 }
 
-ll amodb(string a, ll b) {
-    ll res = 0;
-    for(int i = 0; i < a.length(); i++) {
-        int num = a[i] - '0';
-        ll tmp = res * 10 + num;
-        res = tmp % b;
+string minnum(string a, string b) {
+    string res = "";
+
+    while (!a.empty() && !b.empty()) {
+        if (a[0] <= b[0]) {
+            res += a[0];
+            a.erase(0, 1);
+        } 
+        else {
+            res += b[0];
+            b.erase(0, 1);
+        }
     }
+
+    if (!a.empty())
+        res += a;
+    else
+        res += b;
 
     return res;
 }
@@ -30,9 +41,9 @@ int main() {
     cin.tie(NULL); cout.tie(NULL);
     docfile();
 
-    string a; ll b; cin >> a >> b;
-    
-    cout << amodb(a, b);
+    string A, B; cin >> A >> B;
+
+    cout << minnum(A, B);
 
     return 0;
 }

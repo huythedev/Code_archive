@@ -14,12 +14,23 @@ void docfile() {
     }
 }
 
-ll cntdiv(ll n) {
-    ll res = 0;
-    for(ll i = 1; i <= n; i++) {
-        if(n % i == 0)
-            res++;
+int MAXR = 1e6;
+
+vector<int> divisors(MAXR + 1);
+void pre_cacl() {
+    for(int i = 1; i <= MAXR; i++) {
+        for(int j = i; j <= MAXR; j += i) {
+            divisors[j]++;
+        }
     }
+}
+
+vector<ll> build_prefixsum(vector<int> vec) {
+    vector<ll> res(vec.size() + 1);
+    res[0] = 0;
+    for(int i = 1; i < vec.size(); i++) 
+        res[i] = res[i - 1] + vec[i];
+    
     return res;
 }
 
@@ -28,19 +39,16 @@ int main() {
     cin.tie(NULL); cout.tie(NULL);
     docfile();
 
-
+    pre_cacl();
     int T;
     cin >> T;
+    vector<ll> prefixsum = build_prefixsum(divisors);
 
     while(T--) {
-        ll L, R;
+        int L, R;
         cin >> L >> R;
 
-        ll res = 0;
-        for(ll i = L; i <= R; i++) {
-            res += cntdiv(i);
-        }
-        cout << res << ln;
+        cout << prefixsum[R] - prefixsum[L - 1] << ln;
     }
 
     return 0;
