@@ -1,28 +1,17 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-#define NAME "NAME"
+#define NAME "matong"
 #define ln '\n'
 
 typedef long long ll;
 typedef long double ld;
 
 void docfile() {
-    if(ifstream(NAME".inp")) {
+    if (ifstream(NAME".inp")) {
         freopen(NAME".inp", "r", stdin);
         freopen(NAME".out", "w", stdout);
     }
-}
-
-ll cntdiv(ll n) {
-    ll res = 0;
-    for(ll i = 1; i*i <= n; i++) {
-        if(n%i == 0) {
-            if(i*i == n) res++;
-            else res += 2;
-        }
-    }
-    return res;
 }
 
 int main() {
@@ -30,18 +19,26 @@ int main() {
     cin.tie(NULL); cout.tie(NULL);
     docfile();
 
-    ll N;
-    cin >> N;
+    int N; cin >> N;
+    vector<int> A(N);
+    for (int i = 0; i < N; ++i)
+        cin >> A[i];
 
     ll res = 0;
-    for (ll i = 0; i < N; ++i) {
-        ll a;
-        cin >> a;
-        res += a * cntdiv(a);
+    for (int i = 0; i < N; ++i) {
+        int divi = 0;
+        for (int j = 1; j * j <= A[i]; ++j) {
+            if (A[i] % j == 0) {
+                if (A[i] / j == j)
+                    ++divi;
+                else
+                    divi += 2;
+            }
+        }
+        res += A[i] * divi;
     }
 
     cout << res;
-
 
     return 0;
 }
