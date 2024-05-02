@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-#define NAME "maxarr01"
+#define NAME "sinhnp"
 #define ln '\n'
 
 typedef long long ll;
@@ -14,20 +14,28 @@ void docfile() {
 	}
 }
 
-const int MAXN = 1e5;
+int x[20];
+
+void xuly(int i, int n) {
+	for (int j = 0; j <= 1; j++) {
+		x[i] = j;
+		if (i == n) {
+			for (int i = 1; i <= n; i++)
+				cout << x[i];
+			cout << ln;
+		}
+		else
+			xuly(i + 1, n);
+	}
+}
 
 int main() {
 	ios_base::sync_with_stdio(false);
 	cin.tie(NULL); cout.tie(NULL);
 	docfile();
 
-	vector<int> A(MAXN);
-	A[0] = 0; A[1] = 1; A[2 * 1] = A[1];
-	for (int i = 1; i < MAXN; ++i)
-		A[2 * i + 1] = A[i] + A[i + 1];
-
-	for (int i = 0; i < 5; ++i)
-		cout << A[i] << ' ';
+	int n; cin >> n;
+	xuly(1, n);
 
 	return 0;
 }

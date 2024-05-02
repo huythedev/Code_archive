@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-#define NAME "maxarr01"
+#define NAME "tknp02"
 #define ln '\n'
 
 typedef long long ll;
@@ -14,20 +14,29 @@ void docfile() {
 	}
 }
 
-const int MAXN = 1e5;
-
 int main() {
 	ios_base::sync_with_stdio(false);
 	cin.tie(NULL); cout.tie(NULL);
 	docfile();
 
-	vector<int> A(MAXN);
-	A[0] = 0; A[1] = 1; A[2 * 1] = A[1];
-	for (int i = 1; i < MAXN; ++i)
-		A[2 * i + 1] = A[i] + A[i + 1];
+	int n, k; cin >> n >> k;
 
-	for (int i = 0; i < 5; ++i)
-		cout << A[i] << ' ';
+	vector<int> a(n);
+	for (int i = 0; i < n; ++i)
+		cin >> a[i];
+
+	while (k--) {
+		int x; cin >> x;
+
+		auto pos = lower_bound(a.begin(), a.end(), x) - a.begin();
+
+
+
+		if (pos == 0)
+			cout << 0 << ln;
+		else
+			cout << pos << ln;
+	}
 
 	return 0;
 }

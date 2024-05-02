@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-#define NAME "maxarr01"
+#define NAME "olp4slkca"
 #define ln '\n'
 
 typedef long long ll;
@@ -14,20 +14,14 @@ void docfile() {
 	}
 }
 
-const int MAXN = 1e5;
-
 int main() {
 	ios_base::sync_with_stdio(false);
 	cin.tie(NULL); cout.tie(NULL);
 	docfile();
 
-	vector<int> A(MAXN);
-	A[0] = 0; A[1] = 1; A[2 * 1] = A[1];
-	for (int i = 1; i < MAXN; ++i)
-		A[2 * i + 1] = A[i] + A[i + 1];
+	int a, b, c; cin >> a >> b >> c;
 
-	for (int i = 0; i < 5; ++i)
-		cout << A[i] << ' ';
+	cout << min(a, b) + c + (a - min(a, b)) / 3;
 
 	return 0;
 }

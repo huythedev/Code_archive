@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-#define NAME "maxarr01"
+#define NAME "cntpair0sum"
 #define ln '\n'
 
 typedef long long ll;
@@ -14,20 +14,24 @@ void docfile() {
 	}
 }
 
-const int MAXN = 1e5;
-
 int main() {
 	ios_base::sync_with_stdio(false);
 	cin.tie(NULL); cout.tie(NULL);
 	docfile();
 
-	vector<int> A(MAXN);
-	A[0] = 0; A[1] = 1; A[2 * 1] = A[1];
-	for (int i = 1; i < MAXN; ++i)
-		A[2 * i + 1] = A[i] + A[i + 1];
+	ll N;
+	cin >> N;
+	map<ll, ll> freq;
 
-	for (int i = 0; i < 5; ++i)
-		cout << A[i] << ' ';
+	ll res = 0;
+	for (ll i = 0; i < N; ++i) {
+		ll num;
+		cin >> num;
+		res += freq[-num];
+		freq[num]++;
+	}
+
+	cout << res;
 
 	return 0;
 }
