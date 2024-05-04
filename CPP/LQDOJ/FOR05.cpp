@@ -1,25 +1,25 @@
-#include <iostream>
-#include <fstream>
+#include <bits/stdc++.h>
+using namespace std;
 
-#define NAME "NAME"
+#define NAME "for05"
 
 typedef long long ll;
 typedef long double ld;
 
 void docfile() {
-    if(std::ifstream(NAME".inp")) {
-        std::freopen(NAME".inp", "r", stdin);
-        std::freopen(NAME".out", "w", stdout);
+    if (ifstream(NAME".inp")) {
+        freopen(NAME".inp", "r", stdin);
+        freopen(NAME".out", "w", stdout);
     }
 }
 
-ll tonguoc(ll n){
+ll tonguoc(ll n) {
     ll tong = 0;
-    for(ll i = 1; i * i <= n; i++){
-        if(n % i == 0){
-            tong += i; 
-            if(i != n / i){
-                tong += n / i; 
+    for (ll i = 1; i * i <= n; i++) {
+        if (n % i == 0) {
+            tong += i;
+            if (i != n / i) {
+                tong += n / i;
             }
         }
     }
@@ -27,18 +27,18 @@ ll tonguoc(ll n){
 }
 
 int main() {
-    std::ios_base::sync_with_stdio(false);
-    std::cin.tie(NULL); std::cout.tie(NULL);
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL); cout.tie(NULL);
     docfile();
 
     ll n;
-    std::cin >> n;
+    cin >> n;
 
-    if(tonguoc(n) == 2 * n){
-        std::cout << "YES";
+    if (tonguoc(n) == 2 * n) {
+        cout << "YES";
     }
-    else{
-        std::cout << "NO";
+    else {
+        cout << "NO";
     }
 
     return 0;

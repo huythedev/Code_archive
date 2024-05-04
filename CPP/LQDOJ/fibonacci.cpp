@@ -1,53 +1,38 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-#define NAME "NAME"
+#define NAME "fibonacci"
 #define ln '\n'
 
 typedef long long ll;
 typedef long double ld;
 
 void docfile() {
-    if(ifstream(NAME".inp")) {
+    if (ifstream(NAME".inp")) {
         freopen(NAME".inp", "r", stdin);
         freopen(NAME".out", "w", stdout);
     }
 }
 
-string sumstr(string a, string b) {
-    string res = "";
+const int MAXN = 42;
+vector<ll> fib(MAXN);
 
-    reverse(a.begin(), a.end());
-    reverse(b.begin(), b.end());
-
-    int carry = 0;
-    for (int i = 0; i < max(a.size(), b.size()); i++) {
-        int x = i < a.size() ? a[i] - '0' : 0;
-        int y = i < b.size() ? b[i] - '0' : 0;
-        int sum = x + y + carry;
-        res += (sum % 10) + '0';
-        carry = sum / 10;
-    }
-
-    if (carry) res += carry + '0';
-    reverse(res.begin(), res.end());
-    return res;
+void fibo() {
+    fib[0] = 1;
+    fib[1] = 1;
+    for (int i = 2; i < MAXN; ++i)
+        fib[i] = fib[i - 1] + fib[i - 2];
 }
 
 int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL); cout.tie(NULL);
     docfile();
-
-    vector<string> fib(1000, "0");
-    fib[0] = "0";
-    fib[1] = "1";
-    for (int i = 2; i < 1000; i++) {
-        fib[i] = sumstr(fib[i - 1], fib[i - 2]);
-    }
+    fibo();
 
     int n; cin >> n;
-    cout << fib[n - 1];
+    for (int i = 0; i < n; ++i)
+        cout << fib[i] << ' ';
 
     return 0;
 }

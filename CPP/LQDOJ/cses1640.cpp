@@ -20,11 +20,17 @@ int main() {
 	docfile();
 
 	int n, x; cin >> n >> x;
-	int a[n];
-	for (int i = 0; i < n; ++i)
-		cin >> a[i];
 
-
+	map<int, int> mp;
+	for (int i = 1, a; i <= n; ++i) {
+		cin >> a;
+		if (mp.count(x - a)) {
+			cout << mp[x - a] << " " << i;
+			return 0;
+		}
+		mp[a] = i;
+	}
+	cout << "IMPOSSIBLE";
 
 	return 0;
 }
