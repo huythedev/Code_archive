@@ -23,5 +23,9 @@ int main() {
 
 		cout << cntdiv(x) << endl;
 	}
+
+	cerr << "Time elapsed: " << 1.0 * clock() / CLOCKS_PER_SEC << "s.\n";
+
 	return 0;
 }
+
