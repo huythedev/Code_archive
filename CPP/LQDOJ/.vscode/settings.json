@@ -74,6 +74,7 @@
     "stacktrace": "cpp",
     "regex": "cpp",
     "valarray": "cpp",
-    "iostream": "cpp"
+    "iostream": "cpp",
+    "ios": "cpp"
   }
 }
