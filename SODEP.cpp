@@ -1,69 +1,49 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+#define NAME "sodep"
+#define ln "\n"
+#define sz size()
+
 typedef long long ll;
+typedef long double ld;
+
+void fastio() {
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL);
+	cout.tie(NULL);
+}
 
 void docfile() {
-	freopen("SODEP.INP", "r", stdin);
-	freopen("SODEP.OUT", "w", stdout);
+	if (ifstream(NAME ".INP")) {
+		freopen(NAME ".INP", "r", stdin);
+		freopen(NAME ".OUT", "w", stdout);
+	}
 }
 
-bool checknto(ll x) {
-	if (x == 2 || x == 3) {
-		return true;
-	}
-	
-	if (x <= 3 || x % 2 == 0 || x % 3 == 0) {
-		return false;
-	}
-	
-	for (ll i = 5; i * i < x; i += 6) {
-		if (x % i == 0) {
-			return false;
-		}
-	}
-	return true;
+void time() {
+	cerr << ln << "Time elapsed: " << 1.0 * clock() / CLOCKS_PER_SEC << "s." 
+		 << ln;
 }
 
-bool checksodep(ll x) {
-	ll t = 0;
-	while(x > 0) {
-		t += pow(x % 10, 2);
-		x /= 10;
+bool is_beauty(string n) {
+	int sum = 0;
+	for (int i = 0; i < n.sz; i++) {
+		sum += n[i] - '0';
 	}
-	return checknto(t);
-}
-
-ll vitriso(ll x) {
-	ll res = 0;
-	long long t = 11;
-	while (t < x) {
-		if (checksodep(t)) {
-			++res;
-			++t;
-		}
-		else {
-			++t;
-		}
-	}
-	return res;
+	return sum % 5 == 0;
 }
 
 int main() {
+	fastio();
 	docfile();
-	ll N;
-	cin >> N;
-	
-	bool res = checksodep(N);
-	ll vitri = -1;
-	if (res) {
-		cout << "YES" << endl;
-		cout << vitriso(N) + 1;
+
+	int n; cin >> n;
+	while(n--) {
+		string s; cin >> s;
+		if(is_beauty(s)) cout << s << ' ';
 	}
-	else {
-		cout << "NO" << endl; 
-		cout << vitri;
-	}
-	
-    return 0;
+
+	time();
+	return 0;
 }

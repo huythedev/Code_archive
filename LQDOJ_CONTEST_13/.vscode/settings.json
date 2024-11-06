@@ -1,0 +1,11 @@
+{
+    "files.associations": {
+        "unordered_map": "cpp",
+        "format": "cpp",
+        "ostream": "cpp",
+        "iostream": "cpp",
+        "ios": "cpp",
+        "xiosbase": "cpp",
+        "iomanip": "cpp"
+    }
+}
