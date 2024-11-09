@@ -46,42 +46,18 @@ int main() {
     sort(a.begin(), a.end());
     sort(b.begin(), b.end());
     
+    ll i = n - 1, j = m - 1;
     ll res = -1;
-    
-    for(int i = 0; i < n; i++) {
-        int l = 0, r = m - 1;
-        
-        while(l <= r) {
-            int mid = (l + r) / 2;
-            ll diff = abs(a[i] - b[mid]);
-            
-            if(diff <= d) {
-                res = max(res, a[i] + b[mid]);
-                
-                int tmp = mid - 1;
-                while(tmp >= 0 && abs(a[i] - b[tmp]) <= d) {
-                    res = max(res, a[i] + b[tmp]);
-                    tmp--;
-                }
-                
-                tmp = mid + 1;
-                while(tmp < m && abs(a[i] - b[tmp]) <= d) {
-                    res = max(res, a[i] + b[tmp]);
-                    tmp++;
-                }
-                
-                break;
-            }
-            
-            if(b[mid] < a[i]) {
-                l = mid + 1;
-            } 
-            else {
-                r = mid - 1;
-            }
+    while(i >= 0 && j >= 0) {
+        if(abs(a[i] - b[j]) <= d) {
+            res = max(res, a[i] + b[j]);
+            i--;
+            j--;
+        } else {
+            if(a[i] > b[j]) i--;
+            else j--;
         }
     }
-    
     cout << res;
 
     time();
