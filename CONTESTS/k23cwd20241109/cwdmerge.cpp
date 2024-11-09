@@ -46,17 +46,17 @@ int main() {
     }
 
     sort(vec.begin(), vec.end());
-    vector<pair<int, int>> hehe;
+    map<int, int> hehe;
     
     for(int i = 0; i < m + n; ++i) {
-        hehe.push_back({vec[i], i});
+        hehe[vec[i]] = i;
     }
 
     for(int i : a)
-        cout << hehe[i].second << ' ';
+        cout << hehe[i] << ' ';
     cout << ln;
     for(int i : b)
-        cout << hehe[i].second << ' ';
+        cout << hehe[i] << ' ';
 
     time();
     return 0;
