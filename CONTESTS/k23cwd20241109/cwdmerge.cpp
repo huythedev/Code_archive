@@ -34,7 +34,7 @@ int main() {
 
     int n, m; cin >> n >> m;
     vector<int> vec;
-    vector<int> a(m), b(n);
+    vector<int> a(n), b(m);
     
     for(int i = 0; i < n; ++i) {
         cin >> a[i];
