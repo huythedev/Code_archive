@@ -39,10 +39,10 @@ int main() {
     int tmp = 0;
     for(int i = 0; i < m + n; ++i) {
         cin >> vec[i];
-        if(tmp < m)
+        if(tmp < n)
             a[tmp] = vec[i];
         else
-            b[tmp - m] = vec[i];
+            b[tmp - n] = vec[i];
         ++tmp;
     }
 
