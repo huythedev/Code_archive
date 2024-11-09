@@ -34,9 +34,9 @@ int main() {
 
     ll N, M; cin >> N >> M;
     
-    for(ll T = M;; T += M) {
+    for(ll T = M;; T++) {
         bool found = false;
-        for(ll a = 1; a * a <= T; a++) {
+        for(ll a = 1; a * a <= T && a <= N; a++) {
             if(T % a == 0) {
                 ll b = T / a;
                 if(a <= N && b <= N) {
