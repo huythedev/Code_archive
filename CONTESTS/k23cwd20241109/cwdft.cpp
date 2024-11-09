@@ -34,24 +34,20 @@ int main() {
 
     ll N, M; cin >> N >> M;
     
-    for(ll T = M;; T++) {
-        bool found = false;
-        for(ll a = 1; a * a <= T && a <= N; a++) {
-            if(T % a == 0) {
-                ll b = T / a;
-                if(a <= N && b <= N) {
-                    found = true;
-                    break;
-                }
-            }
-        }
-        if(found) {
-            cout << T;
-            return 0;
-        }
+    if(M > N * N) {
+        cout << -1;
+        return 0;
     }
     
-    cout << -1;
+    ll k = (M + N - 1) / N;
+    ll ans = k * N;
+    
+    if(ans > N * N) {
+        ll sqrtM = sqrt(M - 1);
+        ans = (sqrtM + 1) * (sqrtM + 1);
+    }
+    
+    cout << ans;
 
     time();
     return 0;
