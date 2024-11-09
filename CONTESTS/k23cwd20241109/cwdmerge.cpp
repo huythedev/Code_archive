@@ -37,8 +37,26 @@ int main() {
     vector<int> a(m), b(n);
     
     for(int i = 0; i < n; ++i) {
-        cin >> 
+        cin >> a[i];
+        vec.push_back(a[i]);
     }
+    for(int i = 0; i < m; ++i) {
+        cin >> b[i];
+        vec.push_back(b[i]);
+    }
+
+    sort(vec.begin(), vec.end());
+    vector<pair<int, int>> hehe;
+    
+    for(int i = 0; i < m + n; ++i) {
+        hehe.push_back({vec[i], i});
+    }
+
+    for(int i : a)
+        cout << hehe[i].second << ' ';
+    cout << ln;
+    for(int i : b)
+        cout << hehe[i].second << ' ';
 
     time();
     return 0;
