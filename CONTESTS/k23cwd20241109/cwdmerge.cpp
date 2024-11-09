@@ -53,10 +53,10 @@ int main() {
     }
 
     for(int i : a)
-        cout << hehe[i] << ' ';
+        cout << hehe[i] + 1 << ' ';
     cout << ln;
     for(int i : b)
-        cout << hehe[i] << ' ';
+        cout << hehe[i] + 1 << ' ';
 
     time();
     return 0;
