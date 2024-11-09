@@ -2,18 +2,15 @@
 // Problem Link: https://nbk.homes/problem/cwdft
 #include <bits/stdc++.h>
 using namespace std;
-
 #define NAME "cwdft"
 #define ln "\n"
-#define sz size()
-
 typedef long long ll;
 typedef long double ld;
 
 void fastio() {
     ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
-    cout.tie(NULL);
+    cin.tie(nullptr);
+    cout.tie(nullptr);
 }
 
 void docfile() {
@@ -23,17 +20,14 @@ void docfile() {
     }
 }
 
-void time() {
-    cerr << ln << "Time elapsed: " << 1.0 * clock() / CLOCKS_PER_SEC << "s." 
-         << ln;
-}
-
-bool hehe(ll T, ll N) {
+// Optimized function to check if number T can be factored into a*b where both a,b <= N
+bool canFactor(ll T, ll N) {
     ll sqrtT = sqrt(T);
-    for(ll a = 1; a <= min(sqrtT, N); a++) {
-        if(T % a == 0) {
+    // Only need to check up to sqrt(T)
+    for (ll a = 1; a <= sqrtT; a++) {
+        if (T % a == 0) {
             ll b = T / a;
-            if(b <= N) return true;
+            if (a <= N && b <= N) return true;
         }
     }
     return false;
@@ -42,24 +36,37 @@ bool hehe(ll T, ll N) {
 int main() {
     fastio();
     docfile();
-
+    
     ll N, M;
     cin >> N >> M;
     
-    if(M > N * N) {
+    // Early exit conditions
+    if (M > N * N) {
         cout << -1;
         return 0;
     }
     
-    for(ll T = M; T <= N * N; T++) {
-        if(hehe(T, N)) {
-            cout << T;
-            return 0;
+    // If M is already factorable within N bounds, return it
+    if (canFactor(M, N)) {
+        cout << M;
+        return 0;
+    }
+    
+    // Binary search approach for optimization
+    ll left = M + 1;
+    ll right = N * N;
+    ll ans = -1;
+    
+    while (left <= right) {
+        ll mid = left + (right - left) / 2;
+        if (canFactor(mid, N)) {
+            ans = mid;
+            right = mid - 1;  // Try to find smaller valid answer
+        } else {
+            left = mid + 1;
         }
     }
     
-    cout << -1;
-
-    time();
+    cout << ans;
     return 0;
 }
