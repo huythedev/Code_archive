@@ -33,22 +33,12 @@ int main() {
     docfile();
 
     int n, m; cin >> n >> m;
-    vector<int> vec(m + n);
+    vector<int> vec;
     vector<int> a(m), b(n);
     
-    int tmp = 0;
-    for(int i = 0; i < m + n; ++i) {
-        cin >> vec[i];
-        if(tmp < n)
-            a[tmp] = vec[i];
-        else
-            b[tmp - n] = vec[i];
-        ++tmp;
+    for(int i = 0; i < n; ++i) {
+        cin >> 
     }
-
-    sort(vec.begin(), vec.end());
-    for(int i : a)
-        cout << i << ' ';
 
     time();
     return 0;

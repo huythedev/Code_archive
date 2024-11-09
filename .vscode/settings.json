@@ -2,6 +2,7 @@
     "gitdoc.enabled": true,
     "files.associations": {
         "xiosbase": "cpp",
-        "vector": "cpp"
+        "vector": "cpp",
+        "iostream": "cpp"
     }
 }
