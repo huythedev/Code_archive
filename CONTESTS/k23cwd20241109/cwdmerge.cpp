@@ -42,13 +42,13 @@ int main() {
         if(tmp < m)
             a[tmp] = vec[i];
         else
-            a[tmp - m] = vec[i];
+            b[tmp - m] = vec[i];
         ++tmp;
     }
 
     sort(vec.begin(), vec.end());
     for(int i : a)
-        cin >> i;
+        cout << i << ' ';
 
     time();
     return 0;
