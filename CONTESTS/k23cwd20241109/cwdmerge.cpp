@@ -46,8 +46,9 @@ int main() {
         ++tmp;
     }
 
-    for(int i : vec)
-        cout << i << ' ';
+    sort(vec.begin(), vec.end());
+    for(int i : a)
+        cin >> i;
 
     time();
     return 0;
