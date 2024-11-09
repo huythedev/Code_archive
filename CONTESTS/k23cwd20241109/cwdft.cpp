@@ -28,26 +28,37 @@ void time() {
          << ln;
 }
 
+bool hehe(ll T, ll N) {
+    ll sqrtT = sqrt(T);
+    for(ll a = 1; a <= min(sqrtT, N); a++) {
+        if(T % a == 0) {
+            ll b = T / a;
+            if(b <= N) return true;
+        }
+    }
+    return false;
+}
+
 int main() {
     fastio();
     docfile();
 
-    ll N, M; cin >> N >> M;
+    ll N, M;
+    cin >> N >> M;
     
     if(M > N * N) {
         cout << -1;
         return 0;
     }
     
-    ll k = (M + N - 1) / N;
-    ll ans = k * N;
-    
-    if(ans > N * N) {
-        ll sqrtM = sqrt(M - 1);
-        ans = (sqrtM + 1) * (sqrtM + 1);
+    for(ll T = M; T <= N * N; T++) {
+        if(hehe(T, N)) {
+            cout << T;
+            return 0;
+        }
     }
     
-    cout << ans;
+    cout << -1;
 
     time();
     return 0;
