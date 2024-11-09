@@ -32,13 +32,13 @@ int main() {
     fastio();
     docfile();
 
-    ll N, M; cin >> N >> M;
+    int N, M; cin >> N >> M;
     
-    for(ll T = M;; T++) {
+    for(int T = M;; T++) {
         bool found = false;
-        for(ll a = 1; a * a <= T; a++) {
+        for(int a = 1; a * a <= T; a++) {
             if(T % a == 0) {
-                ll b = T / a;
+                int b = T / a;
                 if(a <= N && b <= N) {
                     found = true;
                     break;
