@@ -32,52 +32,57 @@ int main() {
     fastio();
     docfile();
 
-    int n, m; ll d;
-    cin >> n >> m >> d;
+    int n, m; ll d; cin >> n >> m >> d;
     
     vector<ll> a(n), b(m);
-    for(int i = 0; i < n; i++) cin >> a[i];
-    for(int i = 0; i < m; i++) cin >> b[i];
+    for(int i = 0; i < n; i++) {
+        cin >> a[i];
+    }
+
+    for(int i = 0; i < m; i++) {
+        cin >> b[i];
+    }
     
     sort(a.begin(), a.end());
     sort(b.begin(), b.end());
     
-    ll maxSum = -1;
+    ll res = -1;
     
     for(int i = 0; i < n; i++) {
-        int left = 0, right = m - 1;
+        int l = 0, r = m - 1;
         
-        while(left <= right) {
-            int mid = (left + right) / 2;
+        while(l <= r) {
+            int mid = (l + r) / 2;
             ll diff = abs(a[i] - b[mid]);
             
             if(diff <= d) {
-                maxSum = max(maxSum, a[i] + b[mid]);
+                res = max(res, a[i] + b[mid]);
                 
-                int temp = mid - 1;
-                while(temp >= 0 && abs(a[i] - b[temp]) <= d) {
-                    maxSum = max(maxSum, a[i] + b[temp]);
-                    temp--;
+                int tmp = mid - 1;
+                while(tmp >= 0 && abs(a[i] - b[tmp]) <= d) {
+                    res = max(res, a[i] + b[tmp]);
+                    tmp--;
                 }
                 
-                temp = mid + 1;
-                while(temp < m && abs(a[i] - b[temp]) <= d) {
-                    maxSum = max(maxSum, a[i] + b[temp]);
-                    temp++;
+                tmp = mid + 1;
+                while(tmp < m && abs(a[i] - b[tmp]) <= d) {
+                    res = max(res, a[i] + b[tmp]);
+                    tmp++;
                 }
                 
                 break;
             }
             
             if(b[mid] < a[i]) {
-                left = mid + 1;
-            } else {
-                right = mid - 1;
+                l = mid + 1;
+            } 
+            else {
+                r = mid - 1;
             }
         }
     }
     
-    cout << maxSum << endl;
+    cout << res;
 
     time();
     return 0;
