@@ -1,9 +1,10 @@
 {
-    "gitdoc.enabled": false,
+    "gitdoc.enabled": true,
     "files.associations": {
         "xiosbase": "cpp",
         "vector": "cpp",
         "iostream": "cpp",
-        "ios": "cpp"
+        "ios": "cpp",
+        "unordered_map": "cpp"
     }
 }
