@@ -1,3 +1,5 @@
+// Author: Perry (https://perrythedev.com)
+// Problem Link: 
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -26,68 +28,9 @@ void time() {
          << ln;
 }
 
-const int MOD = 20112024;
-
-ll factorial(int n) {
-    ll result = 1;
-    for (int i = 2; i <= n; ++i) {
-        result = (result * i) % MOD;
-    }
-    return result;
-}
-
-ll power(ll a, ll b, ll mod) {
-    ll result = 1;
-    while (b > 0) {
-        if (b % 2 == 1)
-            result = (result * a) % mod;
-        a = (a * a) % mod;
-        b /= 2;
-    }
-    return result;
-}
-
-ll modInverse(ll n, ll mod) {
-    return power(n, mod - 2, mod);
-}
-
-// Hàm tính số cách sắp xếp
-ll solve(int n, const unordered_map<int, int>& freq) {
-    ll total_fact = factorial(n);  // Giai thừa của n
-    ll divisor_fact = 1;
-    for (const auto &entry : freq) {
-        divisor_fact = (divisor_fact * factorial(entry.second)) % MOD;  // Giai thừa của tần suất các màu
-    }
-    return (total_fact * modInverse(divisor_fact, MOD)) % MOD;
-}
-
 int main() {
     fastio();
     docfile();
-
-    int n; 
-    cin >> n;  // Số chiếc nón
-    vector<int> colors(n);
-    unordered_map<int, int> freq;  // Đếm tần suất của mỗi màu
-
-    for(int i = 0; i < n; ++i) {
-        cin >> colors[i];
-        freq[colors[i]]++;
-    }
-    
-    int max_freq = 0;
-    for(const auto &entry : freq) {
-        max_freq = max(max_freq, entry.second);  // Tìm tần suất của màu xuất hiện nhiều nhất
-    }
-    
-    // Kiểm tra nếu màu nào xuất hiện quá nhiều
-    if(max_freq > (n + 1) / 2) {
-        cout << 0 << endl;
-        return 0;
-    }
-
-    ll res = solve(n, freq);
-    cout << res << endl;
 
     time();
     return 0;
