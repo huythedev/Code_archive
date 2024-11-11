@@ -1,62 +1,69 @@
-// Author: Perry (https://perrythedev.com)
-// Problem Link: 
 #include <bits/stdc++.h>
 using namespace std;
+#define ll long long
+const int MOD = 1e9 + 7;
+const int MAXN = 16;
 
-#define NAME "20-11"
-#define ln "\n"
-#define sz size()
+int n;
+vector<int> colors;
+ll dp[MAXN][1 << MAXN];
+vector<int> positions[MAXN]; // Lưu các vị trí của mỗi màu
 
-typedef long long ll;
-typedef long double ld;
-
-void fastio() {
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
-    cout.tie(NULL);
-}
-
-void docfile() {
-    if (ifstream(NAME ".INP")) {
-        freopen(NAME ".INP", "r", stdin);
-        freopen(NAME ".OUT", "w", stdout);
+// Kiểm tra xem việc đặt màu color vào vị trí pos có hợp lệ không
+bool isValid(int pos, int color, int mask) {
+    // Kiểm tra nếu pos > 0, màu bên trái
+    if (pos > 0) {
+        int prevPos = -1;
+        for (int i = 0; i < n; i++) {
+            if (mask & (1 << i)) {
+                prevPos = i;
+            }
+        }
+        if (prevPos != -1 && colors[prevPos] == color) return false;
     }
+    return true;
 }
 
-void time() {
-    cerr << ln << "Time elapsed: " << 1.0 * clock() / CLOCKS_PER_SEC << "s." 
-         << ln;
-}
-
-const int MOD = 20112024;
-vector<int> fact(1e5 + 1, 1);
-
-void precompute() {
-    // Caculate first 1e5 values of factorial
-    for (int i = 1; i <= 1e5; i++) {
-        fact[i] = (fact[i - 1] * i) % MOD;
+// Hàm quy hoạch động
+ll solve(int pos, int mask) {
+    // Nếu đã đặt hết n vị trí
+    if (pos == n) return 1;
+    
+    // Nếu đã tính trạng thái này
+    if (dp[pos][mask] != -1) return dp[pos][mask];
+    
+    ll result = 0;
+    // Thử đặt từng màu vào vị trí hiện tại
+    for (int i = 0; i < n; i++) {
+        if (!(mask & (1 << i))) { // Nếu chưa sử dụng vị trí i
+            if (isValid(pos, colors[i], mask)) {
+                result = (result + solve(pos + 1, mask | (1 << i))) % MOD;
+            }
+        }
     }
+    
+    return dp[pos][mask] = result;
 }
 
 int main() {
-    fastio();
-    docfile();
-    precompute();
-
-    int n; cin >> n;
-    unordered_map<int, int> colors;
-    for(int i = 0; i < n; ++i) {
-        int x; cin >> x;
-        colors[x]++;
+    ios_base::sync_with_stdio(false);
+    cin.tie(0);
+    
+    // Đọc input
+    cin >> n;
+    colors.resize(n);
+    for (int i = 0; i < n; i++) {
+        cin >> colors[i];
     }
-
-    ll res = fact[n];
-    for(auto& [color, cnt] : colors) {
-        res = (res * fact[cnt]) % MOD;
-    }
-
-    cout << res << ln;
-
-    time();
+    
+    // Khởi tạo mảng dp
+    memset(dp, -1, sizeof(dp));
+    
+    // Tính kết quả
+    ll result = solve(0, 0);
+    
+    // In kết quả
+    cout << result << endl;
+    
     return 0;
 }
