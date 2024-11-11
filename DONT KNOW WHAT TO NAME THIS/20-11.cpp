@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 #define ll long long
-const int MOD = 1e9 + 7;
+const int MOD = 20112024;
 const int MAXN = 1e5 + 5;
 const int MAXC = 105;
 
@@ -34,10 +34,11 @@ ll solve() {
             for(int c = 1; c <= 100; c++) {
                 if(c != last && cnt[c] > 0) {
                     // Số cách = số cách đến i-1 * số lượng màu c còn lại
-                    int remaining = cnt[c];
-                    if(c == color[i-2]) remaining--; // Nếu đã dùng màu này ở vị trí trước
+                    ll remaining = cnt[c];
+                    if(c == color[i-2]) remaining--;
                     if(remaining > 0) {
-                        dp[i][c] = (dp[i][c] + dp[i-1][last] * remaining) % MOD;
+                        ll add = (dp[i-1][last] * remaining) % MOD;
+                        dp[i][c] = (dp[i][c] + add) % MOD;
                     }
                 }
             }
