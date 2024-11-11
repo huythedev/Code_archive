@@ -51,11 +51,12 @@ ll modInverse(ll n, ll mod) {
     return power(n, mod - 2, mod);
 }
 
+// Hàm tính số cách sắp xếp
 ll solve(int n, const unordered_map<int, int>& freq) {
-    ll total_fact = factorial(n);
+    ll total_fact = factorial(n);  // Giai thừa của n
     ll divisor_fact = 1;
     for (const auto &entry : freq) {
-        divisor_fact = (divisor_fact * factorial(entry.second)) % MOD;
+        divisor_fact = (divisor_fact * factorial(entry.second)) % MOD;  // Giai thừa của tần suất các màu
     }
     return (total_fact * modInverse(divisor_fact, MOD)) % MOD;
 }
@@ -64,9 +65,10 @@ int main() {
     fastio();
     docfile();
 
-    int n; cin >> n;
+    int n; 
+    cin >> n;  // Số chiếc nón
     vector<int> colors(n);
-    unordered_map<int, int> freq;
+    unordered_map<int, int> freq;  // Đếm tần suất của mỗi màu
 
     for(int i = 0; i < n; ++i) {
         cin >> colors[i];
@@ -75,7 +77,7 @@ int main() {
     
     int max_freq = 0;
     for(const auto &entry : freq) {
-        max_freq = max(max_freq, entry.second);
+        max_freq = max(max_freq, entry.second);  // Tìm tần suất của màu xuất hiện nhiều nhất
     }
     
     // Kiểm tra nếu màu nào xuất hiện quá nhiều
