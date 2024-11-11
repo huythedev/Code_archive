@@ -28,9 +28,34 @@ void time() {
          << ln;
 }
 
+const int MOD = 20112024;
+vector<int> fact(1e5 + 1, 1);
+
+void precompute() {
+    // Caculate first 1e5 values of factorial
+    for (int i = 1; i <= 1e5; i++) {
+        fact[i] = (fact[i - 1] * i) % MOD;
+    }
+}
+
 int main() {
     fastio();
     docfile();
+    precompute();
+
+    int n; cin >> n;
+    unordered_map<int, int> colors;
+    for(int i = 0; i < n; ++i) {
+        int x; cin >> x;
+        colors[x]++;
+    }
+
+    ll res = fact[n];
+    for(auto& [color, cnt] : colors) {
+        res = (res * fact[cnt]) % MOD;
+    }
+
+    cout << res << ln;
 
     time();
     return 0;
