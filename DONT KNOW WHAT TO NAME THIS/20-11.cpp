@@ -1,5 +1,3 @@
-// Author: Perry (https://perrythedev.com)
-// Problem Link: 
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -80,6 +78,7 @@ int main() {
         max_freq = max(max_freq, entry.second);
     }
     
+    // Kiểm tra nếu màu nào xuất hiện quá nhiều
     if(max_freq > (n + 1) / 2) {
         cout << 0 << endl;
         return 0;
