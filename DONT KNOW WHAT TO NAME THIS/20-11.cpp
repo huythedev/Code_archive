@@ -2,68 +2,65 @@
 using namespace std;
 #define ll long long
 const int MOD = 1e9 + 7;
-const int MAXN = 16;
+const int MAXN = 1e5 + 5;
+const int MAXC = 105;
 
 int n;
-vector<int> colors;
-ll dp[MAXN][1 << MAXN];
-vector<int> positions[MAXN]; // Lưu các vị trí của mỗi màu
+int color[MAXN];
+int cnt[MAXC]; // Đếm số lượng mỗi màu
+ll dp[MAXN][MAXC]; // dp[i][c]: số cách sắp xếp i phần tử đầu, kết thúc bằng màu c
 
-// Kiểm tra xem việc đặt màu color vào vị trí pos có hợp lệ không
-bool isValid(int pos, int color, int mask) {
-    // Kiểm tra nếu pos > 0, màu bên trái
-    if (pos > 0) {
-        int prevPos = -1;
-        for (int i = 0; i < n; i++) {
-            if (mask & (1 << i)) {
-                prevPos = i;
+ll solve() {
+    // Đếm số lượng mỗi màu
+    memset(cnt, 0, sizeof(cnt));
+    for(int i = 0; i < n; i++) {
+        cnt[color[i]]++;
+    }
+    
+    // Khởi tạo cho vị trí đầu tiên
+    memset(dp, 0, sizeof(dp));
+    for(int c = 1; c <= 100; c++) {
+        if(cnt[c] > 0) {
+            dp[1][c] = cnt[c];
+        }
+    }
+    
+    // QHĐ cho các vị trí tiếp theo
+    for(int i = 2; i <= n; i++) {
+        for(int last = 1; last <= 100; last++) {
+            if(dp[i-1][last] == 0) continue;
+            
+            // Thử đặt các màu khác màu last
+            for(int c = 1; c <= 100; c++) {
+                if(c != last && cnt[c] > 0) {
+                    // Số cách = số cách đến i-1 * số lượng màu c còn lại
+                    int remaining = cnt[c];
+                    if(c == color[i-2]) remaining--; // Nếu đã dùng màu này ở vị trí trước
+                    if(remaining > 0) {
+                        dp[i][c] = (dp[i][c] + dp[i-1][last] * remaining) % MOD;
+                    }
+                }
             }
         }
-        if (prevPos != -1 && colors[prevPos] == color) return false;
     }
-    return true;
-}
-
-// Hàm quy hoạch động
-ll solve(int pos, int mask) {
-    // Nếu đã đặt hết n vị trí
-    if (pos == n) return 1;
     
-    // Nếu đã tính trạng thái này
-    if (dp[pos][mask] != -1) return dp[pos][mask];
-    
+    // Tổng hợp kết quả
     ll result = 0;
-    // Thử đặt từng màu vào vị trí hiện tại
-    for (int i = 0; i < n; i++) {
-        if (!(mask & (1 << i))) { // Nếu chưa sử dụng vị trí i
-            if (isValid(pos, colors[i], mask)) {
-                result = (result + solve(pos + 1, mask | (1 << i))) % MOD;
-            }
-        }
+    for(int c = 1; c <= 100; c++) {
+        result = (result + dp[n][c]) % MOD;
     }
-    
-    return dp[pos][mask] = result;
+    return result;
 }
 
 int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(0);
     
-    // Đọc input
     cin >> n;
-    colors.resize(n);
-    for (int i = 0; i < n; i++) {
-        cin >> colors[i];
+    for(int i = 0; i < n; i++) {
+        cin >> color[i];
     }
     
-    // Khởi tạo mảng dp
-    memset(dp, -1, sizeof(dp));
-    
-    // Tính kết quả
-    ll result = solve(0, 0);
-    
-    // In kết quả
-    cout << result << endl;
-    
+    cout << solve() << endl;
     return 0;
 }
