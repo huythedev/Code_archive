@@ -1,5 +1,5 @@
 // Author: Perry (https://perrythedev.com)
-// Problem Link: https://marisaoj.com/problem/402
+// Problem Link: https://marisaoj.com/problem/315
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -32,13 +32,9 @@ int main() {
     fastio();
     docfile();
 
-    ll n; cin >> n;
-    ll res = 0, t = 1;
-    while(t < n) {
-        t *= 2;
-        ++res;
-    }
-    cout << res;
+    int a, b; cin >> a >> b;
+    int tmp = gcd(a, b);
+    cout << a / tmp << ' ' << b / tmp;
 
     time();
     return 0;
