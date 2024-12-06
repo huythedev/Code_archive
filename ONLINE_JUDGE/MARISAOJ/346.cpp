@@ -37,18 +37,21 @@ int main() {
     for(ll &i : A)
         cin >> i;
 
-    for(int i = 0; i < n - 1; ++i) {
-        ll res = 0;
-        for(int j = i + 1; j < n; ++j) {
-            res += A[j];
-            if(res == k) {
-                cout << "YES";
-                return 0;
+    bool found = false;
+    for(int mask = 0; mask < (1 << n); ++mask) {
+        ll sum = 0;
+        for(int i = 0; i < n; ++i) {
+            if(mask & (1 << i)) {
+                sum += A[i];
             }
+        }
+        if(sum == k) {
+            found = true;
+            break;
         }
     }
 
-    cout << "NO";
+    cout << (found ? "YES" : "NO");
 
     time();
     return 0;
