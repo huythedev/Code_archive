@@ -1,5 +1,5 @@
 // Author: Perry (https://perrythedev.com)
-// Problem Link: https://marisaoj.com/problem/24
+// Problem Link: https://marisaoj.com/problem/18
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -28,21 +28,18 @@ void time() {
          << ln;
 }
 
-int power_modulo(int a, int b, int c) {
-    if(b == 0) return 1;
-    if(b % 2 == 0) {
-        int tmp = power_modulo(a, b / 2, c);
-        return (tmp * tmp) % c;
-    }
-    return (a * power_modulo(a, b - 1, c)) % c;
+bool is_prime(int n) {
+    if(n < 2) return false;
+    for(int i = 2; i <= sqrt(n); ++i) if(n % i == 0) return false;
+    return true;
 }
 
 int main() {
     fastio();
     docfile();
 
-    int a, b, c; cin >> a >> b >> c;
-    cout << power_modulo(a, b, c);
+    int n; cin >> n;
+    cout << (is_prime(n) ? "YES" : "NO");
 
     time();
     return 0;
