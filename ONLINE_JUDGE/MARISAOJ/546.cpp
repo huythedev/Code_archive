@@ -28,20 +28,15 @@ void time() {
          << ln;
 }
 
-void solve(vector<int> vec, int n, int k) {
-    if(vec.sz >= 2 && vec[vec.sz - 1] == vec[vec.sz - 2]) {
-        return;
-    }
-    if(vec.sz == k) {
-        for(int x : vec) cout << x << ' ';
+void solve(int n, int k, vector<int> &A, int i, int j) {
+    if(i == k) {
+        for(int x : A) cout << x << ' ';
         cout << ln;
         return;
     }
-
-    for(int x = 1; x <= n; ++x) {
-        vec.push_back(x);
-        solve(vec, n, k);
-        vec.pop_back();
+    for(int x = j + 1; x <= n; ++x) {
+        A[i] = x;
+        solve(n, k, A, i + 1, x);
     }
 }
 
@@ -50,8 +45,8 @@ int main() {
     docfile();
 
     int n, k; cin >> n >> k;
-    vector<int> vec;
-    solve(vec, n, k);
+    vector<int> A(k);
+    solve(n, k, A, 0, 0);
 
     time();
     return 0;
