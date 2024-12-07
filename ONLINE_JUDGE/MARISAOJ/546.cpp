@@ -28,25 +28,23 @@ void time() {
          << ln;
 }
 
-void solve(int n, int k, vector<int> &A, int i, int j) {
-    if(i == k) {
-        for(int x : A) cout << x << ' ';
-        cout << ln;
-        return;
-    }
-    for(int x = j + 1; x <= n; ++x) {
-        A[i] = x;
-        solve(n, k, A, i + 1, x);
-    }
+void solve(int n, int k) {
+    vector<int> nums(n);
+    iota(nums.begin(), nums.end(), 1);
+    do {
+        for (int i = 0; i < k; ++i) {
+            cout << nums[i] << ' ';
+        }
+        cout << '\n';
+    } while (next_permutation(nums.begin(), nums.end()));
 }
 
 int main() {
     fastio();
     docfile();
-
+    
     int n, k; cin >> n >> k;
-    vector<int> A(k);
-    solve(n, k, A, 0, 0);
+    solve(n, k);
 
     time();
     return 0;
