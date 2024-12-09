@@ -32,8 +32,6 @@ int main() {
     fastio();
     docfile();
 
-    // Write consecutive natural numbers from 1 to n we get an integer. For example 15 we have 123456789101112131415. Find a way to erase k digits of the number to get the largest number.
-    // Example with n = 15 and k = 3, we erase 3 digits 1, 2, 3 to get the largest number 456789101112131415.
     int n; ll k; cin >> n >> k;
     string num = "";
     for(int i = 1; i <= n; ++i) num += to_string(i);
