@@ -34,13 +34,10 @@ void makeTest(const string &folderPath, const string &task)
 {
     ofstream out(folderPath + "/" + task + ".INP");  // Create an input file for the test case
 
-    int t = random(1, 20);  // Randomly choose the number of test cases (between 1 and 20)
-    out << t << "\n";  // Write the number of test cases to the input file
+    int n = random(1, 1e9);
+    int k = random(1, 1e9);
 
-    while (t--) {  // For each test case
-        ll k = random(1, 1e12);  // Generate a random number k (up to 10^12)
-        out << k << "\n";  // Write the generated number to the input file
-    }
+    out << n << " " << k << "\n";  // Write the input values to the file
 
     out.close();  // Close the input file after writing
 }
@@ -97,7 +94,7 @@ int main()
     cout << "Enter 1 for macOS/Linux or 2 for Windows: ";
     cin >> osType;  // Prompt user to choose OS type (1 for macOS/Linux, 2 for Windows)
 
-    string task = "CANARIUM", folderName;
+    string task = "BAI_3-4", folderName;
     cout << "Enter folder name: ";
     cin >> folderName;  // Prompt user to input a folder name
 

@@ -36,7 +36,12 @@ int main() {
     string num = "";
     for(int i = 1; i <= n; ++i) num += to_string(i);
 
-    for(int i = 0; i < k; ++i) {
+    if(k >= num.sz) {
+        cout << -1;
+        return 0;
+    }
+
+    for(ll i = 0; i < k; ++i) {
         for(int j = 0; j < num.sz - 1; ++j) {
             if(num[j] < num[j + 1]) {
                 num.erase(j, 1);
