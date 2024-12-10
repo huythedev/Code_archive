@@ -104,5 +104,6 @@ signed main(signed argc, char* argv[]) {
     // TEST[id]/... nhằm để chia subtask
     int id = atoi(argv[1]);
     cout << id << "\n";
+    cout << genTest::rnd(1, 1e9) << ' ' << genTest::rnd(1, 1e9) << endl;
     return 0;
 }
