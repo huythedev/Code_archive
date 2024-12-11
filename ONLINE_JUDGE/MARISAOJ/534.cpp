@@ -36,7 +36,7 @@ int main() {
 
     double r; cin >> r;
 
-    cout << fixed << setprecision(3) << 2 * pi * r << ' ' << M_PI * r * r;
+    cout << fixed << setprecision(3) << 2 * pi * r << ' ' << pi * r * r;
 
     time();
     return 0;
