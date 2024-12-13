@@ -32,20 +32,7 @@ int main() {
     fastio();
     docfile();
 
-    int n; cin >> n;
-    vector<int> a(n);
-    for (int &x : a) cin >> x;
-    int x, y; cin >> x >> y;
-
-    int ans = INT_MAX;
-    for (int i = 0; i < n; i++) {
-        int dist = 0;
-        for (int j = x; j != y; j = (j + 1) % n) {
-            dist += a[j];
-        }
-        ans = min(ans, dist);
-    }
-    cout << ans;
+    
 
     time();
     return 0;
