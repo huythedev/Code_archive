@@ -1,5 +1,5 @@
 // Author: Perry (https://perrythedev.com)
-// Problem Link: https://marisaoj.com/problem/408
+// Problem Link: https://marisaoj.com/problem/422
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -32,16 +32,20 @@ int main() {
     fastio();
     docfile();
 
-    int n, k; cin >> n >> k;
+    int n; cin >> n;
     vector<int> a(n);
     for (int &x : a) cin >> x;
+    int x, y; cin >> x >> y;
 
-    for (int i = k; i < n; i++) {
-        cout << a[i] << ' ';
+    int ans = INT_MAX;
+    for (int i = 0; i < n; i++) {
+        int dist = 0;
+        for (int j = x; j != y; j = (j + 1) % n) {
+            dist += a[j];
+        }
+        ans = min(ans, dist);
     }
-    for (int i = 0; i < k; i++) {
-        cout << a[i] << ' ';
-    }
+    cout << ans;
 
     time();
     return 0;

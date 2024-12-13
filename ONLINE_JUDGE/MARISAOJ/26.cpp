@@ -1,5 +1,5 @@
 // Author: Perry (https://perrythedev.com)
-// Problem Link: https://marisaoj.com/problem/408
+// Problem Link: https://marisaoj.com/problem/26
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -28,20 +28,24 @@ void time() {
          << ln;
 }
 
+bool isPalinVector(vector<int> a) {
+    for (int i = 0; i < a.size() / 2; i++) {
+        if (a[i] != a[a.size() - i - 1]) {
+            return false;
+        }
+    }
+    return true;
+}
+
 int main() {
     fastio();
     docfile();
 
-    int n, k; cin >> n >> k;
+    int n; cin >> n;
     vector<int> a(n);
     for (int &x : a) cin >> x;
 
-    for (int i = k; i < n; i++) {
-        cout << a[i] << ' ';
-    }
-    for (int i = 0; i < k; i++) {
-        cout << a[i] << ' ';
-    }
+    cout << (isPalinVector(a) ? "YES" : "NO");
 
     time();
     return 0;
