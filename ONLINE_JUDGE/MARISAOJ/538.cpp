@@ -34,26 +34,16 @@ int main() {
 
     int n; cin >> n;
     vector<int> a(n);
-    int last_negative_index = -1;
-    for(int i = 0; i < n; i++) {
-        cin >> a[i];
-        if(a[i] < 0)
-            last_negative_index = i;
+    for (int &x : a) cin >> x;
+
+    vector<int> neg, pos;
+    for (int x : a) {
+        if (x < 0) neg.push_back(x);
+        else pos.push_back(x);
     }
-    vector<int> positive_numbers;
-    for(int i = 0; i <= last_negative_index; i++) {
-        if(a[i] < 0) {
-            cout << a[i] << ' ';
-            last_negative_index--;
-        }
-        else 
-            positive_numbers.push_back(a[i]);
-    }
-    reverse(positive_numbers.begin(), positive_numbers.end());
-    for(int i = last_negative_index + 1; i < n; i++)
-        cout << a[i] << ' ';
-    for(int i : positive_numbers)
-        cout << i << ' ';
+
+    for (int x : neg) cout << x << ' ';
+    for (int x : pos) cout << x << ' ';
 
     time();
     return 0;
