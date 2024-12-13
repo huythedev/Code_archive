@@ -41,10 +41,11 @@ int main() {
             last_negative_index = i;
     }
     vector<int> positive_numbers;
-    cout << last_negative_index << ln;
     for(int i = 0; i <= last_negative_index; i++) {
-        if(a[i] < 0)
+        if(a[i] < 0) {
             cout << a[i] << ' ';
+            last_negative_index--;
+        }
         else 
             positive_numbers.push_back(a[i]);
     }
