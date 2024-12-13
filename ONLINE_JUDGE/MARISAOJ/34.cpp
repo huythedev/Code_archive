@@ -1,5 +1,5 @@
 // Author: Perry (https://perrythedev.com)
-// Problem Link: https://marisaoj.com/problem/32
+// Problem Link: https://marisaoj.com/problem/34
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -32,18 +32,14 @@ int main() {
     fastio();
     docfile();
 
-    int n, q; cin >> n >> q;
-    vector<int> A(n);
-    for (int i = 0; i < n; ++i) 
-        cin >> A[i];
-    while(q--) {
-        int i, x; cin >> i >> x;
-        i--;
-        A.insert(A.begin() + i, x);
-        for(int i = 0; i < A.sz; ++i) {
-            cout << A[i] << " ";
-        }
-        cout << ln;
+    int n; cin >> n;
+    vector<int> a(n);
+    for(int &i : a) cin >> i;
+
+    sort(a.begin(), a.end());
+
+    for(int i = 0; i < n; ++i) {
+        cout << a[i] << " ";
     }
 
     time();

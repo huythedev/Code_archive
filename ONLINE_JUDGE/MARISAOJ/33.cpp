@@ -1,5 +1,5 @@
 // Author: Perry (https://perrythedev.com)
-// Problem Link: https://marisaoj.com/problem/32
+// Problem Link: https://marisaoj.com/problem/33
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -32,19 +32,21 @@ int main() {
     fastio();
     docfile();
 
-    int n, q; cin >> n >> q;
-    vector<int> A(n);
-    for (int i = 0; i < n; ++i) 
-        cin >> A[i];
-    while(q--) {
-        int i, x; cin >> i >> x;
-        i--;
-        A.insert(A.begin() + i, x);
-        for(int i = 0; i < A.sz; ++i) {
-            cout << A[i] << " ";
+    int n; cin >> n;
+    vector<int> a(n);
+    for(int &i : a) cin >> i;
+
+    int longest_postive_subarray = 0, current_postive_subarray = 0;
+    for(int i = 0; i < n; ++i) {
+        if(a[i] > 0) {
+            current_postive_subarray++;
+            longest_postive_subarray = max(longest_postive_subarray, current_postive_subarray);
+        } else {
+            current_postive_subarray = 0;
         }
-        cout << ln;
     }
+
+    cout << longest_postive_subarray << ln;
 
     time();
     return 0;
