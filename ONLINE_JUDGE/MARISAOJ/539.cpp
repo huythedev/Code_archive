@@ -43,8 +43,20 @@ int main() {
         else pos.push_back(x);
     }
 
-    for (int x : neg) cout << x << ' ';
-    for (int x : pos) cout << x << ' ';
+    for(int i = 0; i < min((int)neg.sz, (int)pos.sz); i++) {
+        cout << neg[i] << ' ' << pos[i] << ' ';
+    }
+
+    if(neg.sz > pos.sz) {
+        for(int i = pos.sz; i < neg.sz; i++) {
+            cout << neg[i] << ' ';
+        }
+    } 
+    else {
+        for(int i = neg.sz; i < pos.sz; i++) {
+            cout << pos[i] << ' ';
+        }
+    }
 
     time();
     return 0;
