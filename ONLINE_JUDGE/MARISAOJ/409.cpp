@@ -32,19 +32,14 @@ int main() {
     fastio();
     docfile();
 
-    // Given an array A of n
-
-    // integer elements, count the number of dominant elements in the array. An element is considered dominant if it is greater than all the elements to its right in the array.
-
-    // The last element cannot not be a dominant element as there is no element to its right in the array.
-
     int n; cin >> n;
     vector<int> a(n);
     for (int &x : a) cin >> x;
 
-    int ans = 0, max_val = INT_MIN;
-    for (int i = n - 1; i >= 0; i--) {
-        if (a[i] > max_val) {
+    reverse(a.begin(), a.end());
+    int max_val = a[0], ans = 0;
+    for(int i = 1; i < n; ++i) {
+        if(a[i] > max_val) {
             max_val = a[i];
             ans++;
         }
