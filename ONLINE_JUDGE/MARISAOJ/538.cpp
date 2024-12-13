@@ -35,20 +35,24 @@ int main() {
     int n; cin >> n;
     vector<int> a(n);
     int last_negative_index = -1;
-    for(int i = 0; i < n; ++i) {
+    for(int i = 0; i < n; i++) {
         cin >> a[i];
-        if(a[i] < 0) {
+        if(a[i] < 0)
             last_negative_index = i;
-        }
     }
-
-    for(int i = 0; i < n; ++i) {
-        if(n > 0) {
-            a.push_back(a[i]);
-            a.erase(a.begin() + i);
-            n--;
-        }
+    vector<int> positive_numbers;
+    cout << last_negative_index << ln;
+    for(int i = 0; i <= last_negative_index; i++) {
+        if(a[i] < 0)
+            cout << a[i] << ' ';
+        else 
+            positive_numbers.push_back(a[i]);
     }
+    reverse(positive_numbers.begin(), positive_numbers.end());
+    for(int i = last_negative_index + 1; i < n; i++)
+        cout << a[i] << ' ';
+    for(int i : positive_numbers)
+        cout << i << ' ';
 
     time();
     return 0;
