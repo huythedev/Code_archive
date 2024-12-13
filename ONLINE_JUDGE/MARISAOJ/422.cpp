@@ -32,7 +32,22 @@ int main() {
     fastio();
     docfile();
 
-    
+    int n; cin >> n;
+    vector<int> A(n);
+    for (int i = 0; i < n; ++i) 
+        cin >> A[i];
+    int x, y; cin >> x >> y;
+    --x; --y; 
+
+    int clockwise_distance = 0, counter_clockwise_distance = 0;
+    for (int i = x; i != y; i = (i + 1) % n) {
+        clockwise_distance += A[i];
+    }
+    for (int i = x; i != y; i = (i - 1 + n) % n) {
+        counter_clockwise_distance += A[(i - 1 + n) % n];
+    }
+
+    cout << min(clockwise_distance, counter_clockwise_distance) << endl;
 
     time();
     return 0;
