@@ -1,5 +1,5 @@
 // Author: Perry (https://perrythedev.com)
-// Problem Link: https://marisaoj.com/problem/539
+// Problem Link: https://marisaoj.com/problem/409
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -32,30 +32,24 @@ int main() {
     fastio();
     docfile();
 
+    // Given an array A of n
+
+    // integer elements, count the number of dominant elements in the array. An element is considered dominant if it is greater than all the elements to its right in the array.
+
+    // The last element cannot not be a dominant element as there is no element to its right in the array.
+
     int n; cin >> n;
     vector<int> a(n);
     for (int &x : a) cin >> x;
 
-    vector<int> neg, pos;
-    for (int x : a) {
-        if (x < 0) neg.push_back(x);
-        else pos.push_back(x);
-    }
-
-    for(int i = 0; i < min((int)neg.sz, (int)pos.sz); i++) {
-        cout << neg[i] << ' ' << pos[i] << ' ';
-    }
-
-    if(neg.sz > pos.sz) {
-        for(int i = pos.sz; i < neg.sz; i++) {
-            cout << neg[i] << ' ';
-        }
-    } 
-    else {
-        for(int i = neg.sz; i < pos.sz; i++) {
-            cout << pos[i] << ' ';
+    int ans = 0, max_val = INT_MIN;
+    for (int i = n - 1; i >= 0; i--) {
+        if (a[i] > max_val) {
+            max_val = a[i];
+            ans++;
         }
     }
+    cout << ans;
 
     time();
     return 0;
