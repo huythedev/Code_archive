@@ -1,5 +1,5 @@
 // Author: Perry (https://perrythedev.com)
-// Problem Link: https://marisaoj.com/problem/540
+// Problem Link: https://marisaoj.com/problem/539
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -32,15 +32,19 @@ int main() {
     fastio();
     docfile();
 
+    // Given an array A with n integer elements, arrange the array by interleaving the negative and positive elements. The relative order of elements with the same sign should not be changed.
     int n; cin >> n;
     vector<int> a(n);
     for (int &x : a) cin >> x;
 
-    int ans = 0;
-    for (int i = 1; i < n; i++) {
-        ans = max(ans, abs(a[i] - a[i - 1]));
+    vector<int> neg, pos;
+    for (int x : a) {
+        if (x < 0) neg.push_back(x);
+        else pos.push_back(x);
     }
-    cout << ans;
+
+    for (int x : neg) cout << x << ' ';
+    for (int x : pos) cout << x << ' ';
 
     time();
     return 0;

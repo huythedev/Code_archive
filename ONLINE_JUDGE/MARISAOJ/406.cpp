@@ -1,5 +1,5 @@
 // Author: Perry (https://perrythedev.com)
-// Problem Link: https://marisaoj.com/problem/540
+// Problem Link: https://marisaoj.com/problem/406
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -33,14 +33,16 @@ int main() {
     docfile();
 
     int n; cin >> n;
-    vector<int> a(n);
-    for (int &x : a) cin >> x;
-
-    int ans = 0;
-    for (int i = 1; i < n; i++) {
-        ans = max(ans, abs(a[i] - a[i - 1]));
+    int max_val = INT_MIN, max_val_idx = -1;
+    for (int i = 0; i < n; i++) {
+        int x; cin >> x;
+        if (x > max_val) {
+            max_val = x;
+            max_val_idx = i;
+        }
     }
-    cout << ans;
+
+    cout << max_val << ' ' << max_val_idx + 1;
 
     time();
     return 0;
