@@ -32,32 +32,32 @@ int main() {
     fastio();
     docfile();
 
-    int n, k; cin >> n >> k;
+    int n, k;
+    cin >> n >> k;
     vector<int> a(n);
     for(int i = 0; i < n; ++i) {
         cin >> a[i];
     }
 
-    int longest_subarray = INT_MIN, start_idx = 0, end_idx = 0;
+    unordered_map<int, int> freq;
+    int l = 0, r = 0, max_length = 0, start_idx = 0;
 
-    for(int i = 0; i < n - 1; ++i) {
-        set<int> s;
-        int subarray_length = 0;
-        for(int j = i + 1; j < n; ++j) {
-            s.insert(a[j]);
-            if(s.sz > k) {
-                break;
+    for(r = 0; r < n; ++r) {
+        freq[a[r]]++;
+        while (freq.size() > k) {
+            freq[a[l]]--;
+            if (freq[a[l]] == 0) {
+                freq.erase(a[l]);
             }
-            subarray_length++;
+            l++;
         }
-        if(subarray_length > longest_subarray) {
-            longest_subarray = subarray_length;
-            start_idx = i;
-            end_idx = i + subarray_length;
+        if(r - l + 1 > max_length) {
+            max_length = r - l + 1;
+            start_idx = l;
         }
     }
 
-    cout << start_idx + 1 << " " << end_idx + 1 << endl;
+    cout << start_idx + 1 << " " << start_idx + max_length << endl;
 
     time();
     return 0;
