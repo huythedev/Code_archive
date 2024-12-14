@@ -42,32 +42,35 @@ int main() {
     unordered_set<int> used;
     bool possible = true;
 
-    for (int i = 0; i < m - 1; ++i) {
+    for(int i = 0; i < m - 1; ++i) {
         int current = leaders[i] - 1;
         int next = leaders[i + 1] - 1;
         int distance = (next - current + n) % n;
-        if (distance == 0) distance = n;
+        if(distance == 0) 
+            distance = n;
 
-        if (a[current] == -1) {
-            if (used.count(distance)) {
+        if(a[current] == -1) {
+            if(used.count(distance)) {
                 possible = false;
                 break;
             }
             a[current] = distance;
             used.insert(distance);
-        } else if (a[current] != distance) {
+        } 
+        else if(a[current] != distance) {
             possible = false;
             break;
         }
     }
 
-    if (!possible) {
-        cout << -1 << endl;
-    } else {
-        for (int i = 0; i < n; ++i) {
-            if (a[i] == -1) {
-                for (int j = 1; j <= n; ++j) {
-                    if (!used.count(j)) {
+    if(!possible) {
+        cout << -1 << ln;
+    } 
+    else {
+        for(int i = 0; i < n; ++i) {
+            if(a[i] == -1) {
+                for(int j = 1; j <= n; ++j) {
+                    if(!used.count(j)) {
                         a[i] = j;
                         used.insert(j);
                         break;
@@ -75,10 +78,10 @@ int main() {
                 }
             }
         }
-        for (int i = 0; i < n; ++i) {
+        for(int i = 0; i < n; ++i) {
             cout << a[i] << " ";
         }
-        cout << endl;
+        cout << ln;
     }
 
     time();
