@@ -32,31 +32,6 @@ int main() {
     fastio();
     docfile();
 
-    int t; cin >> t;
-    while (t--) {
-        int n; cin >> n;
-        vector<int> a(n);
-        for (int i = 0; i < n; ++i) {
-            cin >> a[i];
-        }
-
-        vector<int> b(n);
-        unordered_map<int, int> freq;
-        int mode = a[0];
-        for (int i = 0; i < n; ++i) {
-            freq[a[i]]++;
-            if (freq[a[i]] > freq[mode] || (freq[a[i]] == freq[mode] && a[i] < mode)) {
-                mode = a[i];
-            }
-            b[i] = mode;
-        }
-
-        for (int i = 0; i < n; ++i) {
-            cout << b[i] << " ";
-        }
-        cout << ln;
-    }
-
     time();
     return 0;
 }
