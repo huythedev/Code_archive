@@ -1,5 +1,5 @@
 // Author: Perry (https://perrythedev.com)
-// Problem Link: https://codeforces.com/contest/2044/problem/A
+// Problem Link: https://codeforces.com/contest/2044/problem/B
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -28,14 +28,27 @@ void time() {
          << ln;
 }
 
+string transform(const string& a) {
+    string b = a;
+    for (char& c : b) {
+        if (c == 'p') {
+            c = 'q';
+        } else if (c == 'q') {
+            c = 'p';
+        }
+    }
+    return b;
+}
+
 int main() {
     fastio();
     docfile();
 
     int t; cin >> t;
     while (t--) {
-        int n; cin >> n;
-        cout << n - 1 << ln;
+        string a;
+        cin >> a;
+        cout << transform(a) << ln;
     }
 
     time();
