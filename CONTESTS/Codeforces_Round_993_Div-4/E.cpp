@@ -1,0 +1,65 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+#define NAME "NAME"
+#define ln "\n"
+#define sz size()
+
+typedef long long ll;
+typedef long double ld;
+
+void fastio() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+}
+
+void docfile() {
+    if (ifstream(NAME ".INP")) {
+        freopen(NAME ".INP", "r", stdin);
+        freopen(NAME ".OUT", "w", stdout);
+    }
+}
+
+void time() {
+    cerr << ln << "Time elapsed: " << 1.0 * clock() / CLOCKS_PER_SEC << "s." 
+         << ln;
+}
+
+int main() {
+    fastio();
+    docfile();
+
+    int t;
+    cin >> t;
+    while (t--) {
+        ll k, l1, r1, l2, r2;
+        cin >> k >> l1 >> r1 >> l2 >> r2;
+        
+        ll ans = 0;
+        for (ll x = l1; x <= r1; x++) {
+            ll y = x;
+            while (y <= r2) {
+                if (y >= l2) {
+                    ans++;
+                }
+                if (y > r2/k) break;  // Prevent overflow
+                y *= k;
+            }
+            
+            // Check division
+            y = x;
+            while (y/k >= l2 && y % k == 0) {
+                y /= k;
+                if (y >= l2 && y <= r2) {
+                    ans++;
+                }
+            }
+        }
+        
+        cout << ans << ln;
+    }
+
+    time();
+    return 0;
+}
