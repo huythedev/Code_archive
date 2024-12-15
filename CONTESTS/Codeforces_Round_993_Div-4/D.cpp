@@ -32,6 +32,52 @@ int main() {
     fastio();
     docfile();
 
+    int t;
+    cin >> t;
+    while (t--) {
+        int n;
+        cin >> n;
+        vector<int> a(n);
+        for (int i = 0; i < n; i++) {
+            cin >> a[i];
+        }
+        
+        vector<int> b(n);
+        for (int i = 0; i < n; i++) {
+            if (i == 0) {
+                b[i] = a[i];
+                continue;
+            }
+            
+            map<int, int> freq;
+            for (int j = 0; j <= i-1; j++) {
+                freq[b[j]]++;
+            }
+            
+            int max_freq = 0;
+            for (auto [num, f] : freq) {
+                max_freq = max(max_freq, f);
+            }
+            
+            if (freq[a[i]] < max_freq) {
+                b[i] = a[i];
+                continue;
+            }
+            
+            for (int x = 1; x <= n; x++) {
+                if (freq[x] <= freq[a[i]] - 1) {
+                    b[i] = x;
+                    break;
+                }
+            }
+        }
+        
+        for (int x : b) {
+            cout << x << " ";
+        }
+        cout << ln;
+    }
+
     time();
     return 0;
 }
