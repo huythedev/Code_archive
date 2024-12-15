@@ -43,17 +43,8 @@ int main() {
                 if (y >= l2) {
                     ans++;
                 }
-                if (y > r2/k) break;  // Prevent overflow
+                if (y > r2 / k) break;  // Prevent overflow
                 y *= k;
-            }
-            
-            // Check division
-            y = x;
-            while (y/k >= l2 && y % k == 0) {
-                y /= k;
-                if (y >= l2 && y <= r2) {
-                    ans++;
-                }
             }
         }
         
