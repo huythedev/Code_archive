@@ -32,6 +32,12 @@ int main() {
     fastio();
     docfile();
 
+    int t; cin >> t;
+    while (t--) {
+        int n; cin >> n;
+        cout << n - 1 << ln;
+    }
+
     time();
     return 0;
 }
