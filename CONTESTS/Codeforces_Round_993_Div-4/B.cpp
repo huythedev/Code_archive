@@ -30,6 +30,7 @@ void time() {
 
 string transform(const string& a) {
     string b = a;
+    reverse(b.begin(), b.end());
     for (char& c : b) {
         if (c == 'p') {
             c = 'q';
@@ -46,9 +47,8 @@ int main() {
 
     int t; cin >> t;
     while (t--) {
-        string a;
-        cin >> a;
-        cout << transform(a) << ln;
+        string st; cin >> st;
+        cout << transform(st) << ln;
     }
 
     time();
