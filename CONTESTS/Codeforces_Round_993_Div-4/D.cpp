@@ -43,31 +43,36 @@ int main() {
         }
         
         vector<int> b(n);
-        for (int i = 0; i < n; i++) {
-            if (i == 0) {
-                b[i] = a[i];
-                continue;
-            }
-            
+        b[0] = a[0];
+        
+        for (int i = 1; i < n; i++) {
             map<int, int> freq;
-            for (int j = 0; j <= i-1; j++) {
+            freq[a[i]] = 1;
+            int target = a[i];
+            
+            // Count frequencies up to current position
+            for (int j = 0; j < i; j++) {
                 freq[b[j]]++;
             }
             
-            int max_freq = 0;
+            // Find max frequency excluding target
+            int max_other = 0;
             for (auto [num, f] : freq) {
-                max_freq = max(max_freq, f);
+                if (num != target) {
+                    max_other = max(max_other, f);
+                }
             }
             
-            if (freq[a[i]] < max_freq) {
-                b[i] = a[i];
-                continue;
-            }
-            
-            for (int x = 1; x <= n; x++) {
-                if (freq[x] <= freq[a[i]] - 1) {
-                    b[i] = x;
-                    break;
+            if (max_other >= freq[target]) {
+                // Need to increase target frequency
+                b[i] = target;
+            } else {
+                // Need unused or low frequency number
+                for (int x = 1; x <= n; x++) {
+                    if (freq[x] < freq[target]) {
+                        b[i] = x;
+                        break;
+                    }
                 }
             }
         }
@@ -75,7 +80,7 @@ int main() {
         for (int x : b) {
             cout << x << " ";
         }
-        cout << ln;
+        cout << "\n";
     }
 
     time();
