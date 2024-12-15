@@ -32,57 +32,6 @@ int main() {
     fastio();
     docfile();
 
-    int t;
-    cin >> t;
-    while (t--) {
-        int n;
-        cin >> n;
-        vector<int> a(n);
-        for (int i = 0; i < n; i++) {
-            cin >> a[i];
-        }
-        
-        vector<int> b(n);
-        b[0] = a[0];
-        
-        for (int i = 1; i < n; i++) {
-            map<int, int> freq;
-            freq[a[i]] = 1;
-            int target = a[i];
-            
-            // Count frequencies up to current position
-            for (int j = 0; j < i; j++) {
-                freq[b[j]]++;
-            }
-            
-            // Find max frequency excluding target
-            int max_other = 0;
-            for (auto [num, f] : freq) {
-                if (num != target) {
-                    max_other = max(max_other, f);
-                }
-            }
-            
-            if (max_other >= freq[target]) {
-                // Need to increase target frequency
-                b[i] = target;
-            } else {
-                // Need unused or low frequency number
-                for (int x = 1; x <= n; x++) {
-                    if (freq[x] < freq[target]) {
-                        b[i] = x;
-                        break;
-                    }
-                }
-            }
-        }
-        
-        for (int x : b) {
-            cout << x << " ";
-        }
-        cout << "\n";
-    }
-
     time();
     return 0;
 }
