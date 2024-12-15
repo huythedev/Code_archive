@@ -1,5 +1,5 @@
 // Author: Perry (https://perrythedev.com)
-// Problem Link: https://codeforces.com/contest/2044/problem/C
+// Problem Link: https://codeforces.com/contest/2044/problem/D
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -34,18 +34,27 @@ int main() {
 
     int t; cin >> t;
     while (t--) {
-        ll m, a, b, c;
-        cin >> m >> a >> b >> c;
-        
-        ll row1 = min(a, m);
-        ll row2 = min(b, m);
-        ll remaining_seats_row1 = m - row1;
-        ll remaining_seats_row2 = m - row2;
-        
-        ll seated_in_row1 = row1 + min(c, remaining_seats_row1);
-        ll seated_in_row2 = row2 + min(c - min(c, remaining_seats_row1), remaining_seats_row2);
-        
-        cout << seated_in_row1 + seated_in_row2 << ln;
+        int n; cin >> n;
+        vector<int> a(n);
+        for (int i = 0; i < n; ++i) {
+            cin >> a[i];
+        }
+
+        vector<int> b(n);
+        unordered_map<int, int> freq;
+        int mode = a[0];
+        for (int i = 0; i < n; ++i) {
+            freq[a[i]]++;
+            if (freq[a[i]] > freq[mode] || (freq[a[i]] == freq[mode] && a[i] < mode)) {
+                mode = a[i];
+            }
+            b[i] = mode;
+        }
+
+        for (int i = 0; i < n; ++i) {
+            cout << b[i] << " ";
+        }
+        cout << ln;
     }
 
     time();
