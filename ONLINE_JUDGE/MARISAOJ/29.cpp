@@ -41,7 +41,10 @@ int main() {
 
     int max_freq_val = 0, max_freq = 0;
     for(pair<int, int> i : freq) {
-        if(i.second > max_freq) {
+        if(i.second == max_freq) {
+            max_freq_val = max(max_freq_val, i.first);
+        }
+        else if(i.second > max_freq) {
             max_freq = i.second;
             max_freq_val = i.first;
         }
