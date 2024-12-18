@@ -50,6 +50,7 @@ int main() {
             sum += a[i].first;
             res.push_back(a[i].second);
         }
+        cout << sum << ln;
     }
     
     cout << res.size() << ln;
