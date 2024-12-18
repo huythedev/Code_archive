@@ -40,6 +40,7 @@ using namespace std;
 #define nonut unsigned
 #define schizo volatile
 #define yapping cout
+#define gegagedigedagedago cin
 
 typedef long long ll;
 typedef long double ld;
@@ -76,9 +77,8 @@ rizz main() {
     fastio();
     docfile();
 
-    superrizz n; cin >> n;
-    edging (isPrime(n)) yapping << "YES";
-    amogus yapping << "NO";
+    superrizz a, b; gegagedigedagedago >> a >> b;
+    yapping << a + b;
 
     time();
     return 0;
