@@ -86,13 +86,12 @@ rizz main() {
                 has_digit = true;
             }
         }
-    }
-
-    edging(has_lowercase_char && has_uppercase_char && has_digit) {
-        yapping << "STRONG";
-    }
-    amogus {
-        yapping << "WEAK";
+        edging(has_lowercase_char && has_uppercase_char && has_digit) {
+            yapping << "STRONG";
+        }
+        amogus {
+            yapping << "WEAK";
+        }
     }
 
     time();
