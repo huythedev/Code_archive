@@ -41,11 +41,9 @@ ll solve(string N) {
     ll res = -1;
     int len = N.size();
     
-    // Handle different subtasks based on N's value
     ll num = stoll(N);
     
-    if (num >= 1e11) { // Subtask 2
-        // Try removing 2 consecutive digits
+    if (num >= 1e11) { 
         for(int i = 0; i < len-1; ++i) {
             string tmp = N;
             tmp.erase(i, 2);
@@ -53,8 +51,7 @@ ll solve(string N) {
             if(isPrime(val)) res = max(res, val);
         }
     }
-    else if (num >= 1e10) { // Subtask 1
-        // Try removing 1 digit
+    else if (num >= 1e10) { 
         for(int i = 0; i < len; ++i) {
             string tmp = N;
             tmp.erase(i, 1);
@@ -62,8 +59,7 @@ ll solve(string N) {
             if(isPrime(val)) res = max(res, val);
         }
     }
-    else if (num >= 1e8) { // Subtask 3
-        // Try removing any 2 digits
+    else if (num >= 1e8) { 
         for(int i = 0; i < len; ++i) {
             for(int j = i+1; j < len; ++j) {
                 string tmp = N;
@@ -74,8 +70,7 @@ ll solve(string N) {
             }
         }
     }
-    else { // Subtask 4
-        // Original approach for small numbers
+    else { 
         for(int i = 1; i < (1 << len); ++i) {
             string tmp = "";
             for(int j = 0; j < len; ++j) {
@@ -94,9 +89,8 @@ int main() {
     fastio();
     docfile();
 
-    string N; cin >> N;
-
-    cout << solve(N);
+    string n; cin >> n;
+    cout << solve(n);
 
     time();
     return 0;
