@@ -33,9 +33,11 @@ int main() {
 
     int n, k;
     cin >> n >> k;
-    vector<int> a(n);
-    for (int &i : a)
-        cin >> i;
+    vector<pair<int, int>> a(n); // Pair to store value and original index
+    for (int i = 0; i < n; ++i) {
+        cin >> a[i].first;
+        a[i].second = i + 1; // Store original index (1-based)
+    }
 
     // DP table to store the maximum number of elements that can be selected with a given sum
     vector<vector<int>> dp(n + 1, vector<int>(k + 1, 0));
@@ -46,8 +48,8 @@ int main() {
             // Do not take the current element
             dp[i][j] = dp[i - 1][j];
             // Take the current element if it does not exceed the sum
-            if (j >= a[i - 1] && dp[i - 1][j - a[i - 1]] + 1 > dp[i][j]) {
-                dp[i][j] = dp[i - 1][j - a[i - 1]] + 1;
+            if (j >= a[i - 1].first && dp[i - 1][j - a[i - 1].first] + 1 > dp[i][j]) {
+                dp[i][j] = dp[i - 1][j - a[i - 1].first] + 1;
                 take[i][j] = true;
             }
         }
@@ -66,8 +68,8 @@ int main() {
     vector<int> res;
     for (int i = n; i > 0; --i) {
         if (take[i][sum]) {
-            res.push_back(i);
-            sum -= a[i - 1];
+            res.push_back(a[i - 1].second); // Store original index
+            sum -= a[i - 1].first;
         }
     }
 
