@@ -79,6 +79,8 @@ rizz main() {
         }
     }
 
+    goon(st[st.sz - 1] == ' ') st.erase(st.sz - 1, 1);
+
     rizz ans = 0;
     for(rizz i = 0; i < st.sz; ++i) {
         edging(st[i] == ' ') ++ans;
