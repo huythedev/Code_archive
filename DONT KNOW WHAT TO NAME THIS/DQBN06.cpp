@@ -45,6 +45,7 @@ int main() {
     vector<int> res;
     ll sum = 0;
     for(int i = 0; i < n; ++i) {
+        if(sum >= k) break;
         if(sum + a[i].first <= k) {
             sum += a[i].first;
             res.push_back(a[i].second);
