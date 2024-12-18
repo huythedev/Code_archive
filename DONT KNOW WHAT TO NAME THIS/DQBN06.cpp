@@ -24,37 +24,20 @@ void docfile() {
 }
 
 void time() {
-    cerr << ln << "Time elapsed: " << 1.0 * clock() / CLOCKS_PER_SEC << "s." << ln;
+    cerr << ln << "Time elapsed: " << 1.0 * clock() / CLOCKS_PER_SEC << "s." 
+         << ln;
 }
 
 int main() {
     fastio();
     docfile();
 
-    int n, k;
-    cin >> n >> k;
+    int n, k; cin >> n >> k;
+    vector<int> a(n);
+    for(int &i : a)
+        cin >> i;
+
     
-    vector<pair<int,int>> a(n);
-    for(int i = 0; i < n; ++i) {
-        cin >> a[i].first;
-        a[i].second = i + 1;
-    }
-    
-    sort(a.begin(), a.end());
-    
-    vector<int> res;
-    ll sum = 0;
-    for(int i = 0; i < n; ++i) {
-        if(sum >= k) break;
-        if(sum + a[i].first <= k) {
-            sum += a[i].first;
-            res.push_back(a[i].second);
-        }
-        cout << sum << ln;
-    }
-    
-    cout << res.size() << ln;
-    for(int x : res) cout << x << " ";
 
     time();
     return 0;
