@@ -40,21 +40,17 @@ bool isPrime(ll n) {
 ll solve(string N) {
     ll res = -1;
     int len = N.size();
-    unordered_set<ll> seen;
-    for (int i = 1; i < (1 << len); ++i) {
+    for(int i = 1; i < (1 << len); ++i) {
         string tmp = "";
-        for (int j = 0; j < len; ++j) {
-            if (i & (1 << j)) {
+        for(int j = 0; j < len; ++j) {
+            if(i & (1 << j)) {
                 tmp += N[j];
             }
         }
-        if (!tmp.empty()) {
+        if(!tmp.empty()) {
             ll num = stoll(tmp);
-            if (seen.find(num) == seen.end()) {
-                seen.insert(num);
-                if (isPrime(num)) {
-                    res = max(res, num);
-                }
+            if(isPrime(num)) {
+                res = max(res, num);
             }
         }
     }
@@ -65,11 +61,9 @@ int main() {
     fastio();
     docfile();
 
-    string N;
-    cin >> N;
+    string N; cin >> N;
 
-    ll result = solve(N);
-    cout << result << endl;
+    cout << solve(N);
 
     time();
     return 0;
