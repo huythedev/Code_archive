@@ -24,35 +24,37 @@ void docfile() {
 }
 
 void time() {
-    cerr << ln << "Time elapsed: " << 1.0 * clock() / CLOCKS_PER_SEC << "s." 
-         << ln;
+    cerr << ln << "Time elapsed: " << 1.0 * clock() / CLOCKS_PER_SEC << "s." << ln;
 }
 
 bool isPrime(ll n) {
-    if (n == 2 || n == 3)
-        return true;
-    if (n < 3 || n % 2 == 0 || n % 3 == 0)
-        return false;
-    for (int i = 5; i * i <= n; i += 6)
-        if (n % i == 0 || n % (i + 2) == 0)
-            return false;
+    if (n <= 1) return false;
+    if (n == 2 || n == 3) return true;
+    if (n % 2 == 0 || n % 3 == 0) return false;
+    for (ll i = 5; i * i <= n; i += 6) {
+        if (n % i == 0 || n % (i + 2) == 0) return false;
+    }
     return true;
 }
 
 ll solve(string N) {
     ll res = -1;
     int len = N.size();
-    for(int i = 1; i < (1 << len); ++i) {
+    unordered_set<ll> seen;
+    for (int i = 1; i < (1 << len); ++i) {
         string tmp = "";
-        for(int j = 0; j < len; ++j) {
-            if(i & (1 << j)) {
+        for (int j = 0; j < len; ++j) {
+            if (i & (1 << j)) {
                 tmp += N[j];
             }
         }
-        if(!tmp.empty()) {
+        if (!tmp.empty()) {
             ll num = stoll(tmp);
-            if(isPrime(num)) {
-                res = max(res, num);
+            if (seen.find(num) == seen.end()) {
+                seen.insert(num);
+                if (isPrime(num)) {
+                    res = max(res, num);
+                }
             }
         }
     }
@@ -63,9 +65,11 @@ int main() {
     fastio();
     docfile();
 
-    string N; cin >> N;
+    string N;
+    cin >> N;
 
-    cout << solve(N) << ln;
+    ll result = solve(N);
+    cout << result << endl;
 
     time();
     return 0;
