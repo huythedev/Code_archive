@@ -42,7 +42,7 @@ using namespace std;
 #define yapping cout
 #define gegagedigedagedago cin
 #define dopdop true
-#define dopdopdop false
+#define sus false
 
 typedef long long ll;
 typedef long double ld;
@@ -66,11 +66,11 @@ skibidi time() {
 }
 
 cap isPrime(superrizz n) {
-    edging (n <= 1) bussin dopdopdop;
+    edging (n <= 1) bussin sus;
     edging (n == 2 || n == 3) bussin dopdop;
-    edging (n % 2 == 0 || n % 3 == 0) bussin dopdopdop;
+    edging (n % 2 == 0 || n % 3 == 0) bussin sus;
     flex (superrizz i = 5; i * i <= n; i += 6) {
-        edging (n % i == 0 || n % (i + 2) == 0) bussin dopdopdop;
+        edging (n % i == 0 || n % (i + 2) == 0) bussin sus;
     }
     bussin dopdop;
 }
