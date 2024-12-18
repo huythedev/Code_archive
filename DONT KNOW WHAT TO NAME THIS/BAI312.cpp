@@ -1,3 +1,5 @@
+// Author: Perry (https://perrythedev.com)
+// Problem Link: 
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -22,7 +24,8 @@ void docfile() {
 }
 
 void time() {
-    cerr << ln << "Time elapsed: " << 1.0 * clock() / CLOCKS_PER_SEC << "s." << ln;
+    cerr << ln << "Time elapsed: " << 1.0 * clock() / CLOCKS_PER_SEC << "s." 
+         << ln;
 }
 
 bool isPrime(ll num) {
@@ -33,35 +36,33 @@ bool isPrime(ll num) {
     return true;
 }
 
-ll largestPrimeByDeletingDigits(string N) {
-    ll maxPrime = -1;
+ll solve(string N) {
+    ll res = -1;
     int len = N.size();
-    for (int i = 1; i < (1 << len); ++i) {
-        string candidate = "";
-        for (int j = 0; j < len; ++j) {
-            if (i & (1 << j)) {
-                candidate += N[j];
+    for(int i = 1; i < (1 << len); ++i) {
+        string tmp = "";
+        for(int j = 0; j < len; ++j) {
+            if(i & (1 << j)) {
+                tmp += N[j];
             }
         }
-        if (!candidate.empty()) {
-            ll num = stoll(candidate);
-            if (isPrime(num)) {
-                maxPrime = max(maxPrime, num);
+        if(!tmp.empty()) {
+            ll num = stoll(tmp);
+            if(isPrime(num)) {
+                res = max(res, num);
             }
         }
     }
-    return maxPrime;
+    return res;
 }
 
 int main() {
     fastio();
     docfile();
 
-    string N;
-    cin >> N;
+    string N; cin >> N;
 
-    ll result = largestPrimeByDeletingDigits(N);
-    cout << result << endl;
+    cout << solve(N) << ln;
 
     time();
     return 0;
