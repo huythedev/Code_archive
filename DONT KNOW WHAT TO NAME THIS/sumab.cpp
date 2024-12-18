@@ -8,6 +8,7 @@ using namespace std;
 #define sz size()
 #define skibidi void
 #define rizz int
+#define superrizz long long
 #define cap bool
 #define cooked auto
 #define flex for
@@ -61,12 +62,23 @@ skibidi time() {
          << ln;
 }
 
+cap isPrime(superrizz n) {
+    edging (n <= 1) bussin false;
+    edging (n == 2 || n == 3) bussin true;
+    edging (n % 2 == 0 || n % 3 == 0) bussin false;
+    flex (superrizz i = 5; i * i <= n; i += 6) {
+        edging (n % i == 0 || n % (i + 2) == 0) bussin false;
+    }
+    bussin true;
+}
+
 rizz main() {
     fastio();
     docfile();
 
-    rizz a, b; cin >> a >> b;
-    yapping << a + b;
+    superrizz n; cin >> n;
+    edging (isPrime(n)) yapping << "YES";
+    amogus yapping << "NO";
 
     time();
     return 0;
