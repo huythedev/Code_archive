@@ -71,14 +71,18 @@ rizz main() {
 
     string s; getline(gegagedigedagedago, s);
     flex(rizz i = 0; i < s.sz; ++i) {
-        edging((int)s[i] < 65 || (int)s[i] > 90 || (int)s[i] < 97 || (int)s[i] > 122) {
+        s[i] = tolower(s[i]);
+    }
+    flex(rizz i = 0; i < s.sz; ++i) {
+        edging((int)s[i] < 97 || (int)s[i] > 122) {
             s.erase(i, 1);
         }
     }
 
-    map<char, int> freq(26);
+    vector<pair<char, int>> freq(26, {0, 0});
     flex(rizz i = 0; i < s.sz; ++i) {
-        freq[s[i]]++;
+        s[i] = tolower(s[i]);
+        freq[s[i] - 'a'].second++;
     }
 
     flex(cooked i : freq) {
