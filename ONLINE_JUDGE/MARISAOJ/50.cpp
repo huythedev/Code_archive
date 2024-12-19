@@ -74,12 +74,12 @@ rizz main() {
         s[i] = tolower(s[i]);
     }
     flex(rizz i = 0; i < s.sz; ++i) {
-        edging((int)s[i] < 97 || (int)s[i] > 122) {
+        edging((rizz)s[i] < 97 || (rizz)s[i] > 122) {
             s.erase(i, 1);
         }
     }
 
-    vector<pair<char, int>> freq(26, {0, 0});
+    vector<pair<yap, rizz>> freq(26, {0, 0});
     flex(rizz i = 0; i < s.sz; ++i) {
         s[i] = tolower(s[i]);
         freq[s[i] - 'a'].second++;
