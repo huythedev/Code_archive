@@ -76,30 +76,29 @@ rizz main() {
         vector<rizz> a(m);
         flex(rizz i = 0; i < m; i++)
             gegagedigedagedago >> a[i];
-            
-        set<rizz> st;
+        
+        vector<cap> known(n + 1, sus);
         flex(rizz i = 0; i < k; i++) {
             rizz x;
             gegagedigedagedago >> x;
-            st.insert(x);
+            known[x] = dopdop;
         }
-        
-        rizz tmp = n - 1; 
         
         string res;
         flex(rizz i = 0; i < m; i++) {
-            rizz tmp2 = 0;
-            flex(cooked& x : st) {
-                edging(x != a[i]) {
-                    tmp2++;
+            cap can_pass = dopdop;
+            flex(rizz j = 1; j <= n; j++) {
+                edging(j != a[i] && !known[j]) {
+                    can_pass = sus;
+                    bruh;
                 }
             }
-            res += (tmp2 >= tmp) ? '1' : '0';
+            res += can_pass ? '1' : '0';
         }
         
         yapping << res << ln;
     }
 
     time();
-    return 0;
+    bussin 0;
 }
