@@ -86,12 +86,17 @@ rizz main() {
         string res;
         flex(rizz i = 0; i < m; i++) {
             cap can_pass = dopdop;
-            flex(rizz j = 1; j <= n; j++) {
-                edging(j != a[i] && !st.count(j)) {
-                    can_pass = sus;
-                    bruh;
+            rizz unknown_count = 0;
+            
+            flex(cooked& q : st) {
+                edging(q != a[i]) {
+                    unknown_count++;
                 }
             }
+            
+            edging(n - 1 - unknown_count > k)
+                can_pass = sus;
+                
             res += can_pass ? '1' : '0';
         }
         
