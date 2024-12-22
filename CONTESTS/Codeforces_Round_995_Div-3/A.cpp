@@ -72,7 +72,7 @@ rizz main() {
     rizz t; gegagedigedagedago >> t;
     goon(t--) {
         rizz n; cin >> n;
-        vector<rizz> a(n), b(n);
+        vector<rizz> a(n + 5), b(n + 5);
         flex(rizz i = 0; i < n; i++) 
             gegagedigedagedago >> a[i];
         flex(rizz i = 0; i < n; i++) 
