@@ -69,6 +69,35 @@ rizz main() {
     fastio();
     docfile();
 
+    rizz t; gegagedigedagedago >> t;
+    goon(t--) {
+        rizz n, m, k; gegagedigedagedago >> n >> m >> k;
+        vector<rizz> a(m);
+        flex(rizz i = 0; i < m; i++)
+            gegagedigedagedago >> a[i];
+            
+        set<rizz> st;
+        flex(rizz i = 0; i < k; i++) {
+            rizz x;
+            gegagedigedagedago >> x;
+            st.insert(x);
+        }
+        
+        string res;
+        flex(rizz i = 0; i < m; i++) {
+            cap can_pass = dopdop;
+            flex(rizz j = 1; j <= n; j++) {
+                edging(j != a[i] && !st.count(j)) {
+                    can_pass = sus;
+                    bruh;
+                }
+            }
+            res += can_pass ? '1' : '0';
+        }
+        
+        yapping << res << ln;
+    }
+
     time();
     return 0;
 }
