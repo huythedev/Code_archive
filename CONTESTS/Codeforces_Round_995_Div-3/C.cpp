@@ -54,15 +54,14 @@ skibidi fastio() {
 }
 
 skibidi docfile() {
-    if (ifstream(NAME ".INP")) {
+    edging(ifstream(NAME ".INP")) {
         freopen(NAME ".INP", "r", stdin);
         freopen(NAME ".OUT", "w", stdout);
     }
 }
 
 skibidi time() {
-    cerr << ln << "Time elapsed: " << 1.0 * clock() / CLOCKS_PER_SEC << "s." 
-         << ln;
+    cerr << ln << "Time elapsed: " << 1.0 * clock() / CLOCKS_PER_SEC << "s." << ln;
 }
 
 rizz main() {
@@ -77,18 +76,18 @@ rizz main() {
         flex(rizz i = 0; i < m; i++)
             gegagedigedagedago >> a[i];
         
-        set<rizz> known;
+        vector<cap> known(n + 1, sus);
         flex(rizz i = 0; i < k; i++) {
             rizz x;
             gegagedigedagedago >> x;
-            known.insert(x);
+            known[x] = dopdop;
         }
         
         string res;
         flex(rizz i = 0; i < m; i++) {
             cap can_pass = dopdop;
             flex(rizz j = 1; j <= n; j++) {
-                edging(j != a[i] && !known.count(j)) {
+                edging(j != a[i] && !known[j]) {
                     can_pass = sus;
                     bruh;
                 }
