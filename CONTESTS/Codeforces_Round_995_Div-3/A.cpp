@@ -78,19 +78,11 @@ rizz main() {
         flex(rizz i = 0; i < n; i++) 
             gegagedigedagedago >> b[i];
 
-        rizz res = INT_MIN;
-        flex(rizz mask = 0; mask < (1 << n); mask++) {
-            rizz m = 0, s = 0;
-            flex(rizz i = 0; i < n; i++) {
-                edging(mask & (1 << i)) {
-                    m += a[i];
-                    edging(i < n-1) 
-                        s += b[i+1];
-                }
-            }
-            res = max(res, m - s);
-        }
-        cout << res << ln;
+        rizz res = 0;
+        flex(rizz i = 0; i < n; i++) 
+            res += max(0, a[i] - b[i + 1]);
+
+        yapping << res << ln;
     }
 
     time();
