@@ -69,38 +69,32 @@ rizz main() {
     fastio();
     docfile();
 
-    rizz t; 
-    gegagedigedagedago >> t;
+    rizz t; gegagedigedagedago >> t;
     goon(t--) {
-        rizz n, m, k; 
-        gegagedigedagedago >> n >> m >> k;
+        rizz n, m, k; gegagedigedagedago >> n >> m >> k;
         
         vector<rizz> a(m);
         flex(rizz i = 0; i < m; i++)
             gegagedigedagedago >> a[i];
             
-        set<rizz> known;
+        set<rizz> st;
         flex(rizz i = 0; i < k; i++) {
             rizz x;
             gegagedigedagedago >> x;
-            known.insert(x);
+            st.insert(x);
         }
         
-        // Pre-calculate how many questions are required for each list
-        rizz required = n - 1; // Each list has n-1 questions
+        rizz tmp = n - 1; 
         
         string res;
         flex(rizz i = 0; i < m; i++) {
-            // For list i:
-            // - If known contains a[i], we need k-1 other questions
-            // - If known doesn't contain a[i], we need k questions
-            rizz known_useful = 0;
-            flex(cooked& x : known) {
+            rizz tmp2 = 0;
+            flex(cooked& x : st) {
                 edging(x != a[i]) {
-                    known_useful++;
+                    tmp2++;
                 }
             }
-            res += (known_useful >= required) ? '1' : '0';
+            res += (tmp2 >= tmp) ? '1' : '0';
         }
         
         yapping << res << ln;
