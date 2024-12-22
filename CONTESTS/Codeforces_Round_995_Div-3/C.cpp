@@ -1,5 +1,5 @@
 // Author: Perry (https://perrythedev.com)
-// Problem Link: https://codeforces.com/contest/2051/problem/B
+// Problem Link: https://codeforces.com/contest/2051/problem/C
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -68,26 +68,6 @@ skibidi time() {
 rizz main() {
     fastio();
     docfile();
-
-    rizz t; gegagedigedagedago >> t;
-    goon(t--) {
-        superrizz n, a, b, c; gegagedigedagedago >> n >> a >> b >> c;
-        
-        superrizz tmp = a + b + c;
-        superrizz tmp1 = (n - 1) / tmp;
-        superrizz dist = tmp1 * tmp;
-        superrizz res = tmp1 * 3;
-        
-        superrizz arr[] = {a, b, c};
-        rizz i = 0;
-        goon(dist < n) {
-            dist += arr[i];
-            res++;
-            i = (i + 1) % 3;
-        }
-        
-        yapping << res << ln;
-    }
 
     time();
     return 0;
