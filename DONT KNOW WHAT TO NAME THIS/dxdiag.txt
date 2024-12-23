@@ -1,7 +1,7 @@
 ------------------
 System Information
 ------------------
-      Time of this report: 12/23/2024, 13:46:47
+      Time of this report: 12/23/2024, 13:47:51
              Machine name: DESKTOP-D0RTEPS
                Machine Id: {14DAD674-0A39-432F-9562-4DDF73117ECB}
          Operating System: Windows 10 IoT Enterprise LTSC 64-bit (10.0, Build 19044) (19041.vb_release.191206-1406)
@@ -12,7 +12,7 @@ System Information
                 Processor: 13th Gen Intel(R) Core(TM) i5-13600K (20 CPUs), ~3.5GHz
                    Memory: 32768MB RAM
       Available OS Memory: 32510MB RAM
-                Page File: 47069MB used, 8956MB available
+                Page File: 47517MB used, 8508MB available
               Windows Dir: C:\Windows
           DirectX Version: DirectX 12
       DX Setup Parameters: Not found
