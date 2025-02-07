@@ -36,11 +36,11 @@ int main() {
     ll sum_digit = 0;
     bool is_devided_by_30 = false, has_zero = false;
 
-    set<int> digits;
+    vector<int> freq(10, 0);  
     for (char c : s) {
         sum_digit += c - '0';
         if (c == '0') has_zero = true;
-        digits.insert(c - '0');
+        freq[c - '0']++;
     }
 
     if (sum_digit % 3 == 0 && has_zero) is_devided_by_30 = true;
@@ -51,9 +51,9 @@ int main() {
     }
     else {
         for (int i = 9; i >= 0; i--) {
-            while (digits.count(i)) {
+            while (freq[i] > 0) {
                 cout << i;
-                digits.erase(i);
+                freq[i]--;
             }
         }
     }
