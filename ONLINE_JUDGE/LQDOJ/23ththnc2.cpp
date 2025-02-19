@@ -1,67 +1,79 @@
-// Author: Perry (https://perrythedev.com)^
+// Author: Perry (https://perrythedev.com)
+// Problem Link: https://lqdoj.edu.vn/problem/23ththnc2
 #include <bits/stdc++.h>
 using namespace std;
+
+#define NAME "NAME"
+#define ln "\n"
+#define sz size()
+
 typedef long long ll;
+typedef long double ld;
 
-const int MAXN = 1e6;
-vector<ll> sequence;
+void fastio() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+}
 
-// Function to check if a number is prime
-bool is_prime(int n) {
-    if(n < 2) return false;
-    for(int i = 2; i * i <= n; i++) {
-        if(n % i == 0) return false;
+void docfile() {
+    if (ifstream(NAME ".INP")) {
+        freopen(NAME ".INP", "r", stdin);
+        freopen(NAME ".OUT", "w", stdout);
+    }
+}
+
+void time() {
+    cerr << ln << "Time elapsed: " << 1.0 * clock() / CLOCKS_PER_SEC << "s." 
+         << ln;
+}
+
+bool isPrime(int n) {
+    if (n < 2) return false;
+    if (n < 4) return true;
+    if (n % 2 == 0 || n % 3 == 0) return false;
+    for (int i = 5; i * i <= n; i += 6) {
+        if (n % i == 0 || n % (i + 2) == 0) return false;
     }
     return true;
 }
 
-// Function to get digit sum
-int digit_sum(ll n) {
+bool isSumPrime(ll num) {
     int sum = 0;
-    while(n > 0) {
-        sum += n % 10;
-        n /= 10;
+    while (num > 0) {
+        sum += num % 10;
+        num /= 10;
     }
-    return sum;
-}
-
-// Precompute sequence
-void precompute() {
-    sequence.push_back(0);  // 0th element (not used)
-    ll num = 1;
-    for(int i = 1; i <= MAXN; i++) {
-        while(!is_prime(digit_sum(num))) num++;
-        sequence.push_back(num);
-        num++;
-    }
-}
-
-// Function to find kth number
-ll solve(ll k) {
-    if(k <= MAXN) return sequence[k];
-    
-    // For larger k, start from last precomputed number
-    ll num = sequence.back();
-    for(ll i = MAXN; i < k; i++) {
-        num++;
-        while(!is_prime(digit_sum(num))) num++;
-    }
-    return num;
+    return isPrime(sum);
 }
 
 int main() {
-    ios_base::sync_with_stdio(false);
-    cin.tie(nullptr);
-    
-    precompute();
-    
+    fastio();
+    docfile();
+
     int t;
     cin >> t;
-    while(t--) {
-        ll k;
-        cin >> k;
-        cout << solve(k) << '\n';
+    vector<ll> queries(t);
+    ll maxK = 0;
+
+    for (int i = 0; i < t; ++i) {
+        cin >> queries[i];
+        maxK = max(maxK, queries[i]);
     }
-    
+
+    vector<ll> sequence;
+    ll num = 1;
+    while (sequence.size() < maxK) {
+        if (isSumPrime(num)) {
+            sequence.push_back(num);
+        }
+        num++;
+    }
+
+    for (int i = 0; i < t; ++i) {
+        cout << sequence[queries[i] - 1] << endl;
+    }
+
+    time();
     return 0;
 }
