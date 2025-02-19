@@ -26,12 +26,17 @@ int main() {
 
     string taskFile = task + ".exe";
 
+    // Create the main directory using the task name
+    string mainDir = task;
+    _mkdir(mainDir.c_str());
+
     auto start = high_resolution_clock::now();
 
     for (int i = 1; i <= numOfTest; ++i) {
         auto testStart = high_resolution_clock::now(); 
 
-        string dirName = "test" + to_string(i);
+        // Create subdirectory for each test case
+        string dirName = mainDir + "/test" + to_string(i);
         _mkdir(dirName.c_str());
 
         string inpFile = dirName + "/" + task + ".inp";
@@ -43,7 +48,7 @@ int main() {
         string taskCommand = taskFile + " < " + inpFile + " > " + outFile;
         executeCommand(taskCommand);
 
-        // Đo thời gian kết thúc của test case
+        // Measure the time taken for each test case
         auto testEnd = high_resolution_clock::now();
         auto testDuration = duration_cast<milliseconds>(testEnd - testStart);
 
