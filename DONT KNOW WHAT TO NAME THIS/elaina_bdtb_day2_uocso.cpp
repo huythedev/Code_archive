@@ -1,9 +1,9 @@
 // Author: Perry (https://perrythedev.com)
-// Problem Link: https://marisaoj.com/problems/430
+// Problem Link: https://oj.vnoi.info/problem/elaina_bdtb_day2_uocso
 #include <bits/stdc++.h>
 using namespace std;
 
-#define NAME "NAME"
+#define NAME "UOCSO"
 #define ln "\n"
 #define sz size()
 
@@ -28,16 +28,21 @@ void time() {
          << ln;
 }
 
+vector<int> findDivisorsHasThreeDivs(ll n) {
+    vector<int> res;
+    // Find all divs that each divs has three divs
+    for(int i = 1; i <= sqrt(n); ++i) {
+        
+    }
+
+    return res;
+}
+
 int main() {
     fastio();
     docfile();
 
-    int n; cin >> n;
-    vector<int> a(n);
-    for(int &i : a)
-        cin >> i;
 
-    
 
     time();
     return 0;

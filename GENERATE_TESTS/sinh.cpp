@@ -97,13 +97,50 @@ namespace genTest {
         }
         cout << "\n";
     }
+
+    char randomColor() {
+        string colors = "GBYR";
+        return colors[rnd(0, 3)];
+    }
+
+    string generateString(int n) {
+        string s;
+        for(int i = 0; i < n; i++) {
+            s += randomColor();
+        }
+        return s;
+    }
 } // namespace genTest
 
 
 signed main(signed argc, char* argv[]) {
-    // TEST[id]/... nhằm để chia subtask
     int id = atoi(argv[1]);
-    cout << id << "\n";
-    cout << genTest::rnd(1, 1e9) << ' ' << genTest::rnd(1, 1e9) << endl;
+    int n, q;
+    
+    if(id == 1) {  // Small tests
+        n = genTest::rnd(1, 1000);
+        q = genTest::rnd(1, 1000);
+    } else {  // Full constraints
+        n = genTest::rnd(1, 100000);
+        q = genTest::rnd(1, 100000);
+    }
+    
+    cout << n << " " << q << "\n";
+    cout << genTest::generateString(n) << "\n";
+    
+    for(int i = 0; i < q; i++) {
+        int l = genTest::rnd(1, n);
+        int r = genTest::rnd(l, n);
+        
+        if(id == 2) {  // Only get queries
+            cout << "get " << l << " " << r << "\n";
+        } else {  // Mix of get and change
+            if(genTest::rnd(0, 1)) {
+                cout << "get " << l << " " << r << "\n";
+            } else {
+                cout << "change " << l << " " << r << " " << genTest::randomColor() << "\n";
+            }
+        }
+    }
     return 0;
 }

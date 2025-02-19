@@ -1,9 +1,9 @@
 // Author: Perry (https://perrythedev.com)
-// Problem Link: https://marisaoj.com/problems/430
+// Problem Link: https://nbk.homes/problem/hoaban1
 #include <bits/stdc++.h>
 using namespace std;
 
-#define NAME "NAME"
+#define NAME "hoaban1"
 #define ln "\n"
 #define sz size()
 
@@ -28,16 +28,35 @@ void time() {
          << ln;
 }
 
+void solve() {
+    int n, q; ll B; cin >> n >> q >> B;
+    
+    vector<ll> height(n + 1, B);
+    
+    for(int i = 0; i < q; i++) {
+        int r, p; cin >> r >> p;
+        
+        while(p--) {
+            int minIdx = 1;
+            for(int j = 2; j <= r; j++) {
+                if(height[j] < height[minIdx]) {
+                    minIdx = j;
+                }
+            }
+            height[minIdx]++;
+        }
+    }
+    
+    for(int i = 1; i <= n; i++) {
+        cout << height[i] << " ";
+    }
+}
+
 int main() {
     fastio();
     docfile();
 
-    int n; cin >> n;
-    vector<int> a(n);
-    for(int &i : a)
-        cin >> i;
-
-    
+    solve();
 
     time();
     return 0;

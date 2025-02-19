@@ -1,9 +1,9 @@
-// Author: Perry (https://perrythedev.com)
-// Problem Link: https://marisaoj.com/problems/430
+`// Author: Perry (https://perrythedev.com)
+// Problem Link: 
 #include <bits/stdc++.h>
 using namespace std;
 
-#define NAME "NAME"
+#define NAME "DAYCON"
 #define ln "\n"
 #define sz size()
 
@@ -31,14 +31,26 @@ void time() {
 int main() {
     fastio();
     docfile();
-
-    int n; cin >> n;
-    vector<int> a(n);
-    for(int &i : a)
-        cin >> i;
-
     
-
+    int n;
+    cin >> n;
+    vector<ll> a(n);
+    for(int i = 0; i < n; i++) 
+        cin >> a[i];
+    
+    unordered_map<ll, int> mp;  
+    ll sum = 0;
+    int res = 0;
+    mp[0] = 1;
+    
+    for(int i = 0; i < n; i++) {
+        sum += a[i];
+        res += mp[sum - (i + 1)];
+        mp[sum - (i + 1)]++;       
+    }
+    
+    cout << res;
+    
     time();
     return 0;
 }

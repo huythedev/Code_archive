@@ -1,9 +1,9 @@
 // Author: Perry (https://perrythedev.com)
-// Problem Link: https://marisaoj.com/problems/430
+// Problem Link: 
 #include <bits/stdc++.h>
 using namespace std;
 
-#define NAME "NAME"
+#define NAME "TONGSOUOC"
 #define ln "\n"
 #define sz size()
 
@@ -28,16 +28,27 @@ void time() {
          << ln;
 }
 
+ll cnt(ll n) {
+    ll res = 0;
+
+    for (ll i = 1; i * i <= n; ++i) {
+        res += n / i;
+
+        if (n / i != i) 
+            res += i * (n / i - n / (i + 1));
+    }
+
+    return res;
+}
+
 int main() {
     fastio();
     docfile();
 
-    int n; cin >> n;
-    vector<int> a(n);
-    for(int &i : a)
-        cin >> i;
+    ll l, r; 
+    cin >> l >> r;
 
-    
+    cout << cnt(r) - cnt(l - 1);
 
     time();
     return 0;
