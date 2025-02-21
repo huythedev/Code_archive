@@ -1,5 +1,5 @@
 // Author: Perry (https://perrythedev.com)
-// Problem Link: https://nbk.homes/problem/bai1ks3
+// Problem Link: https://nbk.homes/problem/findij
 // davul
 #include <bits/stdc++.h>
 using namespace std;
@@ -32,6 +32,36 @@ void time() {
 int main() {
     fastio();
     docfile();
+    
+    int t;
+    cin >> t;
+    while (t--) {
+        int n;
+        cin >> n;
+        vector<int> a(n + 1);
+        vector<int> ans(n + 1, -1);
+        stack<int> st;
+        
+        for (int i = 1; i <= n; i++) {
+            cin >> a[i];
+        }
+        
+        for (int i = 1; i <= n; i++) {
+            while (!st.empty() && a[i] > a[st.top()]) {
+                int idx = st.top();
+                if (ans[idx] == -1 || i - idx < abs(ans[idx] - idx)) {
+                    ans[idx] = i;
+                }
+                st.pop();
+            }
+            st.push(i);
+        }
+        
+        for (int i = 1; i <= n; i++) {
+            cout << (ans[i] == -1 ? -1 : a[ans[i]]) << " ";
+        }
+        cout << ln;
+    }
 
     time();
     return 0;
