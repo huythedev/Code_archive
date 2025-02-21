@@ -119,12 +119,13 @@ int main() {
     string n1 = tru(n, "1");
     string n2 = multiply(n1, n);
     string n3 = divide(n2, 4);
-    string n4 = multiply(n1, n);
-    string n5 = multiply("2", sum(multiply("2", n), tru(n, "1")));
-    string n6 = multiply("4", n);
 
-    string res = multiply(n3, sum(sum(n4, n5), n6));
-    cout << res;
+    string n4 = multiply(n1, n);
+    string n5 = multiply("2", tru(multiply("2", n), "1"));
+    string n6 = sum(n4, sum(n5, "4"));
+
+    string result = multiply(n3, n6);
+    cout << result;
 
     time();
     return 0;
