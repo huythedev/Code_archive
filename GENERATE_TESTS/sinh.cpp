@@ -138,18 +138,20 @@ namespace genTest {
 
 signed main(signed argc, char* argv[]) {
     int id = atoi(argv[1]);
-    
-    if(id <= 60) {
-        int n = genTest::rnd(1, 20), l = genTest::rnd(1, n), r = genTest::rnd(l, n);
-        cout << n << " " << l << " " << r << "\n";
-        vector<int> a = genTest::vec(n, 0, 10);
-        genTest::print(a);
+
+    if (id <= 60) {
+        int t = genTest::rnd(100, 2000);
+        cout << t << "\n";
+        for (int i = 0; i < t; i++) {
+            cout << genTest::rnd(1e3, 1e6) << "\n";
+        }
     }
     else {
-        int n = genTest::rnd(1000, 100000), l = genTest::rnd(1, n), r = genTest::rnd(l, n);
-        cout << n << " " << l << " " << r << "\n";
-        vector<int> a = genTest::vec(n, -1000000000, 1000000000);
-        genTest::print(a);
+        int t = genTest::rnd(1e4, 1e4);
+        cout << t << "\n";
+        for (int i = 0; i < t; i++) {
+            cout << genTest::rnd(1e4, 1e6) << "\n";
+        }
     }
 
     return 0;
