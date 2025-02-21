@@ -112,6 +112,7 @@ int main() {
     fastio();
     docfile();
 
+    // Cong thuc goc: 1*2*3 + 2*3*4 + 3*4*5 + ... + (n-1)*n*(n+1)
     // Cong thuc tong quat: (((n - 1)*n) / 4)((n-1)n + 2(2n-1) + 4)
     string n; cin >> n;
 
