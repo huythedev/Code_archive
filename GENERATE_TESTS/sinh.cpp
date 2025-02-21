@@ -110,37 +110,47 @@ namespace genTest {
         }
         return s;
     }
+
+    // Generate a random graph with n vertices and m edges
+    vector<pair<int,int>> generateGraph(int n, int m) {
+        vector<pair<int,int>> edges;
+        set<pair<int,int>> used;
+        
+        while (edges.size() < m) {
+            int u = rnd(1, n);
+            int v = rnd(1, n);
+            
+            if (u == v) continue; // no self loops
+            
+            // normalize edge representation (smaller vertex first)
+            if (u > v) swap(u, v);
+            
+            // check if edge already exists
+            if (used.count({u, v})) continue;
+            
+            used.insert({u, v});
+            edges.push_back({u, v});
+        }
+        return edges;
+    }
 } // namespace genTest
 
 
 signed main(signed argc, char* argv[]) {
     int id = atoi(argv[1]);
-    int n, q;
     
-    if(id == 1) {  // Small tests
-        n = genTest::rnd(1, 1000);
-        q = genTest::rnd(1, 1000);
-    } else {  // Full constraints
-        n = genTest::rnd(1, 100000);
-        q = genTest::rnd(1, 100000);
+    if(id <= 60) {
+        int n = genTest::rnd(1, 20), l = genTest::rnd(1, n), r = genTest::rnd(l, n);
+        cout << n << " " << l << " " << r << "\n";
+        vector<int> a = genTest::vec(n, 0, 10);
+        genTest::print(a);
     }
-    
-    cout << n << " " << q << "\n";
-    cout << genTest::generateString(n) << "\n";
-    
-    for(int i = 0; i < q; i++) {
-        int l = genTest::rnd(1, n);
-        int r = genTest::rnd(l, n);
-        
-        if(id == 2) {  // Only get queries
-            cout << "get " << l << " " << r << "\n";
-        } else {  // Mix of get and change
-            if(genTest::rnd(0, 1)) {
-                cout << "get " << l << " " << r << "\n";
-            } else {
-                cout << "change " << l << " " << r << " " << genTest::randomColor() << "\n";
-            }
-        }
+    else {
+        int n = genTest::rnd(1000, 100000), l = genTest::rnd(1, n), r = genTest::rnd(l, n);
+        cout << n << " " << l << " " << r << "\n";
+        vector<int> a = genTest::vec(n, -1000000000, 1000000000);
+        genTest::print(a);
     }
+
     return 0;
 }
