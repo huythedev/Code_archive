@@ -61,7 +61,7 @@ int main() {
     }
 
     int res = k * count_positive + l * count_positive_even;
-    cout << res;
+    cout << res << endl;
 
     time();
     return 0;
