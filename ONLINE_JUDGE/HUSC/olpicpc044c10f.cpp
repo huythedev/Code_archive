@@ -29,39 +29,47 @@ void time() {
          << ln;
 }
 
+const int MAXN = 1005;
+ll diff[MAXN][MAXN], N, K, A, B;
+
+void apply_updates() {
+    for (int i = 1; i <= N; ++i) {
+        for (int j = 1; j <= N; ++j) {
+            diff[i][j] += diff[i - 1][j] + diff[i][j - 1] - diff[i - 1][j - 1];
+        }
+    }
+}
+
 int main() {
     fastio();
     docfile();
 
-    int n, m; cin >> n >> m;
-    vector<vector<int>> matrix(n, vector<int>(n, 0));
-
-    for (int i = 0; i < m; ++i) {
-        int r1, c1, r2, c2, v;
-        cin >> r1 >> c1 >> r2 >> c2 >> v;
-        for (int r = r1 - 1; r < r2; ++r) {
-            for (int c = c1 - 1; c < c2; ++c) {
-                matrix[r][c] += v;
-            }
-        }
+    cin >> N >> K;
+    while (K--) {
+        int r1, c1, r2, c2;
+        cin >> r1 >> c1 >> r2 >> c2;
+        diff[r1][c1] += 1;
+        diff[r2 + 1][c1] -= 1;
+        diff[r1][c2 + 1] -= 1;
+        diff[r2 + 1][c2 + 1] += 1;
     }
 
-    int k, l; cin >> k >> l;
+    apply_updates();
 
-    int count_positive = 0, count_positive_even = 0;
-    for (int r = 0; r < n; ++r) {
-        for (int c = 0; c < n; ++c) {
-            if (matrix[r][c] > 0) {
-                count_positive++;
-                if (matrix[r][c] % 2 == 0) {
-                    count_positive_even++;
+    ll P = 0, E = 0;
+    for (int i = 1; i <= N; ++i) {
+        for (int j = 1; j <= N; ++j) {
+            if (diff[i][j] > 0) {
+                P += diff[i][j];
+                if (diff[i][j] % 2 == 0) {
+                    E += diff[i][j];
                 }
             }
         }
     }
 
-    int res = k * count_positive + l * count_positive_even;
-    cout << res << endl;
+    cin >> A >> B;
+    cout << P * A + E * B << '\n';
 
     time();
     return 0;
