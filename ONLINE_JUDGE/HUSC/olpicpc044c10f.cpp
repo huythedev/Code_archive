@@ -30,12 +30,12 @@ void time() {
 }
 
 const int MAXN = 1005;
-ll diff[MAXN][MAXN], N, K, A, B;
+ll diff[MAXN][MAXN], matrix[MAXN][MAXN], N, K, A, B;
 
 void apply_updates() {
     for (int i = 1; i <= N; ++i) {
         for (int j = 1; j <= N; ++j) {
-            diff[i][j] += diff[i - 1][j] + diff[i][j - 1] - diff[i - 1][j - 1];
+            matrix[i][j] = diff[i][j] + matrix[i - 1][j] + matrix[i][j - 1] - matrix[i - 1][j - 1];
         }
     }
 }
@@ -46,12 +46,12 @@ int main() {
 
     cin >> N >> K;
     while (K--) {
-        int r1, c1, r2, c2;
-        cin >> r1 >> c1 >> r2 >> c2;
-        diff[r1][c1] += 1;
-        diff[r2 + 1][c1] -= 1;
-        diff[r1][c2 + 1] -= 1;
-        diff[r2 + 1][c2 + 1] += 1;
+        int r1, c1, r2, c2, v;
+        cin >> r1 >> c1 >> r2 >> c2 >> v;
+        diff[r1][c1] += v;
+        diff[r2 + 1][c1] -= v;
+        diff[r1][c2 + 1] -= v;
+        diff[r2 + 1][c2 + 1] += v;
     }
 
     apply_updates();
@@ -59,10 +59,10 @@ int main() {
     ll P = 0, E = 0;
     for (int i = 1; i <= N; ++i) {
         for (int j = 1; j <= N; ++j) {
-            if (diff[i][j] > 0) {
-                P += diff[i][j];
-                if (diff[i][j] % 2 == 0) {
-                    E += diff[i][j];
+            if (matrix[i][j] > 0) {
+                P++;
+                if (matrix[i][j] % 2 == 0) {
+                    E++;
                 }
             }
         }
