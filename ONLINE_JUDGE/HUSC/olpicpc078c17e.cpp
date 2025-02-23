@@ -29,34 +29,39 @@ void time() {
          << ln;
 }
 
-const int MAXN = 2e5 + 5;
-vector<vector<ll>> mat, res;
+vector<vector<int>> adj;
 int n, m;
 
-void multiply(vector<vector<ll>>& a, vector<vector<ll>>& b) {
-    vector<vector<ll>> temp(n + 1, vector<ll>(n + 1));
-    for(int i = 1; i <= n; i++)
-        for(int j = 1; j <= n; j++)
-            for(int k = 1; k <= n; k++)
-                temp[i][j] += a[i][k] * b[k][j];
-    a = temp;
-}
-
-ll solve() {
-    ll total = 0;
-    res = mat;
+ll countPaths(int start) {
+    vector<int> dist(n + 1, -1);
+    vector<ll> count(n + 1, 0);
+    queue<int> q;
     
-    for(int i = 1; i <= n; i++)
-        for(int j = 1; j <= n; j++)
-            if(mat[i][j]) total++;
-            
-    for(int len = 2; len < n; len++) {
-        multiply(res, mat);
-        for(int i = 1; i <= n; i++)
-            for(int j = 1; j <= n; j++)
-                total += res[i][j];
+    dist[start] = 0;
+    count[start] = 1;
+    q.push(start);
+    ll paths = 0;
+    
+    while(!q.empty()) {
+        int v = q.front();
+        q.pop();
+        
+        if(dist[v] > 0) {
+            paths += count[v];
+        }
+        
+        for(int u : adj[v]) {
+            if(dist[u] == -1) {
+                dist[u] = dist[v] + 1;
+                count[u] = count[v];
+                q.push(u);
+            } else if(dist[u] == dist[v] + 1) {
+                count[u] += count[v];
+            }
+        }
     }
-    return total;
+    
+    return paths;
 }
 
 int main() {
@@ -64,16 +69,21 @@ int main() {
     docfile();
     
     cin >> n >> m;
-    
-    mat.resize(n + 1, vector<ll>(n + 1));
+    adj.resize(n + 1);
     
     for(int i = 0; i < m; i++) {
         int u, v;
         cin >> u >> v;
-        mat[u][v] = mat[v][u] = 1;
+        adj[u].push_back(v);
+        adj[v].push_back(u);
     }
     
-    cout << solve() << ln;
+    ll ans = 0;
+    for(int i = 1; i <= n; i++) {
+        ans += countPaths(i);
+    }
+    
+    cout << ans << ln;
     
     time();
     return 0;
