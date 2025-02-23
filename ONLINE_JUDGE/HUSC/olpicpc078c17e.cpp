@@ -29,10 +29,49 @@ void time() {
          << ln;
 }
 
+vector<vector<int>> adj;
+vector<bool> visited;
+ll res = 0;
+
+void dfs(int v, int len) {
+    visited[v] = true;
+    
+    if (len >= 1) {
+        res++;
+    }
+    
+    for (int u : adj[v]) {
+        if (!visited[u]) {
+            dfs(u, len + 1);
+        }
+    }
+    
+    visited[v] = false;
+}
+
 int main() {
     fastio();
     docfile();
-
+    
+    int n, m;
+    cin >> n >> m;
+    
+    adj.resize(n + 1);
+    visited.resize(n + 1, false);
+    
+    for (int i = 0; i < m; i++) {
+        int u, v;
+        cin >> u >> v;
+        adj[u].push_back(v);
+        adj[v].push_back(u);
+    }
+    
+    for (int i = 1; i <= n; i++) {
+        dfs(i, 0);
+    }
+    
+    cout << res << ln;
+    
     time();
     return 0;
 }
