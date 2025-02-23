@@ -30,30 +30,22 @@ void time() {
 }
 
 vector<vector<int>> adj;
-vector<bool> visited;
 int n, m;
-
-void dfs(int v, int len, int start, ll& paths) {
-    if (len > 0) paths++;
-    
-    visited[v] = true;
-    for (int u : adj[v]) {
-        if (!visited[u]) {
-            dfs(u, len + 1, start, paths);
-        }
-    }
-    visited[v] = false;
-}
 
 ll solve() {
     ll total = 0;
-    visited.resize(n + 1);
-    
-    for (int i = 1; i <= n; i++) {
-        fill(visited.begin(), visited.end(), false);
-        dfs(i, 0, i, total);
+    vector<int> degree(n + 1, 0);
+
+    for (int v = 1; v <= n; v++) {
+        degree[v] = adj[v].size();
+        total += degree[v];
     }
-    
+
+    for (int v = 1; v <= n; v++) {
+        for (int x : adj[v]) {
+            total += (degree[x] - 1);
+        }
+    }
     return total;
 }
 
@@ -64,8 +56,8 @@ int main() {
     cin >> n >> m;
     adj.resize(n + 1);
     
-    for(int i = 0; i < m; i++) {
-        int u, v;
+    for (int i = 0; i < m; i++) {
+        int u, v; 
         cin >> u >> v;
         adj[u].push_back(v);
         adj[v].push_back(u);
