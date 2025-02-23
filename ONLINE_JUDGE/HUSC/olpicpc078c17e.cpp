@@ -46,7 +46,7 @@ ll solve() {
             }
             for (int w : adj[u]) {
                 if (w != v && w > u) {
-                    total += 1; // Count paths of length 3
+                    total += (degree[w] - 1); // Count paths of length 3
                 }
             }
         }
