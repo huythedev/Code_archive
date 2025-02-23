@@ -6,10 +6,8 @@ using namespace std;
 
 #define NAME "olpicpc078c17e"
 #define ln "\n"
-#define sz size()
 
 typedef long long ll;
-typedef long double ld;
 
 void fastio() {
     ios_base::sync_with_stdio(false);
@@ -25,35 +23,37 @@ void docfile() {
 }
 
 void time() {
-    cerr << ln << "Time elapsed: " << 1.0 * clock() / CLOCKS_PER_SEC << "s." 
-         << ln;
+    cerr << ln << "Time elapsed: " << 1.0 * clock() / CLOCKS_PER_SEC << "s." << ln;
 }
 
 vector<vector<int>> adj;
-vector<bool> visited;
 int n, m;
-
-void dfs(int v, int len, int start, ll& paths) {
-    if (len > 0) paths++;
-    
-    visited[v] = true;
-    for (int u : adj[v]) {
-        if (!visited[u]) {
-            dfs(u, len + 1, start, paths);
-        }
-    }
-    visited[v] = false;
-}
 
 ll solve() {
     ll total = 0;
-    visited.resize(n + 1);
-    
-    for (int i = 1; i <= n; i++) {
-        fill(visited.begin(), visited.end(), false);
-        dfs(i, 0, i, total);
+    vector<int> degree(n + 1, 0);
+
+    // Calculate degree for each vertex
+    for (int v = 1; v <= n; v++) {
+        degree[v] = adj[v].size();
     }
-    
+
+    // Count paths of length 2 and 3
+    for (int v = 1; v <= n; v++) {
+        for (int u : adj[v]) {
+            for (int w : adj[u]) {
+                if (w != v) {
+                    total++; // Count paths of length 2
+                    for (int x : adj[w]) {
+                        if (x != u && x != v) {
+                            total++; // Count paths of length 3
+                        }
+                    }
+                }
+            }
+        }
+    }
+
     return total;
 }
 
@@ -64,7 +64,7 @@ int main() {
     cin >> n >> m;
     adj.resize(n + 1);
     
-    for(int i = 0; i < m; i++) {
+    for (int i = 0; i < m; i++) {
         int u, v;
         cin >> u >> v;
         adj[u].push_back(v);
