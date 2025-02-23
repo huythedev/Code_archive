@@ -30,38 +30,31 @@ void time() {
 }
 
 vector<vector<int>> adj;
+vector<bool> visited;
 int n, m;
 
-ll countPaths(int start) {
-    vector<int> dist(n + 1, -1);
-    vector<ll> count(n + 1, 0);
-    queue<int> q;
+void dfs(int v, int len, int start, ll& paths) {
+    if (len > 0) paths++;
     
-    dist[start] = 0;
-    count[start] = 1;
-    q.push(start);
-    ll paths = 0;
-    
-    while(!q.empty()) {
-        int v = q.front();
-        q.pop();
-        
-        if(dist[v] > 0) {
-            paths += count[v];
-        }
-        
-        for(int u : adj[v]) {
-            if(dist[u] == -1) {
-                dist[u] = dist[v] + 1;
-                count[u] = count[v];
-                q.push(u);
-            } else if(dist[u] == dist[v] + 1) {
-                count[u] += count[v];
-            }
+    visited[v] = true;
+    for (int u : adj[v]) {
+        if (!visited[u]) {
+            dfs(u, len + 1, start, paths);
         }
     }
+    visited[v] = false;
+}
+
+ll solve() {
+    ll total = 0;
+    visited.resize(n + 1);
     
-    return paths;
+    for (int i = 1; i <= n; i++) {
+        fill(visited.begin(), visited.end(), false);
+        dfs(i, 0, i, total);
+    }
+    
+    return total;
 }
 
 int main() {
@@ -78,12 +71,7 @@ int main() {
         adj[v].push_back(u);
     }
     
-    ll ans = 0;
-    for(int i = 1; i <= n; i++) {
-        ans += countPaths(i);
-    }
-    
-    cout << ans << ln;
+    cout << solve() << ln;
     
     time();
     return 0;
