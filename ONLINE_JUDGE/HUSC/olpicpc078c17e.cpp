@@ -41,14 +41,12 @@ ll solve() {
     // Count paths of length 2 and 3
     for (int v = 1; v <= n; v++) {
         for (int u : adj[v]) {
+            if (u > v) {
+                total += (degree[v] - 1); // Count paths of length 2
+            }
             for (int w : adj[u]) {
-                if (w != v) {
-                    total++; // Count paths of length 2
-                    for (int x : adj[w]) {
-                        if (x != u && x != v) {
-                            total++; // Count paths of length 3
-                        }
-                    }
+                if (w != v && w > u) {
+                    total += 1; // Count paths of length 3
                 }
             }
         }
