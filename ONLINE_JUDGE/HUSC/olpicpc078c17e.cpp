@@ -29,48 +29,51 @@ void time() {
          << ln;
 }
 
-vector<vector<int>> adj;
-vector<bool> visited;
-ll res = 0;
+const int MAXN = 2e5 + 5;
+vector<vector<ll>> mat, res;
+int n, m;
 
-void dfs(int v, int len) {
-    visited[v] = true;
+void multiply(vector<vector<ll>>& a, vector<vector<ll>>& b) {
+    vector<vector<ll>> temp(n + 1, vector<ll>(n + 1));
+    for(int i = 1; i <= n; i++)
+        for(int j = 1; j <= n; j++)
+            for(int k = 1; k <= n; k++)
+                temp[i][j] += a[i][k] * b[k][j];
+    a = temp;
+}
+
+ll solve() {
+    ll total = 0;
+    res = mat;
     
-    if (len >= 1) {
-        res++;
+    for(int i = 1; i <= n; i++)
+        for(int j = 1; j <= n; j++)
+            if(mat[i][j]) total++;
+            
+    for(int len = 2; len < n; len++) {
+        multiply(res, mat);
+        for(int i = 1; i <= n; i++)
+            for(int j = 1; j <= n; j++)
+                total += res[i][j];
     }
-    
-    for (int u : adj[v]) {
-        if (!visited[u]) {
-            dfs(u, len + 1);
-        }
-    }
-    
-    visited[v] = false;
+    return total;
 }
 
 int main() {
     fastio();
     docfile();
     
-    int n, m;
     cin >> n >> m;
     
-    adj.resize(n + 1);
-    visited.resize(n + 1, false);
+    mat.resize(n + 1, vector<ll>(n + 1));
     
-    for (int i = 0; i < m; i++) {
+    for(int i = 0; i < m; i++) {
         int u, v;
         cin >> u >> v;
-        adj[u].push_back(v);
-        adj[v].push_back(u);
+        mat[u][v] = mat[v][u] = 1;
     }
     
-    for (int i = 1; i <= n; i++) {
-        dfs(i, 0);
-    }
-    
-    cout << res << ln;
+    cout << solve() << ln;
     
     time();
     return 0;
