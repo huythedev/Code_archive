@@ -62,7 +62,7 @@ void subtask2() {
     
     queue<int> pos0;
     for (int i = 0; i < n; i++) {
-        if (a[i] == 0) pos0.push(i + 1); 
+        if (a[i] == 0) pos0.push(i + 1); // 1-based
     }
     
     vector<pair<int, int>> ops;
