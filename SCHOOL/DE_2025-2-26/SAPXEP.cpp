@@ -51,8 +51,7 @@ int main() {
         }
         
         if(min_idx != i) {
-            operations.push_back({i + 1, min_idx + 1});  // 1-indexed for output
-            // Reverse the array from i to min_idx
+            operations.push_back({i + 1, min_idx + 1});  
             reverse(a.begin() + i, a.begin() + min_idx + 1);
         }
     }
