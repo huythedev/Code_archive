@@ -57,28 +57,28 @@ void subtask1() {
 }
 
 void subtask2() {
-    vector<int> b = a;
-    sort(b.begin(), b.end());
-    
-    queue<int> pos0;
+    vector<pair<int, int>> operations;
     for (int i = 0; i < n; i++) {
-        if (a[i] == 0) pos0.push(i + 1); // 1-based
-    }
-    
-    vector<pair<int, int>> ops;
-    int p = 1;
-    while (!pos0.empty()) {
-        int q = pos0.front();
-        pos0.pop();
-        if (q > p) {
-            ops.push_back({p, q});
+        // Find the minimum element's index from i to n-1
+        int min_val = a[i];
+        int min_idx = i;
+        for (int k = i + 1; k < n; k++) {
+            if (a[k] < min_val) {
+                min_val = a[k];
+                min_idx = k;
+            }
         }
-        p++;
+        // If the minimum is not at position i, perform a reversal
+        if (min_idx != i) {
+            reverse(a.begin() + i, a.begin() + min_idx + 1);
+            operations.push_back({i + 1, min_idx + 1}); // Store 1-based indices
+        }
     }
     
-    cout << ops.size() << "\n";
-    for (auto [i, j] : ops) {
-        cout << i << " " << j << "\n";
+    // Output the number of operations and the operations themselves
+    cout << operations.size() << "\n";
+    for (auto [start, end] : operations) {
+        cout << start << " " << end << "\n";
     }
 }
 
@@ -92,12 +92,10 @@ int main() {
         cin >> a[i];
     }
     
-    if (n <= 1e3) {
-        subtask1();
-    }
-    else {
+    // if (n <= 1e3)
+    //     subtask1();
+    // else
         subtask2();
-    }
 
     time();
     return 0;
