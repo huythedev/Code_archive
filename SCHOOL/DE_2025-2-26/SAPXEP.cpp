@@ -4,7 +4,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-#define NAME "SX"
+#define NAME "SAPXEP"
 #define ln "\n"
 #define sz size()
 
@@ -20,7 +20,7 @@ void fastio() {
 void docfile() {
     if (ifstream(NAME ".INP")) {
         freopen(NAME ".INP", "r", stdin);
-        freopen(NAME ".INP", "w", stdout);
+        freopen(NAME ".OUT", "w", stdout);
     }
 }
 
@@ -41,18 +41,46 @@ int main() {
     }
     
     vector<pair<int, int>> operations;
+    vector<pair<int, int>> pos(n); // stores {value, original_position}
     
-    for(int i = 0; i < n - 1; i++) {
-        int min_idx = i;
-        for(int j = i + 1; j < n; j++) {
-            if(a[j] < a[min_idx]) {
-                min_idx = j;
-            }
-        }
+    for(int i = 0; i < n; i++) {
+        pos[i] = {a[i], i};
+    }
+    
+    // Sort to determine target positions
+    sort(pos.begin(), pos.end());
+    
+    vector<int> target_pos(n);
+    for(int i = 0; i < n; i++) {
+        target_pos[pos[i].second] = i;
+    }
+    
+    // Use cycle following technique
+    vector<bool> visited(n, false);
+    
+    for(int i = 0; i < n; i++) {
+        if(visited[i] || target_pos[i] == i) continue;
         
-        if(min_idx != i) {
-            operations.push_back({i + 1, min_idx + 1});  
-            reverse(a.begin() + i, a.begin() + min_idx + 1);
+        int cycle_start = i;
+        int j = i;
+        
+        while(!visited[j]) {
+            visited[j] = true;
+            j = target_pos[j];
+            
+            if(j != cycle_start) {
+                operations.push_back({min(cycle_start, j) + 1, max(cycle_start, j) + 1});
+                
+                // Simulate the reverse
+                int left = min(cycle_start, j);
+                int right = max(cycle_start, j);
+                while(left < right) {
+                    swap(a[left], a[right]);
+                    swap(target_pos[left], target_pos[right]);
+                    left++;
+                    right--;
+                }
+            }
         }
     }
     
