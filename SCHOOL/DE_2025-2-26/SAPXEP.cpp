@@ -29,41 +29,74 @@ void time() {
          << ln;
 }
 
-int main() {
-    fastio();
-    docfile();
+const int maxn = 1e5 + 5;
+int n;
+vector<int> a(maxn);
 
-    int n;
-    cin >> n;
-    vector<int> a(n);
-    for (int i = 0; i < n; i++) cin >> a[i];
+void subtask1() {
+    vector<pair<int, int>> operations;
     
+    for(int i = 0; i < n - 1; i++) {
+        int min_idx = i;
+        for(int j = i + 1; j < n; j++) {
+            if(a[j] < a[min_idx]) {
+                min_idx = j;
+            }
+        }
+        
+        if(min_idx != i) {
+            operations.push_back({i + 1, min_idx + 1});  
+            reverse(a.begin() + i, a.begin() + min_idx + 1);
+        }
+    }
+    
+    cout << operations.size() << ln;
+    for(auto op : operations) {
+        cout << op.first << " " << op.second << ln;
+    }
+}
+
+void subtask2() {
     vector<int> b = a;
     sort(b.begin(), b.end());
     
-    map<int, queue<int>> pos;
+    queue<int> pos0;
     for (int i = 0; i < n; i++) {
-        pos[a[i]].push(i + 1); // 1-based indices
+        if (a[i] == 0) pos0.push(i + 1); 
     }
     
     vector<pair<int, int>> ops;
-    for (int i = 1; i <= n; i++) {
-        int v = b[i - 1];
-        while (!pos[v].empty() && pos[v].front() < i) {
-            pos[v].pop(); // Skip used or past positions
+    int p = 1;
+    while (!pos0.empty()) {
+        int q = pos0.front();
+        pos0.pop();
+        if (q > p) {
+            ops.push_back({p, q});
         }
-        if (!pos[v].empty()) {
-            int j = pos[v].front();
-            if (j > i) {
-                ops.push_back({i, j});
-                pos[v].pop();
-            }
-        }
+        p++;
     }
     
     cout << ops.size() << "\n";
     for (auto [i, j] : ops) {
         cout << i << " " << j << "\n";
+    }
+}
+
+int main() {
+    fastio();
+    docfile();
+
+    cin >> n;
+    a.resize(n);
+    for(int i = 0; i < n; i++) {
+        cin >> a[i];
+    }
+    
+    if (n <= 1e3) {
+        subtask1();
+    }
+    else {
+        subtask2();
     }
 
     time();
