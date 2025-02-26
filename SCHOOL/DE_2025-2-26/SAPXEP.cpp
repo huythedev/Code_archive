@@ -29,56 +29,31 @@ void time() {
          << ln;
 }
 
-const int maxn = 1e5 + 5;
-int n;
-vector<int> a(maxn);
+const int MAXN = 100005;
 
-void subtask1() {
-    vector<pair<int, int>> operations;
-    
-    for(int i = 0; i < n - 1; i++) {
-        int min_idx = i;
-        for(int j = i + 1; j < n; j++) {
-            if(a[j] < a[min_idx]) {
-                min_idx = j;
-            }
-        }
-        
-        if(min_idx != i) {
-            operations.push_back({i + 1, min_idx + 1});  
-            reverse(a.begin() + i, a.begin() + min_idx + 1);
-        }
-    }
-    
-    cout << operations.size() << ln;
-    for(auto op : operations) {
-        cout << op.first << " " << op.second << ln;
-    }
+int n;
+vector<int> a, sorted_a;
+vector<pair<int, int>> steps;
+
+void kt(int l, int r) {
+    reverse(a.begin() + l, a.begin() + r + 1);
+    steps.push_back({l + 1, r + 1});
 }
 
-void subtask2() {
-    vector<pair<int, int>> operations;
+void solve() {
+    sorted_a = a;
+    sort(sorted_a.begin(), sorted_a.end());
+
     for (int i = 0; i < n; i++) {
-        // Find the minimum element's index from i to n-1
-        int min_val = a[i];
-        int min_idx = i;
-        for (int k = i + 1; k < n; k++) {
-            if (a[k] < min_val) {
-                min_val = a[k];
-                min_idx = k;
-            }
-        }
-        // If the minimum is not at position i, perform a reversal
-        if (min_idx != i) {
-            reverse(a.begin() + i, a.begin() + min_idx + 1);
-            operations.push_back({i + 1, min_idx + 1}); // Store 1-based indices
+        if (a[i] != sorted_a[i]) {
+            int j = find(a.begin() + i, a.end(), sorted_a[i]) - a.begin();
+            kt(i, j);
         }
     }
-    
-    // Output the number of operations and the operations themselves
-    cout << operations.size() << "\n";
-    for (auto [start, end] : operations) {
-        cout << start << " " << end << "\n";
+
+    cout << steps.size() << endl;
+    for (auto [l, r] : steps) {
+        cout << l << " " << r << endl;
     }
 }
 
@@ -88,14 +63,11 @@ int main() {
 
     cin >> n;
     a.resize(n);
-    for(int i = 0; i < n; i++) {
+    for (int i = 0; i < n; i++) {
         cin >> a[i];
     }
-    
-    // if (n <= 1e3)
-    //     subtask1();
-    // else
-        subtask2();
+
+    solve();
 
     time();
     return 0;
