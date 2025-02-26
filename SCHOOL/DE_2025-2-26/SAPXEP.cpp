@@ -43,20 +43,21 @@ int main() {
     
     map<int, queue<int>> pos;
     for (int i = 0; i < n; i++) {
-        pos[a[i]].push(i + 1); 
+        pos[a[i]].push(i + 1); // 1-based indices
     }
     
     vector<pair<int, int>> ops;
     for (int i = 1; i <= n; i++) {
         int v = b[i - 1];
         while (!pos[v].empty() && pos[v].front() < i) {
-            pos[v].pop(); 
+            pos[v].pop(); // Skip used or past positions
         }
-        if (pos[v].empty()) continue; 
-        int j = pos[v].front();
-        if (j != i) {
-            ops.push_back({i, j});
-            pos[v].pop();
+        if (!pos[v].empty()) {
+            int j = pos[v].front();
+            if (j > i) {
+                ops.push_back({i, j});
+                pos[v].pop();
+            }
         }
     }
     
