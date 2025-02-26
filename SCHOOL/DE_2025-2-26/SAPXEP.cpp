@@ -36,57 +36,25 @@ int main() {
     int n;
     cin >> n;
     vector<int> a(n);
-    for(int i = 0; i < n; i++) {
-        cin >> a[i];
-    }
-    
-    vector<pair<int, int>> operations;
-    vector<pair<int, int>> pos(n); // stores {value, original_position}
-    
-    for(int i = 0; i < n; i++) {
-        pos[i] = {a[i], i};
-    }
-    
-    // Sort to determine target positions
-    sort(pos.begin(), pos.end());
-    
-    vector<int> target_pos(n);
-    for(int i = 0; i < n; i++) {
-        target_pos[pos[i].second] = i;
-    }
-    
-    // Use cycle following technique
-    vector<bool> visited(n, false);
-    
-    for(int i = 0; i < n; i++) {
-        if(visited[i] || target_pos[i] == i) continue;
-        
-        int cycle_start = i;
+    for(int i = 0; i < n; i++) cin >> a[i];
+    vector<pair<int, int>> ops;
+    for(int i = 0; i < n - 1; i++) {
+        int min_val = a[i];
         int j = i;
-        
-        while(!visited[j]) {
-            visited[j] = true;
-            j = target_pos[j];
-            
-            if(j != cycle_start) {
-                operations.push_back({min(cycle_start, j) + 1, max(cycle_start, j) + 1});
-                
-                // Simulate the reverse
-                int left = min(cycle_start, j);
-                int right = max(cycle_start, j);
-                while(left < right) {
-                    swap(a[left], a[right]);
-                    swap(target_pos[left], target_pos[right]);
-                    left++;
-                    right--;
-                }
+        for(int k = i + 1; k < n; k++) {
+            if(a[k] < min_val) {
+                min_val = a[k];
+                j = k;
             }
         }
+        if(j != i) {
+            reverse(a.begin() + i, a.begin() + j + 1);
+            ops.push_back({i + 1, j + 1});
+        }
     }
-    
-    cout << operations.size() << ln;
-    for(auto op : operations) {
-        cout << op.first << " " << op.second << ln;
+    cout << ops.size() << endl;
+    for(auto p : ops) {
+        cout << p.first << " " << p.second << endl;
     }
 
     time();
