@@ -33,6 +33,35 @@ int main() {
     fastio();
     docfile();
 
+    int n;
+    cin >> n;
+    vector<int> a(n);
+    for(int i = 0; i < n; i++) {
+        cin >> a[i];
+    }
+    
+    vector<pair<int, int>> operations;
+    
+    for(int i = 0; i < n - 1; i++) {
+        int min_idx = i;
+        for(int j = i + 1; j < n; j++) {
+            if(a[j] < a[min_idx]) {
+                min_idx = j;
+            }
+        }
+        
+        if(min_idx != i) {
+            operations.push_back({i + 1, min_idx + 1});  // 1-indexed for output
+            // Reverse the array from i to min_idx
+            reverse(a.begin() + i, a.begin() + min_idx + 1);
+        }
+    }
+    
+    cout << operations.size() << ln;
+    for(auto op : operations) {
+        cout << op.first << " " << op.second << ln;
+    }
+
     time();
     return 0;
 }
