@@ -4,7 +4,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-#define NAME "SAPXEP"
+#define NAME "SX"
 #define ln "\n"
 #define sz size()
 
@@ -20,7 +20,7 @@ void fastio() {
 void docfile() {
     if (ifstream(NAME ".INP")) {
         freopen(NAME ".INP", "r", stdin);
-        freopen(NAME ".OUT", "w", stdout);
+        freopen(NAME ".INP", "w", stdout);
     }
 }
 
