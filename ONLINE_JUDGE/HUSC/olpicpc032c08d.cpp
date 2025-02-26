@@ -1,0 +1,57 @@
+// Author: Perry (https://perrythedev.com)
+// Problem Link: https://coder.husc.edu.vn/problem/olpicpc032c08d
+// davul
+#include <bits/stdc++.h>
+using namespace std;
+
+#define NAME "olpicpc032c08d"
+#define ln "\n"
+#define sz size()
+
+typedef long long ll;
+typedef long double ld;
+
+void fastio() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+}
+
+void docfile() {
+    if (ifstream(NAME ".INP")) {
+        freopen(NAME ".INP", "r", stdin);
+        freopen(NAME ".OUT", "w", stdout);
+    }
+}
+
+void time() {
+    cerr << ln << "Time elapsed: " << 1.0 * clock() / CLOCKS_PER_SEC << "s." 
+         << ln;
+}
+
+const int MOD = 1e9 + 7;
+
+ll solve(int n) {
+    vector<ll> dp(n + 1, 0);
+    dp[0] = 1; 
+
+    for (int i = 3; i <= n; ++i) {
+        for (int j = i; j <= n; ++j) {
+            dp[j] = (dp[j] + dp[j - i]) % MOD;
+        }
+    }
+
+    return dp[n];
+}
+
+int main() {
+    fastio();
+    docfile();
+
+    int n;
+    cin >> n;
+    cout << solve(n);
+
+    time();
+    return 0;
+}
