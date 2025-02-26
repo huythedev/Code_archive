@@ -35,7 +35,7 @@ int n;
 vector<int> a, sorted_a;
 vector<pair<int, int>> steps;
 
-void kt(int l, int r) {
+void check(int l, int r) {
     reverse(a.begin() + l, a.begin() + r + 1);
     steps.push_back({l + 1, r + 1});
 }
@@ -47,7 +47,7 @@ void solve() {
     for (int i = 0; i < n; i++) {
         if (a[i] != sorted_a[i]) {
             int j = find(a.begin() + i, a.end(), sorted_a[i]) - a.begin();
-            kt(i, j);
+            check(i, j);
         }
     }
 
