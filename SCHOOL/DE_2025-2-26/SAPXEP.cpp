@@ -36,25 +36,33 @@ int main() {
     int n;
     cin >> n;
     vector<int> a(n);
-    for(int i = 0; i < n; i++) cin >> a[i];
+    for (int i = 0; i < n; i++) cin >> a[i];
+    
+    vector<int> b = a;
+    sort(b.begin(), b.end());
+    
+    map<int, queue<int>> pos;
+    for (int i = 0; i < n; i++) {
+        pos[a[i]].push(i + 1); 
+    }
+    
     vector<pair<int, int>> ops;
-    for(int i = 0; i < n - 1; i++) {
-        int min_val = a[i];
-        int j = i;
-        for(int k = i + 1; k < n; k++) {
-            if(a[k] < min_val) {
-                min_val = a[k];
-                j = k;
-            }
+    for (int i = 1; i <= n; i++) {
+        int v = b[i - 1];
+        while (!pos[v].empty() && pos[v].front() < i) {
+            pos[v].pop(); 
         }
-        if(j != i) {
-            reverse(a.begin() + i, a.begin() + j + 1);
-            ops.push_back({i + 1, j + 1});
+        if (pos[v].empty()) continue; 
+        int j = pos[v].front();
+        if (j != i) {
+            ops.push_back({i, j});
+            pos[v].pop();
         }
     }
-    cout << ops.size() << endl;
-    for(auto p : ops) {
-        cout << p.first << " " << p.second << endl;
+    
+    cout << ops.size() << "\n";
+    for (auto [i, j] : ops) {
+        cout << i << " " << j << "\n";
     }
 
     time();
