@@ -40,6 +40,7 @@ int main() {
     
     if (b1 - a1 <= b2 - a2) {
         for (ll x = a1; x <= b1; ++x) {
+            if (x == 0) {
                 if (a3 <= 0 && 0 <= b3) {
                     count += (b2 - a2 + 1);
                 }
@@ -53,8 +54,7 @@ int main() {
                 count += (rightBound - leftBound + 1);
             }
         }
-    } 
-    else {
+    } else {
         for (ll y = a2; y <= b2; ++y) {
             if (y == 0) {
                 if (a3 <= 0 && 0 <= b3) {
