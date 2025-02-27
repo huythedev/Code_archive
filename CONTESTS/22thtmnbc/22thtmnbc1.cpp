@@ -38,7 +38,61 @@ int main() {
     
     ll count = 0;
     
-    if (b1 - a1 <= b2 - a2) {
+    if (a1 == b1) {
+        ll x = a1;
+        if (x == 0) {
+            if (a3 <= 0 && 0 <= b3) {
+                count += (b2 - a2 + 1);
+            }
+        } else {
+            ll leftY = max(a2, (a3 + x - 1) / x);  
+            ll rightY = min(b2, b3 / x);
+            
+            if (leftY <= rightY) {
+                count += (rightY - leftY + 1);
+            }
+        }
+    }
+    else if (a2 == b2) {
+        ll y = a2;
+        if (y == 0) {
+            if (a3 <= 0 && 0 <= b3) {
+                count += (b1 - a1 + 1);
+            }
+        } else {
+            ll leftX = max(a1, (a3 + y - 1) / y);
+            ll rightX = min(b1, b3 / y);
+            
+            if (leftX <= rightX) {
+                count += (rightX - leftX + 1);
+            }
+        }
+    }
+    else if ((b1 - a1 > 10000) && (b2 - a2 > 10000)) {
+        for (ll z = a3; z <= b3; ++z) {
+            if (z == 0) {
+                if (a1 <= 0 && 0 <= b1 && a2 <= 0 && 0 <= b2) {
+                    count++;
+                }
+                continue;
+            }
+            
+            for (ll x = 1; x * x <= z; ++x) {
+                if (z % x == 0) {
+                    ll y = z / x;
+                    
+                    if (a1 <= x && x <= b1 && a2 <= y && y <= b2) {
+                        count++;
+                    }
+                    
+                    if (x != y && a1 <= y && y <= b1 && a2 <= x && x <= b2) {
+                        count++;
+                    }
+                }
+            }
+        }
+    }
+    else if (b1 - a1 <= b2 - a2) {
         for (ll x = a1; x <= b1; ++x) {
             if (x == 0) {
                 if (a3 <= 0 && 0 <= b3) {
@@ -54,7 +108,8 @@ int main() {
                 count += (rightBound - leftBound + 1);
             }
         }
-    } else {
+    } 
+    else {
         for (ll y = a2; y <= b2; ++y) {
             if (y == 0) {
                 if (a3 <= 0 && 0 <= b3) {
