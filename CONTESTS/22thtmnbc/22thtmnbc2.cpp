@@ -29,14 +29,6 @@ void time() {
          << ln;
 }
 
-int getRichness(int l, int r, const vector<int>& c) {
-    bitset<64> provinces; 
-    for (int i = l; i <= r; i++) {
-        provinces.set(c[i]);
-    }
-    return provinces.count();
-}
-
 int main() {
     fastio();
     docfile();
@@ -49,83 +41,110 @@ int main() {
     }
     
     if (g == 2) {
-        vector<int> left(n);
-        unordered_set<int> seen;
+        vector<int> prefixRichness(n);
+        bitset<64> prefixProvinces;
         for (int i = 0; i < n; i++) {
-            seen.insert(c[i]);
-            left[i] = seen.size();
+            prefixProvinces.set(c[i]);
+            prefixRichness[i] = prefixProvinces.count();
         }
         
-        vector<int> right(n);
-        seen.clear();
+        vector<int> suffixRichness(n);
+        bitset<64> suffixProvinces;
         for (int i = n - 1; i >= 0; i--) {
-            seen.insert(c[i]);
-            right[i] = seen.size();
+            suffixProvinces.set(c[i]);
+            suffixRichness[i] = suffixProvinces.count();
         }
         
         int answer = 0;
         for (int i = 0; i < n - 1; i++) {
-            answer = max(answer, left[i] + right[i + 1]);
+            answer = max(answer, prefixRichness[i] + suffixRichness[i + 1]);
         }
         
         cout << answer << ln;
-        time();
         return 0;
     }
     
     if (g == 3) {
-        vector<unordered_set<int>> prefixSets(n + 1);
-        vector<int> prefixCount(n + 1, 0);
-        
+        vector<int> prefixRichness(n + 1, 0);
+        bitset<64> prefixProvinces;
         for (int i = 0; i < n; i++) {
-            prefixSets[i + 1] = prefixSets[i];
-            prefixSets[i + 1].insert(c[i]);
-            prefixCount[i + 1] = prefixSets[i + 1].size();
+            prefixProvinces.set(c[i]);
+            prefixRichness[i + 1] = prefixProvinces.count();
         }
         
         int answer = 0;
-        for (int i = 1; i < n; i++) {
-            for (int j = i + 1; j < n; j++) {
-                int richness1 = prefixCount[i];
+        
+        for (int i = 1; i < n - 1; i++) {
+            int richness1 = prefixRichness[i]; 
+            
+            // For each possible second split
+            bitset<64> middleProvinces;
+            for (int j = i; j < n - 1; j++) {
+                middleProvinces.set(c[j]);
+                int richness2 = middleProvinces.count(); 
                 
-                unordered_set<int> group2;
-                for (int k = i; k < j; k++) {
-                    group2.insert(c[k]);
+                bitset<64> lastProvinces;
+                for (int k = j + 1; k < n; k++) {
+                    lastProvinces.set(c[k]);
                 }
-                int richness2 = group2.size();
-                
-                unordered_set<int> group3;
-                for (int k = j; k < n; k++) {
-                    group3.insert(c[k]);
-                }
-                int richness3 = group3.size();
+                int richness3 = lastProvinces.count(); 
                 
                 answer = max(answer, richness1 + richness2 + richness3);
             }
         }
         
         cout << answer << ln;
-        time();
         return 0;
     }
     
-    vector<vector<int>> dp(n + 1, vector<int>(g + 1, 0));
-    
-    for (int i = 1; i <= n; i++) {
-        dp[i][1] = getRichness(0, i - 1, c);
-    }
-    
-    for (int j = 2; j <= g; j++) {
-        for (int i = j; i <= n; i++) {
-            dp[i][j] = 0; 
-            for (int k = j - 1; k < i; k++) {
-                int currRichness = getRichness(k, i - 1, c);
-                dp[i][j] = max(dp[i][j], dp[k][j - 1] + currRichness);
+    if (n <= 100) {
+        vector<vector<int>> richness(n, vector<int>(n));
+        for (int l = 0; l < n; l++) {
+            bitset<64> provinces;
+            for (int r = l; r < n; r++) {
+                provinces.set(c[r]);
+                richness[l][r] = provinces.count();
             }
         }
+        
+        vector<vector<int>> dp(n, vector<int>(g + 1, 0));
+        
+        for (int i = 0; i < n; i++) {
+            dp[i][1] = richness[0][i];
+        }
+        
+        for (int j = 2; j <= g; j++) {
+            for (int i = j - 1; i < n; i++) {
+                for (int k = j - 2; k < i; k++) {
+                    dp[i][j] = max(dp[i][j], dp[k][j - 1] + richness[k + 1][i]);
+                }
+            }
+        }
+        
+        cout << dp[n - 1][g] << ln;
+    } 
+    else {
+        int answer = 0;
+        if (g == 4) {
+            for (int i = 1; i < n - 2; i++) {
+                for (int j = i + 1; j < n - 1; j++) {
+                    for (int k = j + 1; k < n; k++) {
+                        bitset<64> g1, g2, g3, g4;
+                        for (int x = 0; x < i; x++) g1.set(c[x]);
+                        for (int x = i; x < j; x++) g2.set(c[x]);
+                        for (int x = j; x < k; x++) g3.set(c[x]);
+                        for (int x = k; x < n; x++) g4.set(c[x]);
+                        
+                        int r1 = g1.count(), r2 = g2.count();
+                        int r3 = g3.count(), r4 = g4.count();
+                        answer = max(answer, r1 + r2 + r3 + r4);
+                    }
+                }
+            }
+        }
+        
+        cout << answer << ln;
     }
-    
-    cout << dp[n][g] << ln;
 
     time();
     return 0;
