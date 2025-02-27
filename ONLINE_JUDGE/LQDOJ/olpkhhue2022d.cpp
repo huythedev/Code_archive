@@ -30,38 +30,6 @@ void time() {
          << ln;
 }
 
-int countDivisorsInRange(int m, int left, int right) {
-    left = max(left, 1);
-    right = min(right, m);
-    if (left > right) return 0;
-    
-    int count = 0;
-    for (int i = 1; i * i <= m; i++) {
-        if (m % i == 0) {
-            if (i >= left && i <= right) count++;
-            int j = m / i;
-            if (j != i && j >= left && j <= right) count++;
-        }
-    }
-    return count;
-}
-
-int countDivisorsLessThanMInRange(int m, int left, int right) {
-    left = max(left, 1);
-    right = min(right, m - 1);
-    if (left > right) return 0;
-    
-    int count = 0;
-    for (int i = 1; i * i <= m; i++) {
-        if (m % i == 0) {
-            if (i >= left && i <= right) count++;
-            int j = m / i;
-            if (j != i && j >= left && j <= right) count++;
-        }
-    }
-    return count;
-}
-
 int main() {
     fastio();
     docfile();
@@ -73,32 +41,53 @@ int main() {
         cin >> n;
         vector<pair<int, int>> ranges(n);
         int maxR = 0;
+        set<int> candidateMaximums;
+        
         for (int i = 0; i < n; i++) {
             cin >> ranges[i].first >> ranges[i].second;
             maxR = max(maxR, ranges[i].second);
+            
+            for (int j = max(1, ranges[i].first); j <= min(ranges[i].second, ranges[i].first + 1); j++) {
+                candidateMaximums.insert(j);
+            }
+            candidateMaximums.insert(ranges[i].second);
         }
 
         ll result = 0;
         
-        for (int m = 1; m <= maxR; m++) {
-            bool validMax = false;
+        for (int m : candidateMaximums) {
+            vector<vector<int>> divisors(n);
+            
             for (int i = 0; i < n; i++) {
-                if (ranges[i].first <= m && m <= ranges[i].second) {
-                    validMax = true;
-                    break;
+                int left = ranges[i].first;
+                int right = ranges[i].second;
+                
+                for (int d = 1; d * d <= m; d++) {
+                    if (m % d == 0) {
+                        if (d >= left && d <= right) {
+                            divisors[i].push_back(d);
+                        }
+                        int d2 = m / d;
+                        if (d2 != d && d2 >= left && d2 <= right) {
+                            divisors[i].push_back(d2);
+                        }
+                    }
                 }
             }
-            if (!validMax) continue;
-
+            
             ll totalWays = 1;
             ll waysWithoutMax = 1;
             
             for (int i = 0; i < n; i++) {
-                int countTotal = countDivisorsInRange(m, ranges[i].first, ranges[i].second);
-                int countWithoutMax = countDivisorsLessThanMInRange(m, ranges[i].first, ranges[i].second);
+                int total = divisors[i].size();
+                int withoutMax = 0;
                 
-                totalWays = (totalWays * countTotal) % MOD;
-                waysWithoutMax = (waysWithoutMax * countWithoutMax) % MOD;
+                for (int d : divisors[i]) {
+                    if (d < m) withoutMax++;
+                }
+                
+                totalWays = (totalWays * total) % MOD;
+                waysWithoutMax = (waysWithoutMax * withoutMax) % MOD;
             }
             
             ll waysWithMax = (totalWays - waysWithoutMax + MOD) % MOD;
