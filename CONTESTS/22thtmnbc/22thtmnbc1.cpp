@@ -38,12 +38,37 @@ int main() {
     
     ll count = 0;
     
-    for (ll x = a1; x <= b1; ++x) {
-        ll leftBound = max(a2, (a3 + x - 1) / x); 
-        ll rightBound = min(b2, b3 / x);
-        
-        if (leftBound <= rightBound) {
-            count += (rightBound - leftBound + 1);
+    if (b1 - a1 <= b2 - a2) {
+        for (ll x = a1; x <= b1; ++x) {
+                if (a3 <= 0 && 0 <= b3) {
+                    count += (b2 - a2 + 1);
+                }
+                continue;
+            }
+            
+            ll leftBound = max(a2, (a3 + x - 1) / x); 
+            ll rightBound = min(b2, b3 / x);
+            
+            if (leftBound <= rightBound) {
+                count += (rightBound - leftBound + 1);
+            }
+        }
+    } 
+    else {
+        for (ll y = a2; y <= b2; ++y) {
+            if (y == 0) {
+                if (a3 <= 0 && 0 <= b3) {
+                    count += (b1 - a1 + 1);
+                }
+                continue;
+            }
+            
+            ll leftBound = max(a1, (a3 + y - 1) / y); 
+            ll rightBound = min(b1, b3 / y);
+            
+            if (leftBound <= rightBound) {
+                count += (rightBound - leftBound + 1);
+            }
         }
     }
     
