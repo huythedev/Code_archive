@@ -29,16 +29,13 @@ void time() {
          << ln;
 }
 
-ll factorial(ll n) {
-    if (n == 0) return 1;
-    return n * factorial(n - 1);
-}
+const ll factorial[10] = {1, 1, 2, 6, 24, 120, 720, 5040, 40320, 362880};
 
 ll f(ll x) {
     if (x <= 9)
-        return factorial(x);
+        return factorial[x];
     else {
-        return factorial(x % 10) + f(x / 10);
+        return factorial[x % 10] + f(x / 10);
     }
 }
 
@@ -46,15 +43,14 @@ int main() {
     fastio();
     docfile();
 
-    int y; cin >> y;
+    ll y; cin >> y;
 
-    ll x = 0, curr = 0;
-    while (curr != y) {
-        curr = f(x);
+    ll x = 0;
+    while (f(x) != y) {
         x++;
     }
 
-    cout << x - 1 << ln;
+    cout << x;
 
     time();
     return 0;
