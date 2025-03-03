@@ -52,8 +52,7 @@ int main() {
     while (curr < y) {
         curr = f(x);
         x++;
-        if (curr > y) {
-            x--;
+        if (curr == y) {
             break;
         }
     }
