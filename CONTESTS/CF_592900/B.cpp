@@ -49,15 +49,12 @@ int main() {
     int y; cin >> y;
 
     ll x = 0, curr = 0;
-    while (curr < y) {
+    while (curr != y) {
         curr = f(x);
         x++;
-        if (curr == y) {
-            break;
-        }
     }
 
-    cout << x << ln;
+    cout << x - 1 << ln;
 
     time();
     return 0;
