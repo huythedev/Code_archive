@@ -58,12 +58,12 @@ int main() {
         }
     }
     
-    int max_day = 0;
+    int res = 0;
     for (int i = 0; i < n; i++) {
-        max_day = max(max_day, day[i]);
+        res = max(res, day[i]);
     }
     
-    cout << max_day << endl;
+    cout << res;
 
     time();
     return 0;
