@@ -45,6 +45,10 @@ signed main() {
     prefix_sum[0] = 0; 
     for (int i = 1; i <= n; ++i) prefix_sum[i] = prefix_sum[i - 1] + a[i - 1];
 
+    for (ll i : prefix_sum)
+        cout << i << ' '; 
+    cout << ln;
+
     ll res = 0;
     for (int i = 1; i <= n; ++i) {
         for (int j = i + 1; j <= n; ++j) {
