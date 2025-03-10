@@ -56,11 +56,8 @@ signed main() {
         return 0;
     }
 
-    ll total_sum = prefix_sum[n - 1];
-    ll part_sum = total_sum / 3;
+    ll part_sum = prefix_sum[n - 1] / 3;
     ll count_part_sum = 0, res = 0;
-
-    vector<ll> count_prefix(n, 0);
 
     for (int i = 0; i < n - 1; ++i) {
         if (prefix_sum[i] == 2 * part_sum) {
