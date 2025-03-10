@@ -41,26 +41,26 @@ signed main() {
     cin >> n;
     a.resize(n);
     prefix_sum.resize(n);
-    for (int i = 0; i < n; ++i) cin >> a[i];
-    prefix_sum[0] = a[0]; 
-    for (int i = 1; i < n; ++i) prefix_sum[i] = prefix_sum[i - 1] + a[i];
+    for (int i = 0; i < n; ++i) {
+        cin >> a[i];
+        if (i == 0) prefix_sum[0] = a[0];
+        else prefix_sum[i] = prefix_sum[i - 1] + a[i];
+    }
 
-    for (ll i : prefix_sum)
-        cout << i << ' '; 
-    cout << ln;
+    // for (ll i : prefix_sum)
+    //     cout << i << ' '; 
+    // cout << ln;
 
     ll res = 0;
-    for (int i = 0; i < n; ++i) {
-        for (int j = i; j < n; ++j) {
+    for (int i = 1; i < n - 1; ++i) {
+        for (int j = i; j < n - 1; ++j) {
             ll sum_first_part = 0, sum_second_part = 0, sum_third_part = 0;
 
-            if (i > 0) sum_first_part = prefix_sum[i - 1];
-            sum_second_part = prefix_sum[j] - sum_first_part;
+            sum_first_part = prefix_sum[i - 1];
+            sum_second_part = prefix_sum[j] - prefix_sum[i - 1];
             sum_third_part = prefix_sum[n - 1] - prefix_sum[j];
 
-            if (sum_first_part == sum_second_part && sum_second_part == sum_third_part) {
-                res++;
-            }
+            if (sum_first_part == sum_second_part && sum_second_part == sum_third_part) res++;
         }
     }
 
