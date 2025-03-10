@@ -51,16 +51,23 @@ signed main() {
     //     cout << i << ' '; 
     // cout << ln;
 
-    ll res = 0;
-    for (int i = 1; i < n - 1; ++i) {
-        for (int j = i; j < n - 1; ++j) {
-            ll sum_first_part = 0, sum_second_part = 0, sum_third_part = 0;
+    if (prefix_sum[n - 1] % 3 != 0) {
+        cout << 0 << ln;
+        return 0;
+    }
 
-            sum_first_part = prefix_sum[i - 1];
-            sum_second_part = prefix_sum[j] - prefix_sum[i - 1];
-            sum_third_part = prefix_sum[n - 1] - prefix_sum[j];
+    ll total_sum = prefix_sum[n - 1];
+    ll part_sum = total_sum / 3;
+    ll count_part_sum = 0, res = 0;
 
-            if (sum_first_part == sum_second_part && sum_second_part == sum_third_part) res++;
+    vector<ll> count_prefix(n, 0);
+
+    for (int i = 0; i < n - 1; ++i) {
+        if (prefix_sum[i] == 2 * part_sum) {
+            res += count_part_sum;
+        }
+        if (prefix_sum[i] == part_sum) {
+            count_part_sum++;
         }
     }
 
