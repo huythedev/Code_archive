@@ -133,25 +133,166 @@ namespace genTest {
         }
         return edges;
     }
+
+    // Generate a random tree with n vertices
+    vector<pair<int, int>> randomTree(int n) {
+        vector<pair<int, int>> edges;
+        vector<int> nodes(n - 1);
+        for (int i = 0; i < n - 1; i++) {
+            nodes[i] = i + 2; // Nodes from 2 to n
+        }
+        
+        // Shuffle the nodes to create random connections
+        shuffle(nodes.begin(), nodes.end(), rng);
+        
+        for (int i = 0; i < n - 1; i++) {
+            // Connect each node to a random existing node (1 to nodes[i]-1)
+            int parent = rnd(1, nodes[i] - 1);
+            edges.push_back({parent, nodes[i]});
+        }
+        
+        return edges;
+    }
+    
+    // Generate a star tree with n vertices (all connected to node 1)
+    vector<pair<int, int>> starTree(int n) {
+        vector<pair<int, int>> edges;
+        for (int i = 2; i <= n; i++) {
+            edges.push_back({1, i});
+        }
+        return edges;
+    }
+    
+    // Generate a line tree with n vertices (forming a single line)
+    vector<pair<int, int>> lineTree(int n) {
+        vector<pair<int, int>> edges;
+        for (int i = 1; i < n; i++) {
+            edges.push_back({i, i + 1});
+        }
+        return edges;
+    }
+    
+    // Generate a binary tree with n vertices
+    vector<pair<int, int>> binaryTree(int n) {
+        vector<pair<int, int>> edges;
+        for (int i = 1; i <= n / 2; i++) {
+            if (2 * i <= n) edges.push_back({i, 2 * i});
+            if (2 * i + 1 <= n) edges.push_back({i, 2 * i + 1});
+        }
+        return edges;
+    }
+    
+    // Generate a more balanced random tree with n vertices
+    vector<pair<int, int>> balancedTree(int n) {
+        vector<pair<int, int>> edges;
+        for (int i = 2; i <= n; i++) {
+            // Connect to a random node with a lower index, but limit maximum tree depth
+            int parent = max(1LL, i - genTest::rnd(1, min(100LL, i-1)));
+            edges.push_back({parent, i});
+        }
+        return edges;
+    }
+    
+    // Generate a wide tree with limited depth (suitable for large n)
+    vector<pair<int, int>> wideTree(int n) {
+        vector<pair<int, int>> edges;
+        int maxDepth = min((long long)20, (int)sqrt(n) + 5); // Limit tree depth based on size
+        vector<int> levels(n + 1, 0);
+        levels[1] = 1; // Root at level 1
+        
+        for (int i = 2; i <= n; i++) {
+            // Choose a random parent from nodes that haven't reached max children
+            int parent;
+            do {
+                parent = rnd(1, i-1);
+            } while (levels[parent] >= maxDepth);
+            
+            edges.push_back({parent, i});
+            levels[i] = levels[parent] + 1;
+        }
+        return edges;
+    }
 } // namespace genTest
 
 
 signed main(signed argc, char* argv[]) {
     int id = atoi(argv[1]);
-
+    
+    int n;
+    vector<pair<int, int>> tree;
+    
+    // Subtask 1: 60% test with n ≤ 2000
     if (id <= 60) {
-        int t = genTest::rnd(100, 2000);
-        cout << t << "\n";
-        for (int i = 0; i < t; i++) {
-            cout << genTest::rnd(1e3, 1e6) << "\n";
+        if (id <= 10) {
+            // Small test cases
+            n = genTest::rnd(5, 20); 
+        } 
+        else if (id <= 30) {
+            // Medium test cases
+            n = genTest::rnd(100, 500);
+        }
+        else {
+            // Large test cases for subtask 1
+            n = genTest::rnd(1000, 2000);
         }
     }
+    // Subtask 2: 40% test with n ≤ 100000
     else {
-        int t = genTest::rnd(1e4, 1e4);
-        cout << t << "\n";
-        for (int i = 0; i < t; i++) {
-            cout << genTest::rnd(1e4, 1e6) << "\n";
+        if (id <= 70) {
+            n = genTest::rnd(2001, 10000);
         }
+        else if (id <= 80) {
+            n = genTest::rnd(10001, 50000);
+        }
+        else {
+            n = genTest::rnd(50001, 99999); // Slightly reduced maximum to avoid potential issues
+        }
+    }
+    
+    // Choose different tree structures based on id
+    int structureType;
+    
+    // For large test cases (id > 70), avoid potentially problematic tree structures
+    if (id > 70) {
+        structureType = id % 3;
+        switch (structureType) {
+            case 0:
+                tree = genTest::balancedTree(n);
+                break;
+            case 1:
+                tree = genTest::starTree(n);
+                break;
+            case 2:
+                tree = genTest::wideTree(n);
+                break;
+        }
+    } else {
+        structureType = id % 4;
+        switch (structureType) {
+            case 0:
+                tree = genTest::randomTree(n);
+                break;
+            case 1:
+                tree = genTest::starTree(n);
+                break;
+            case 2:
+                tree = genTest::lineTree(n);
+                break;
+            case 3:
+                tree = genTest::binaryTree(n);
+                break;
+        }
+    }
+    
+    // Output the test case
+    cout << n << endl;
+    
+    // Shuffle edges to avoid predictable patterns (but preserve tree structure)
+    auto shuffledEdges = tree;
+    shuffle(shuffledEdges.begin(), shuffledEdges.end(), genTest::rng);
+    
+    for (auto edge : shuffledEdges) {
+        cout << edge.first << " " << edge.second << endl;
     }
 
     return 0;
