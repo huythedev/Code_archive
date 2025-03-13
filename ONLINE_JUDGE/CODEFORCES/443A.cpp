@@ -1,5 +1,5 @@
 // Author: Perry (https://perrythedev.com)
-// Problem Link: https://codeforces.com/problemset/problem/208/A
+// Problem Link: https://codeforces.com/problemset/problem/443/A
 // davul
 #include <bits/stdc++.h>
 using namespace std;
@@ -34,25 +34,14 @@ signed main() {
     docfile();
 
     string s;
-    cin >> s;
-
-    string result;
-    bool space = false;
-
-    for (size_t i = 0; i < s.sz; ++i) {
-        if (i + 2 < s.sz && s[i] == 'W' && s[i + 1] == 'U' && s[i + 2] == 'B') {
-            if (!result.empty() && !space) {
-                result += ' ';
-                space = true;
-            }
-            i += 2;
-        } else {
-            result += s[i];
-            space = false;
+    getline(cin, s);
+    set<char> unique_chars;
+    for (char c : s) {
+        if (isalpha(c)) {
+            unique_chars.insert(c);
         }
     }
-
-    cout << result << ln;
+    cout << unique_chars.size() << ln;
 
     time();
     return 0;

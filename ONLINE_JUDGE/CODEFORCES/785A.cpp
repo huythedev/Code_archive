@@ -1,5 +1,5 @@
 // Author: Perry (https://perrythedev.com)
-// Problem Link: https://codeforces.com/problemset/problem/208/A
+// Problem Link: https://codeforces.com/problemset/problem/785/A
 // davul
 #include <bits/stdc++.h>
 using namespace std;
@@ -32,27 +32,6 @@ void time() {
 signed main() {
     fastio();
     docfile();
-
-    string s;
-    cin >> s;
-
-    string result;
-    bool space = false;
-
-    for (size_t i = 0; i < s.sz; ++i) {
-        if (i + 2 < s.sz && s[i] == 'W' && s[i + 1] == 'U' && s[i + 2] == 'B') {
-            if (!result.empty() && !space) {
-                result += ' ';
-                space = true;
-            }
-            i += 2;
-        } else {
-            result += s[i];
-            space = false;
-        }
-    }
-
-    cout << result << ln;
 
     time();
     return 0;
