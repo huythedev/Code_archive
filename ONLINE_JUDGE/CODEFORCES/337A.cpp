@@ -1,5 +1,5 @@
 // Author: Perry (https://perrythedev.com)
-// Problem Link: https://codeforces.com/problemset/problem/427/A
+// Problem Link: https://codeforces.com/problemset/problem/337/A
 // davul
 #include <bits/stdc++.h>
 using namespace std;
@@ -32,24 +32,6 @@ void time() {
 signed main() {
     fastio();
     docfile();
-
-    int n;
-    cin >> n;
-    int untreated = 0, police = 0;
-    for (int i = 0; i < n; ++i) {
-        int event;
-        cin >> event;
-        if (event == -1) {
-            if (police > 0) {
-                police--;
-            } else {
-                untreated++;
-            }
-        } else {
-            police += event;
-        }
-    }
-    cout << untreated << ln;
 
     time();
     return 0;
