@@ -33,6 +33,8 @@ signed main() {
     fastio();
     docfile();
 
+    cout << 25 << ln;
+
     time();
     return 0;
 }
