@@ -1,5 +1,5 @@
 // Author: Perry (https://perrythedev.com)
-// Problem Link: https://codeforces.com/problemset/problem/230/B
+// Problem Link: https://codeforces.com/problemset/problem/1742/A
 // davul
 #include <bits/stdc++.h>
 using namespace std;
@@ -29,34 +29,16 @@ void time() {
          << ln;
 }
 
-bool is_prime(ll n) {
-    if (n <= 1) return false;
-    if (n <= 3) return true;
-    if (n % 2 == 0 || n % 3 == 0) return false;
-    for (ll i = 5; i * i <= n; i += 6) {
-        if (n % i == 0 || n % (i + 2) == 0) return false;
-    }
-    return true;
-}
-
-bool is_t_prime(ll n) {
-    if (n < 4) return false;
-    ll root = sqrt(n);
-    return root * root == n && is_prime(root);
-}
-
 signed main() {
     fastio();
     docfile();
 
-    ll n;
-    cin >> n;
-    vector<ll> numbers(n);
-    for (ll i = 0; i < n; ++i) {
-        cin >> numbers[i];
-    }
-    for (ll i = 0; i < n; ++i) {
-        if (is_t_prime(numbers[i])) {
+    int t;
+    cin >> t;
+    while (t--) {
+        int a, b, c;
+        cin >> a >> b >> c;
+        if (a + b == c || a + c == b || b + c == a) {
             cout << "YES" << ln;
         } else {
             cout << "NO" << ln;
