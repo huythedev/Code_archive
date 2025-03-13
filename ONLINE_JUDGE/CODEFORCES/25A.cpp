@@ -1,5 +1,5 @@
 // Author: Perry (https://perrythedev.com)
-// Problem Link: https://codeforces.com/problemset/problem/158/B
+// Problem Link: https://codeforces.com/problemset/problem/25/A
 // davul
 #include <bits/stdc++.h>
 using namespace std;
@@ -35,29 +35,23 @@ signed main() {
 
     int n;
     cin >> n;
-    vector<int> groups(n);
+    vector<int> numbers(n);
+    vector<int> even_indices, odd_indices;
+
     for (int i = 0; i < n; ++i) {
-        cin >> groups[i];
+        cin >> numbers[i];
+        if (numbers[i] % 2 == 0) {
+            even_indices.push_back(i + 1);
+        } else {
+            odd_indices.push_back(i + 1);
+        }
     }
 
-    vector<int> count(5, 0);
-    for (int i = 0; i < n; ++i) {
-        count[groups[i]]++;
+    if (even_indices.size() == 1) {
+        cout << even_indices[0] << ln;
+    } else {
+        cout << odd_indices[0] << ln;
     }
-
-    int taxis = count[4] + count[3] + count[2] / 2;
-    count[1] -= count[3];
-
-    if (count[2] % 2 == 1) {
-        taxis++;
-        count[1] -= 2;
-    }
-
-    if (count[1] > 0) {
-        taxis += (count[1] + 3) / 4;
-    }
-
-    cout << taxis << ln;
 
     time();
     return 0;
