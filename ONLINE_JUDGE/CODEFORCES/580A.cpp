@@ -1,5 +1,5 @@
 // Author: Perry (https://perrythedev.com)
-// Problem Link: https://codeforces.com/problemset/problem/268/A
+// Problem Link: https://codeforces.com/problemset/problem/580/A
 // davul
 #include <bits/stdc++.h>
 using namespace std;
@@ -35,21 +35,22 @@ signed main() {
 
     int n;
     cin >> n;
-    vector<pair<int, int>> teams(n);
+    vector<int> a(n);
     for (int i = 0; i < n; ++i) {
-        cin >> teams[i].first >> teams[i].second;
+        cin >> a[i];
     }
 
-    int count = 0;
-    for (int i = 0; i < n; ++i) {
-        for (int j = 0; j < n; ++j) {
-            if (i != j && teams[i].first == teams[j].second) {
-                ++count;
-            }
+    int max_len = 1, current_len = 1;
+    for (int i = 1; i < n; ++i) {
+        if (a[i] >= a[i - 1]) {
+            current_len++;
+        } else {
+            current_len = 1;
         }
+        max_len = max(max_len, current_len);
     }
 
-    cout << count << ln;
+    cout << max_len << ln;
 
     time();
     return 0;
