@@ -33,6 +33,19 @@ signed main() {
     fastio();
     docfile();
 
+    int n, m;
+    cin >> n >> m;
+    vector<int> puzzles(m);
+    for (int i = 0; i < m; ++i) {
+        cin >> puzzles[i];
+    }
+    sort(puzzles.begin(), puzzles.end());
+    int min_diff = INT_MAX;
+    for (int i = 0; i <= m - n; ++i) {
+        min_diff = min(min_diff, puzzles[i + n - 1] - puzzles[i]);
+    }
+    cout << min_diff << ln;
+
     time();
     return 0;
 }
