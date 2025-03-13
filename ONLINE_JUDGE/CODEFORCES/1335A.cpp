@@ -1,5 +1,5 @@
 // Author: Perry (https://perrythedev.com)
-// Problem Link: https://codeforces.com/problemset/problem/131/A
+// Problem Link: https://codeforces.com/problemset/problem/1335/A
 // davul
 #include <bits/stdc++.h>
 using namespace std;
@@ -29,27 +29,20 @@ void time() {
          << ln;
 }
 
+void solve() {
+    int t;
+    cin >> t;
+    while (t--) {
+        ll n;
+        cin >> n;
+        cout << (n - 1) / 2 << ln;
+    }
+}
+
 signed main() {
     fastio();
     docfile();
-
-    string s;
-    cin >> s;
-    bool all_upper = true;
-    for (int i = 1; i < s.sz; ++i) {
-        if (islower(s[i])) {
-            all_upper = false;
-            break;
-        }
-    }
-    if (all_upper) {
-        for (char &c : s) {
-            if (islower(c)) c = toupper(c);
-            else c = tolower(c);
-        }
-    }
-    cout << s << ln;
-
+    solve();
     time();
     return 0;
 }
