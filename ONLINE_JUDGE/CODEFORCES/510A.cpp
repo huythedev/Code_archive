@@ -1,5 +1,5 @@
 // Author: Perry (https://perrythedev.com)
-// Problem Link: https://codeforces.com/problemset/problem/4/C
+// Problem Link: https://codeforces.com/problemset/problem/510/A
 // davul
 #include <bits/stdc++.h>
 using namespace std;
@@ -32,20 +32,6 @@ void time() {
 signed main() {
     fastio();
     docfile();
-
-    int n;
-    cin >> n;
-    unordered_map<string, int> username_count;
-    while (n--) {
-        string username;
-        cin >> username;
-        if (username_count[username] == 0) {
-            cout << "OK" << ln;
-        } else {
-            cout << username << username_count[username] << ln;
-        }
-        username_count[username]++;
-    }
 
     time();
     return 0;
