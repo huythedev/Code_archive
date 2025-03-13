@@ -1,5 +1,5 @@
 // Author: Perry (https://perrythedev.com)
-// Problem Link: https://codeforces.com/problemset/problem/510/A
+// Problem Link: https://codeforces.com/problemset/problem/131/A
 // davul
 #include <bits/stdc++.h>
 using namespace std;
@@ -32,20 +32,6 @@ void time() {
 signed main() {
     fastio();
     docfile();
-
-    int n, m;
-    cin >> n >> m;
-    for (int i = 0; i < n; ++i) {
-        if (i % 2 == 0) {
-            cout << string(m, '#') << ln;
-        } else {
-            if ((i / 2) % 2 == 0) {
-                cout << string(m - 1, '.') << '#' << ln;
-            } else {
-                cout << '#' << string(m - 1, '.') << ln;
-            }
-        }
-    }
 
     time();
     return 0;
