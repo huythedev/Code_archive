@@ -72,6 +72,7 @@ signed main() {
         int res = 0;
         for (int i = 0; i < 64; ++i) res += (int)pow(2, i) * bits[i];
         cout << "! " << res << ln;
+        cout.flush();
     }
 
     time();
