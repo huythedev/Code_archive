@@ -29,14 +29,29 @@ void time() {
          << ln;
 }
 
+void mem() {
+    struct rusage usage;
+    getrusage(RUSAGE_SELF, &usage);
+    ld mem_used = usage.ru_maxrss;
+    if (mem_used < 1024.0) {
+        cerr << ln << "Memory used: " << mem_used << " KB." << ln;
+    }
+    else if (mem_used >= (ld)1024.0 && mem_used < (1024.0 * 1024.0)) {
+        cerr << ln << "Memory used: " << mem_used / 1024.0 << " MB." << ln;
+    }
+    else {
+        cerr << "Memory used: " << (mem_used / 1024.0) / 1024.0 << " GB." << ln << "----------" << ln;
+    }
+}
+
 const int MAXN = 1e5 + 10;
 const int LOGN = 18;
 
 vector<int> adj[MAXN];
 int parent[MAXN][LOGN], level[MAXN];
 bool visited[MAXN];
-vector<pair<int, int>> nonTreeEdges;
-vector<vector<int>> dist; 
+vector<pair<int, int> > nonTreeEdges;
+vector<vector<int> > dist; 
 unordered_map<int, int> node_to_idx;
 
 void bfs(int start, vector<int>& d) {
@@ -127,13 +142,14 @@ int main() {
     preprocessLCA(n);
 
     set<int> endpoints;
-    for (auto [a, b] : nonTreeEdges) {
+    for (pair<int, int> tmp : nonTreeEdges) {
+        int a = tmp.first, b = tmp.second;
         endpoints.insert(a);
         endpoints.insert(b);
     }
     vector<int> endpoints_list(endpoints.begin(), endpoints.end());
     dist.resize(endpoints_list.size());
-    for (int i = 0; i < endpoints_list.size(); i++) {
+    for (int i = 0; i < (int)endpoints_list.size(); i++) {
         node_to_idx[endpoints_list[i]] = i;
         dist[i].resize(n + 1);
         bfs(endpoints_list[i], dist[i]);
@@ -145,15 +161,18 @@ int main() {
         int u, v;
         cin >> u >> v;
         int min_dist = distTree(u, v);
-        for (auto [a, b] : nonTreeEdges) {
+        for (pair<int, int> tmp : nonTreeEdges) {
+            int a = tmp.first, b = tmp.second;
             int idx_a = node_to_idx[a], idx_b = node_to_idx[b];
             int cand1 = dist[idx_a][u] + 1 + dist[idx_b][v];
             int cand2 = dist[idx_b][u] + 1 + dist[idx_a][v];
-            min_dist = min({min_dist, cand1, cand2});
+            // min_dist = min({min_dist, cand1, cand2});
+            min_dist = min(min(min_dist, cand1), cand2);
         }
         cout << min_dist << ln;
     }
 
     time();
+    mem();
     return 0;
 }
