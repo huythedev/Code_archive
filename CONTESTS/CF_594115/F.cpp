@@ -29,82 +29,45 @@ void time() {
          << ln;
 }
 
-const int maxn = 205;
-
-vector<int> red(maxn), green(maxn), blue(maxn);
-int R, G, B;
-vector<tuple<int, int, int, int, int>> rectangles(maxn * maxn * 3);
-
-bool comp(tuple<int, int, int, int, int> a, tuple<int, int, int, int, int> b) {
-    return get<0>(a) > get<0>(b);
-}
-
 signed main() {
     fastio();
     docfile();
 
+    int R, G, B;
     cin >> R >> G >> B;
     
-    for (int i = 0; i < R; ++i) cin >> red[i];
-    for (int i = 0; i < G; ++i) cin >> green[i];
-    for (int i = 0; i < B; ++i) cin >> blue[i];
+    vector<int> red(R), green(G), blue(B);
     
-    sort(red.rbegin(), red.rend());
-    sort(green.rbegin(), green.rend());
-    sort(blue.rbegin(), blue.rend());
+    for (int i = 0; i < R; i++) cin >> red[i];
+    for (int i = 0; i < G; i++) cin >> green[i];
+    for (int i = 0; i < B; i++) cin >> blue[i];
     
-    int idx = 0;
-    for (int i = 0; i < R; ++i) {
-        for (int j = 0; j < G; ++j) {
-            rectangles[idx] = make_tuple((int)red[i] * green[j], 0, i, 1, j);
-            ++idx;
-        }
-    }
+    sort (red.rbegin(), red.rend());
+    sort (green.rbegin(), green.rend());
+    sort (blue.rbegin(), blue.rend());
     
-    for (int i = 0; i < R; ++i) {
-        for (int j = 0; j < B; ++j) {
-            rectangles[idx] = make_tuple((int)red[i] * blue[j], 0, i, 2, j);
-            ++idx;
-        }
-    }
+    vector<vector<vector<int>>> dp (R + 1, vector<vector<int>>(G + 1, vector<int>(B + 1, 0)));
     
-    for (int i = 0; i < G; ++i) {
-        for (int j = 0; j < B; ++j) {
-            rectangles[idx] = make_tuple((int)green[i] * blue[j], 1, i, 2, j);
-            ++idx;
-        }
-    }
-    
-    sort(rectangles.begin(), rectangles.end(), comp);
-    
-    vector<bool> vec1(R, false), vec2(G, false), vec3(B, false);
-    int res = 0;
-    
-    for (tuple<int, int, int, int, int> i : rectangles) {
-        int c1 = get<1>(i), c2 = get<3>(i);
-        int idx1 = get<2>(i), idx2 = get<4>(i);
-        
-        if (c1 == 0 && c2 == 1) {
-            if (!vec1[idx1] && !vec2[idx2]) {
-                vec1[idx1] = vec2[idx2] = true;
-                res += get<0>(i);
-            }
-        } 
-        else if (c1 == 0 && c2 == 2) {
-            if (!vec1[idx1] && !vec3[idx2]) {
-                vec1[idx1] = vec3[idx2] = true;
-                res += get<0>(i);
-            }
-        } 
-        else if (c1 == 1 && c2 == 2) {
-            if (!vec2[idx1] && !vec3[idx2]) {
-                vec2[idx1] = vec3[idx2] = true;
-                res += get<0>(i);
+    for (int i = 0; i <= R; i++) {
+        for (int j = 0; j <= G; j++) {
+            for (int k = 0; k <= B; k++) {
+                if (i > 0) dp[i][j][k] = max(dp[i][j][k], dp[i-1][j][k]);
+                if (j > 0) dp[i][j][k] = max(dp[i][j][k], dp[i][j-1][k]);
+                if (k > 0) dp[i][j][k] = max(dp[i][j][k], dp[i][j][k-1]);
+                
+                if (i > 0 && j > 0) 
+                    dp[i][j][k] = max(dp[i][j][k], dp[i-1][j-1][k] + red[i-1] * green[j-1]);
+                
+                if (i > 0 && k > 0) 
+                    dp[i][j][k] = max(dp[i][j][k], dp[i-1][j][k-1] + red[i-1] * blue[k-1]);
+                
+                if (j > 0 && k > 0) 
+                    dp[i][j][k] = max(dp[i][j][k], dp[i][j-1][k-1] + green[j-1] * blue[k-1]);
             }
         }
     }
     
-    cout << res << ln;
+    cout << dp[R][G][B] << ln;
     
     time();
     return 0;
