@@ -69,7 +69,7 @@ signed main() {
     set<int> unique_A(A.begin(), A.end());
     vector<int> sorted_unique(unique_A.begin(), unique_A.end());
     map<int, int> rank_map;
-    for (int i = 0; i < sorted_unique.size(); ++i) {
+    for (int i = 0; i < (int)sorted_unique.size(); ++i) {
         rank_map[sorted_unique[i]] = i + 1; 
     }
     int U = sorted_unique.size();
