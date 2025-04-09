@@ -55,7 +55,7 @@ namespace genTest {
         seq.push_back(prev);
 
         for (int i = 1; i < n; i++) {
-            int curr = rnd(l, prev);
+            int curr = rnd(prev, l);
             seq.push_back(curr);
             prev = curr;
         }
@@ -216,83 +216,42 @@ namespace genTest {
 
 
 signed main(signed argc, char* argv[]) {
-    int id = atoi(argv[1]);
+    int id;
     
-    int n;
-    vector<pair<int, int>> tree;
-    
-    // Subtask 1: 60% test with n ≤ 2000
-    if (id <= 60) {
-        if (id <= 10) {
-            // Small test cases
-            n = genTest::rnd(5, 20); 
-        } 
-        else if (id <= 30) {
-            // Medium test cases
-            n = genTest::rnd(100, 500);
-        }
-        else {
-            // Large test cases for subtask 1
-            n = genTest::rnd(1000, 2000);
-        }
-    }
-    // Subtask 2: 40% test with n ≤ 100000
-    else {
-        if (id <= 70) {
-            n = genTest::rnd(2001, 10000);
-        }
-        else if (id <= 80) {
-            n = genTest::rnd(10001, 50000);
-        }
-        else {
-            n = genTest::rnd(50001, 99999); // Slightly reduced maximum to avoid potential issues
-        }
-    }
-    
-    // Choose different tree structures based on id
-    int structureType;
-    
-    // For large test cases (id > 70), avoid potentially problematic tree structures
-    if (id > 70) {
-        structureType = id % 3;
-        switch (structureType) {
-            case 0:
-                tree = genTest::balancedTree(n);
-                break;
-            case 1:
-                tree = genTest::starTree(n);
-                break;
-            case 2:
-                tree = genTest::wideTree(n);
-                break;
-        }
+    // Check if command-line argument exists
+    if (argc > 1) {
+        id = atoi(argv[1]);
     } else {
-        structureType = id % 4;
-        switch (structureType) {
-            case 0:
-                tree = genTest::randomTree(n);
-                break;
-            case 1:
-                tree = genTest::starTree(n);
-                break;
-            case 2:
-                tree = genTest::lineTree(n);
-                break;
-            case 3:
-                tree = genTest::binaryTree(n);
-                break;
-        }
+        // Default to test case 1 if no argument provided
+        id = 1;
     }
     
-    // Output the test case
-    cout << n << endl;
-    
-    // Shuffle edges to avoid predictable patterns (but preserve tree structure)
-    auto shuffledEdges = tree;
-    shuffle(shuffledEdges.begin(), shuffledEdges.end(), genTest::rng);
-    
-    for (auto edge : shuffledEdges) {
-        cout << edge.first << " " << edge.second << endl;
+    if (id <= 40) {
+        int n = genTest::rnd(1, 20);
+        vector<int> a = genTest::vec(n, 1, 1e5);
+        cout << n << "\n";
+        for (int i = 0; i < n; i++) {
+            cout << a[i] << " ";
+        }
+        cout << "\n";
+    }
+    else if (id <= 80) {
+        int n = genTest::rnd(1, 2000);
+        vector<int> a = genTest::vec(n, 1, 1e5);
+        cout << n << "\n";
+        for (int i = 0; i < n; i++) {
+            cout << a[i] << " ";
+        }
+        cout << "\n";
+    }
+    else {
+        int n = genTest::rnd(1, 2e5);
+        vector<int> a = genTest::vec(n, 1, 1e5);
+        cout << n << "\n";
+        for (int i = 0; i < n; i++) {
+            cout << a[i] << " ";
+        }
+        cout << "\n";
     }
 
     return 0;
