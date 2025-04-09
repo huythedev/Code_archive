@@ -4,7 +4,6 @@
         "body": [
             "// Author: Perry",
             "// Problem Link: ${1:}",
-            "// davul",
             "#include <bits/stdc++.h>",
             "using namespace std;",
             "",
