@@ -45,7 +45,6 @@ signed main() {
     // Input reading: O(teams * students_per_team)
     
     // For each query: O(queries)
-    int teams, students_per_team, queries;
     cin >> teams >> students_per_team >> queries;
 
     // Input times for each student in each team
