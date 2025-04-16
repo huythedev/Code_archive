@@ -1,4 +1,4 @@
-// Author: Perry (https://perrythedev.com)^
+// Author: huythedev (https://huythedev.com)^
 #include <bits/stdc++.h>
 #define MAX_HERO   10101
 #define MAX_TURN   23

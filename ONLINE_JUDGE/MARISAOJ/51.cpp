@@ -1,4 +1,4 @@
-// Author: Perry (https://perrythedev.com)
+// Author: huythedev (https://huythedev.com)
 // Problem Link: https://marisaoj.com/problem/51
 // davul
 #include <bits/stdc++.h>

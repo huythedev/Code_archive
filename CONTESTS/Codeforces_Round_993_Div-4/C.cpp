@@ -1,4 +1,4 @@
-// Author: Perry (https://perrythedev.com)
+// Author: huythedev (https://huythedev.com)
 // Problem Link: https://codeforces.com/contest/2044/problem/C
 #include <bits/stdc++.h>
 using namespace std;

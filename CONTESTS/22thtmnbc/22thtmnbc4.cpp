@@ -1,4 +1,4 @@
-// Author: Perry (https://perrythedev.com)
+// Author: huythedev (https://huythedev.com)
 // Problem Link: https://lqdoj.edu.vn/problem/22thtmnbc4
 // davul
 #include <bits/stdc++.h>

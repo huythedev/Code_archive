@@ -1,4 +1,4 @@
-// Author: Perry (https://perrythedev.com)^
+// Author: huythedev (https://huythedev.com)^
 #include <vector>
 #include <cstdlib>
 #include <cstring>

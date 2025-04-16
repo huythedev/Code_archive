@@ -1,4 +1,4 @@
-// Author: Perry (https://perrythedev.com)
+// Author: huythedev (https://huythedev.com)
 // Problem Link: https://codeforces.com/group/VbkeP1fypp/contest/594115/problem/C
 // davul
 #include <bits/stdc++.h>

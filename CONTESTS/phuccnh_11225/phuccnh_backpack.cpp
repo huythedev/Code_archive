@@ -1,4 +1,4 @@
-// Author: Perry (https://perrythedev.com)
+// Author: huythedev (https://huythedev.com)
 // Problem Link: https://oj.vnoi.info/problem/phuccnh_backpack
 // davul
 #include <bits/stdc++.h>

@@ -1,4 +1,4 @@
-// Author: Perry (optimized version)
+// Author: huythedev (optimized version)
 // Problem Link: https://oj.vku.udn.vn/problem/olp6heroteam
 #include <bits/stdc++.h>
 using namespace std;

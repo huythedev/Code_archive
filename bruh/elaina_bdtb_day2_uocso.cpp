@@ -1,4 +1,4 @@
-// Author: Perry (https://perrythedev.com)
+// Author: huythedev (https://huythedev.com)
 // Problem Link: https://oj.vnoi.info/problem/elaina_bdtb_day2_uocso
 #include <bits/stdc++.h>
 using namespace std;

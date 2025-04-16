@@ -1,4 +1,4 @@
-// Author: Perry (https://perrythedev.com)
+// Author: huythedev (https://huythedev.com)
 // Problem Link: https://oj.vnoi.info/problem/elaina_kstb24_bosotg
 // davul
 #include <bits/stdc++.h>

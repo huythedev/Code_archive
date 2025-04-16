@@ -1,4 +1,4 @@
-// Author: Perry (https://perrythedev.com)
+// Author: huythedev (https://huythedev.com)
 // Problem Link: https://nbk.homes/problem/cwdmerge
 #include <bits/stdc++.h>
 using namespace std;

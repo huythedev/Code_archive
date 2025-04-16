@@ -1,4 +1,4 @@
-// Author: Perry (https://perrythedev.com)
+// Author: huythedev (https://huythedev.com)
 // Problem Link: https://coder.husc.edu.vn/problem/olpicpc073c16d
 // davul
 #include <bits/stdc++.h>

@@ -1,4 +1,4 @@
-// Author: Perry (https://perrythedev.com)
+// Author: huythedev (https://huythedev.com)
 // Problem Link: https://k23oj.site/problem/cpcrc1c
 #include <bits/stdc++.h>
 using namespace std;

@@ -1,4 +1,4 @@
-// Author: Perry (https://perrythedev.com)
+// Author: huythedev (https://huythedev.com)
 // Problem Link: https://lqdoj.edu.vn/problem/23ththnc2
 #include <bits/stdc++.h>
 using namespace std;

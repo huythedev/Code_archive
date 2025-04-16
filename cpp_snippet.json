@@ -2,7 +2,7 @@
     "template": {
         "prefix": "gfg",
         "body": [
-            "// Author: Perry",
+            "// Author: huythedev",
             "// Problem Link: ${1:}",
             "#include <bits/stdc++.h>",
             "using namespace std;",
