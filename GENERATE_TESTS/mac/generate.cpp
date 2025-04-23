@@ -67,9 +67,9 @@ void run_exe(const string &folderPath, const string &task, int osType)
 
     // Run the executable depending on the OS type
     if (osType == 1) {  // For macOS/Linux
-        system(("./" + task).c_str());
+        system(("./" + task).c_str()); // Use ./task for macOS/Linux
     } else if (osType == 2) {  // For Windows
-        system((task).c_str());
+        system((task + ".exe").c_str()); // Use .exe for Windows
     }
 
     // Copy output file from the current directory to the generated folder
@@ -103,43 +103,31 @@ int main()
     srand(time(0));  // Seed the random number generator
     rd.seed(rand());  // Further seed the random device
 
-    string task = "MATMA", folderName;
-    cout << "Enter folder name: ";
-    cin >> folderName;  // Prompt user to input a folder name
+    string task;
+    cout << "Enter the name of the executable file (without extension): ";
+    cin >> task;
 
     int n;
     cout << "Enter the number of test cases you want to create: ";
-    cin >> n;  // Prompt user to input the number of test cases to generate
+    cin >> n;
 
-    string parentFolder = folderName;
+    string parentFolder = task;
+    createDirectory(parentFolder);
+    string baseName = "Test";
 
-    createDirectory(parentFolder);  // Create the parent folder
-
-    string baseName = "Test";  // Base name for the generated test folders
-
-    // Loop through the number of test cases to generate
     for (int i = 1; i <= n; i++)
     {
-        // Generate a folder name for each test case (e.g., Test01, Test02, etc.)
         string folderName = baseName + (i < 10 ? "0" : "") + to_string(i);
         string folderPath = parentFolder + "/" + folderName;
-
-        // Try to create the test case folder
         if (createDirectory(folderPath))
         {
-            // Just use it if needed
-            // bool validTest = false;
-            // // Keep generating tests until a valid output is obtained
-            // while (!validTest) {
-            //     makeTest(folderPath, task);  // Generate a new test case
-            //     run_exe(folderPath, task, osType);  // Run the executable with the test case
-            //     validTest = isValidOutput(folderPath, task);  // Check if the output is valid
-            // }
-            cerr << "Generated valid test " << i << " in folder " << folderPath << "\n";  // Output confirmation
+            makeTest(folderPath, task);
+            run_exe(folderPath, task, 1); // 1 for macOS/Linux
+            cerr << "Generated valid test " << i << " in folder " << folderPath << "\n";
         }
         else
         {
-            cout << "Failed to create directory: " << folderPath << "\n";  // Error message if folder creation fails
+            cout << "Failed to create directory: " << folderPath << "\n";
         }
     }
 

@@ -25,12 +25,10 @@ void docfile() {
 }
 
 void time() {
-    cerr << ln << "Time elapsed: " << 1.0 * clock() / CLOCKS_PER_SEC << "s." 
-         << ln;
+    cerr << ln << "Time elapsed: " << 1.0 * clock() / CLOCKS_PER_SEC << "s." << ln;
 }
 
 const int MAXN = 1e6 + 5;
-
 vector<vector<int>> prime_divs(MAXN);
 
 void precompute() {
@@ -48,27 +46,23 @@ signed main() {
     docfile();
     precompute();
 
+    int N, a, b;
+    cin >> N >> a >> b;
 
-    int N, a, b; cin >> N >> a >> b;
-
-    map<vector<int>, int> prime_set_counts; 
-    int max_count = 0;
-
+    map<vector<int>, int> count;
     for (int i = a; i <= b; ++i) {
-        if (i == 0) continue; 
-        if (i == 1) {
-            prime_set_counts[vector<int>()]++;
-        } else {
-            prime_set_counts[prime_divs[i]]++;
+        count[prime_divs[i]]++;
+    }
+
+    int max_count = 0;
+    for (const auto& pair : count) {
+        if (pair.second > max_count) {
+            max_count = pair.second;
         }
     }
 
-    for (auto const& [prime_set, count] : prime_set_counts) {
-        max_count = max(max_count, count);
-    }
+    cout << max_count << ln;
 
-    cout << max_count << ln; 
- 
     time();
     return 0;
 }
