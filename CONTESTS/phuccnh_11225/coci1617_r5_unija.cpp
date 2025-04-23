@@ -1,6 +1,6 @@
 // Author: huythedev (https://huythedev.com)
 // Problem Link: https://oj.vnoi.info/problem/coci1617_r5_unija
-// davul
+
 #include <bits/stdc++.h>
 using namespace std;
 

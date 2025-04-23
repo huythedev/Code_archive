@@ -1,6 +1,6 @@
 // Author: huythedev (https://huythedev.com)
 // Problem Link: https://codeforces.com/group/G0iFI97YZN/contest/592900/problem/A
-// davul
+
 #include <bits/stdc++.h>
 using namespace std;
 

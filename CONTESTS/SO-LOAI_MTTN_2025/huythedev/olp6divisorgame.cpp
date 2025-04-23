@@ -1,6 +1,6 @@
 // Author: huythedev (https://huythedev.com)
 // Problem Link: https://oj.vku.udn.vn/problem/olp6divisorgame
-// davul
+
 #include <bits/stdc++.h>
 using namespace std;
 

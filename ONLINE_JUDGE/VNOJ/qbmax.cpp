@@ -1,6 +1,6 @@
 // Author: huythedev (https://huythedev.com)
 // Problem Link: https://oj.vnoi.info/problem/qbmax
-// davul
+
 #include <bits/stdc++.h>
 using namespace std;
 

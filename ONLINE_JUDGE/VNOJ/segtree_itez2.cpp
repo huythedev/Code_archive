@@ -1,6 +1,6 @@
 // Author: huythedev (https://huythedev.com)
 // Problem Link: https://oj.vnoi.info/problem/segtree_itez2
-// davul
+
 #include <bits/stdc++.h>
 using namespace std;
 

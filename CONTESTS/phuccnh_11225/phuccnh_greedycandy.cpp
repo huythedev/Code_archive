@@ -1,6 +1,6 @@
 // Author: huythedev (https://huythedev.com)
 // Problem Link: https://oj.vnoi.info/problem/phuccnh_greedycandy
-// davul
+
 #include <bits/stdc++.h>
 using namespace std;
 

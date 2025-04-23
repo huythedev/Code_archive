@@ -1,6 +1,6 @@
 // Author: huythedev (https://huythedev.com)
 // Problem Link: https://oj.vnoi.info/problem/pvhoi2_bddn
-// davul
+
 #include <bits/stdc++.h>
 using namespace std;
 

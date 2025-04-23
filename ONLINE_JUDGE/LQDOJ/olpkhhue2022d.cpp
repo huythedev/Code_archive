@@ -1,6 +1,6 @@
 // Author: huythedev (https://huythedev.com)
 // Problem Link: https://lqdoj.edu.vn/problem/olpkhhue2022d
-// davul
+
 #include <bits/stdc++.h>
 using namespace std;
 

@@ -1,6 +1,6 @@
 // Author: huythedev (https://huythedev.com)
 // Problem Link: https://oj.vnoi.info/problem/elaina_kstb24_daycon
-// davul
+
 #include <bits/stdc++.h>
 using namespace std;
 

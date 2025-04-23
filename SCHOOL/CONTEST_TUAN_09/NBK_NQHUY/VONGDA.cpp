@@ -1,6 +1,6 @@
 // Author: huythedev (https://huythedev.com)
 // Problem Link: 
-// davul
+
 #include <bits/stdc++.h>
 using namespace std;
 
