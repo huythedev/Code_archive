@@ -1,6 +1,6 @@
 // Author: huythedev
 // Problem Link: 
-// caluht
+
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -25,7 +25,8 @@ void docfile() {
 }
 
 void time() {
-    cerr << ln << "Time elapsed: " << 1.0 * clock() / CLOCKS_PER_SEC << "s." << ln;
+    cerr << ln << "Time elapsed: " << 1.0 * clock() / CLOCKS_PER_SEC << "s." 
+         << ln;
 }
 
 const int MAXN = 1e6 + 5;
@@ -46,23 +47,22 @@ signed main() {
     docfile();
     precompute();
 
+
     int N, a, b;
     cin >> N >> a >> b;
 
-    map<vector<int>, int> count;
-    for (int i = a; i <= b; ++i) {
-        count[prime_divs[i]]++;
+    map<vector<int>, int> mp;
+    for (int i = a; i <= b; i++) {
+        mp[prime_divs[i]]++;
     }
 
     int max_count = 0;
-    for (const auto& pair : count) {
-        if (pair.second > max_count) {
-            max_count = pair.second;
-        }
+    for (const auto& pair : mp) {
+        max_count = max(max_count, pair.second);
     }
 
     cout << max_count << ln;
-
+ 
     time();
     return 0;
 }

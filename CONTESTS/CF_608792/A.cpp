@@ -1,10 +1,9 @@
 // Author: huythedev
-// Problem Link: 
-
+// Problem Link: https://codeforces.com/group/G0iFI97YZN/contest/608792/problem/A
 #include <bits/stdc++.h>
 using namespace std;
 
-#define NAME "NAME"
+#define NAME "A"
 #define ln "\n"
 #define sz size()
 
@@ -29,12 +28,22 @@ void time() {
          << ln;
 }
 
+void solve() {
+    int n; cin >> n;
+    vector<int> a(n);
+    for (int &i : a) cin >> i;
+
+    
+}
+
 signed main() {
     fastio();
     docfile();
 
-    int a, b; cin >> a >> b;
-    cout << a + b << ln;
+    int t; cin >> t;
+    while (t--) {
+        solve();
+    }
 
     time();
     return 0;

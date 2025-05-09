@@ -1,6 +1,6 @@
 // Author: huythedev
 // Problem Link: https://www.it.ngs.edu.vn/problem/newtonspark25ck_line
-// caluht
+
 #include <bits/stdc++.h>
 using namespace std;
 
