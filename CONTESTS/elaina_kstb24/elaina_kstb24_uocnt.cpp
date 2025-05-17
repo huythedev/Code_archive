@@ -31,16 +31,16 @@ void time() {
 
 const int MAXN = 1e6;
 vector<int> primes;
-bitset<MAXN + 1> is_prime_sieve;
+bitset<MAXN + 1> isPrime;
 
 void sieve() {
-    is_prime_sieve.set();
-    is_prime_sieve[0] = is_prime_sieve[1] = 0;
+    isPrime.set();
+    isPrime[0] = isPrime[1] = 0;
     for (int i = 2; i <= MAXN; ++i) {
-        if (is_prime_sieve[i]) {
+        if (isPrime[i]) {
             primes.push_back(i);
             for (int j = i * 2; j <= MAXN; j += i) {
-                is_prime_sieve[j] = 0;
+                isPrime[j] = 0;
             }
         }
     }
