@@ -1,4 +1,4 @@
-// Author: huythedev (https://huythedev.com)
+// Author: huythedev
 // Problem Link: https://marisaoj.com/problem/544
 #include <bits/stdc++.h>
 using namespace std;
@@ -28,25 +28,40 @@ void time() {
          << ln;
 }
 
-void solve(string s, int n) {
-    if(s.sz >= 2 && s[s.sz - 1] == s[s.sz - 2]) {
+void genString(int len, string str) {
+    bool sameChar = false;
+    for (int i = 0; i < (int)str.sz - 1; ++i) {
+        if (str[i] == str[i + 1]) sameChar = true;
+    }
+
+    if (str.sz == len) {
+        if (sameChar)
+            return;
+
+        cout << str << ln;
         return;
     }
-    if(s.sz == n) {
-        cout << s << ln;
-        return;
-    }
-    solve(s + 'A', n);
-    solve(s + 'B', n);
-    solve(s + 'C', n);
+
+    genString(len, str + 'A');
+    genString(len, str + 'B');
+    genString(len, str + 'C');
 }
 
-int main() {
-    fastio();
-    docfile();
-
+void solve() {
     int n; cin >> n;
-    solve("", n);
+
+    genString(n, "");
+}
+
+signed main() {
+    docfile();
+    fastio();
+
+    int t = 1;
+    // cin >> t;
+    while (t--) {
+        solve();
+    }
 
     time();
     return 0;

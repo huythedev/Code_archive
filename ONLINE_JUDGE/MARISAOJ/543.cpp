@@ -1,4 +1,4 @@
-// Author: huythedev (https://huythedev.com)
+// Author: huythedev
 // Problem Link: https://marisaoj.com/problem/543
 #include <bits/stdc++.h>
 using namespace std;
@@ -28,21 +28,30 @@ void time() {
          << ln;
 }
 
-void solve(string s, int n) {
-    if(s.sz == n) {
-        cout << s << ln;
+void genBinaryLenN(int len, string bin) {
+    if (bin.sz == len) {
+        cout << bin << ln;
         return;
     }
-    solve(s + '0', n);
-    solve(s + '1', n);
+
+    genBinaryLenN(len, bin + '0');
+    genBinaryLenN(len, bin + '1');
 }
 
-int main() {
-    fastio();
-    docfile();
-
+void solve() {
     int n; cin >> n;
-    solve("", n);
+    genBinaryLenN(n, "");
+}
+
+signed main() {
+    docfile();
+    fastio();
+
+    int t = 1;
+    // cin >> t;
+    while (t--) {
+        solve();
+    }
 
     time();
     return 0;

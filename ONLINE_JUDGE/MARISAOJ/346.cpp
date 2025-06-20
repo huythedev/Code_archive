@@ -1,4 +1,4 @@
-// Author: huythedev (https://huythedev.com)
+// Author: huythedev
 // Problem Link: https://marisaoj.com/problem/346
 #include <bits/stdc++.h>
 using namespace std;
@@ -28,30 +28,37 @@ void time() {
          << ln;
 }
 
-int main() {
-    fastio();
-    docfile();
-
+void solve() {
     int n; ll k; cin >> n >> k;
-    vector<ll> A(n);
-    for(ll &i : A)
-        cin >> i;
+    vector<ll> a(n);
+    for (int i = 0; i < n; ++i) cin >> a[i];
 
     bool found = false;
-    for(int mask = 0; mask < (1 << n); ++mask) {
+    int tmp = 1 << n;
+    for (int i = 0; i < tmp; ++i) {
         ll sum = 0;
-        for(int i = 0; i < n; ++i) {
-            if(mask & (1 << i)) {
-                sum += A[i];
-            }
+        for (int j = 0; j < n; ++j) {
+            if (i & (1 << j)) sum += a[j];
         }
-        if(sum == k) {
+        if (sum == k) {
             found = true;
             break;
         }
     }
 
-    cout << (found ? "YES" : "NO");
+    if (found) cout << "YES" << ln;
+    else cout << "NO" << ln;
+}
+
+signed main() {
+    docfile();
+    fastio();
+
+    int t = 1;
+    // cin >> t;
+    while (t--) {
+        solve();
+    }
 
     time();
     return 0;

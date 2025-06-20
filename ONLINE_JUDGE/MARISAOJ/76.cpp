@@ -1,10 +1,9 @@
-// Author: huythedev (https://huythedev.com)
-// Problem Link: https://marisaoj.com/problem/76
-
+// Author: huythedev
+// Problem Link: 
 #include <bits/stdc++.h>
 using namespace std;
 
-#define NAME "NAME"
+#define NAME "76"
 #define ln "\n"
 #define sz size()
 
@@ -29,41 +28,54 @@ void time() {
          << ln;
 }
 
-int n, q;
-vector<int> A;
-
-void solve(int x) {
-    int l = 0, r = n - 1;
-    int result = -1;
-    
-    while (l <= r) {
-        int mid = l + (r - l) / 2;
-        if (A[mid] == x) {
-            result = mid + 1; 
-            r = mid - 1;      
-        }
-        else if (A[mid] > x) {
-            r = mid - 1;
-        }
-        else { 
-            l = mid + 1;
-        }
-    }
-    
-    cout << result << ln;
-}
-
-signed main() {
-    fastio();
-    docfile();
-
-    cin >> n >> q;
-    A.resize(n);
-    for (int i = 0; i < n; ++i) cin >> A[i];
+void solve() {
+    int n, q; cin >> n >> q;
+    vector<int> A(n);
+    for (int &x : A) cin >> x;
 
     while (q--) {
         int x; cin >> x;
-        solve(x);
+
+        int l = 0, r = n - 1;
+        int mid = (l + r) / 2;
+        int pos = -1;
+        bool found = false;
+        while (l < r) {
+            if (A[mid] == x) {
+                pos = mid;
+                found = true;
+                break;
+            }
+            if (A[mid] > x) {
+                r = mid - 1;
+            }
+            else {
+                l = mid + 1;
+            }
+            mid = (l + r) / 2;
+        }
+
+        if (!found && A[l] != x) {
+            cout << "-1" << ln;
+            continue;
+        }
+
+        if (pos == -1) pos = l;
+
+        while (pos > 0 && A[pos - 1] == A[pos]) pos--;
+
+        cout << pos + 1 << ln;
+    }
+}
+
+signed main() {
+    docfile();
+    fastio();
+
+    int t = 1;
+    // cin >> t;
+    while (t--) {
+        solve();
     }
 
     time();

@@ -1,10 +1,9 @@
-// Author: huythedev (https://huythedev.com)
-// Problem Link: https://marisaoj.com/problem/77
-
+// Author: huythedev
+// Problem Link: 
 #include <bits/stdc++.h>
 using namespace std;
 
-#define NAME "NAME"
+#define NAME "77"
 #define ln "\n"
 #define sz size()
 
@@ -29,38 +28,47 @@ void time() {
          << ln;
 }
 
-int n, q;
-vector<int> A;
-
-void solve(int x) {
-    int l = 0, r = n - 1;
-    int result = -1;
-    
-    while (l <= r) {
-        int mid = l + (r - l) / 2;
-        if (A[mid] <= x) {
-            result = mid + 1;
-            l = mid + 1;      
-        } 
-        else {
-            r = mid - 1;      
-        }
-    }
-    
-    cout << result << ln;
-}
-
-signed main() {
-    fastio();
-    docfile();
-
-    cin >> n >> q;
-    A.resize(n);
-    for (int i = 0; i < n; ++i) cin >> A[i];
+void solve() {
+    int n, q; cin >> n >> q;
+    vector<int> A(n);
+    for (int &x : A) cin >> x;
 
     while (q--) {
         int x; cin >> x;
-        solve(x);
+        
+        if (A[0] > x) {
+            cout << "-1" << ln;
+            continue;
+        }
+        
+        int l = 0, r = n - 1;
+        int mid = n / 2;
+        int pos = -1;
+        while (l < r) {
+            if (A[mid] > x)
+                r = mid - 1;
+            else 
+                l = mid + 1;
+            
+            mid = (l + r) / 2;
+        }
+
+        pos = l;
+        while (A[pos] > x) --pos;
+        while (pos < n - 1 && A[pos + 1] <= x) ++pos;
+
+        cout << pos + 1 << ln;
+    }
+}
+
+signed main() {
+    docfile();
+    fastio();
+
+    int t = 1;
+    // cin >> t;
+    while (t--) {
+        solve();
     }
 
     time();

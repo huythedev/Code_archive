@@ -1,10 +1,9 @@
-// Author: huythedev (https://huythedev.com)
-// Problem Link: https://marisaoj.com/problem/515
-
+// Author: huythedev
+// Problem Link: 
 #include <bits/stdc++.h>
 using namespace std;
 
-#define NAME "NAME"
+#define NAME "515"
 #define ln "\n"
 #define sz size()
 
@@ -29,39 +28,48 @@ void time() {
          << ln;
 }
 
-const int maxn =  1e5 + 5;
+void solve() {
+    int n, q; cin >> n >> q;
+    vector<int> a(n);
+    for (int &i : a) cin >> i;
 
-int n, q;
-vector<int> A(maxn);
+    for (int i = 0; i < q; ++i) {
+        int x; cin >> x;
+        
+        int l = 0, r = n - 1;
+        int mid = n / 2;
+        bool found = false;
+        while (l < r) {
+            // cout << l << ' ' << mid << ' ' << r << ln;
+            if (a[mid] == x) {
+                cout << mid + 1 << ln;
+                found = true;
+                break;
+            }
 
-void solve(int x) {
-    int l = 0, r = n - 1;
-    while (l <= r) {
-        int mid = l + (r - l) / 2; 
-        if (A[mid] > x) {
-            r = mid - 1;
+            if (x < a[mid]) {
+                r = mid - 1;
+                mid = (l + r) / 2;
+            }
+            else {
+                l = mid + 1;
+                mid = (l + r) / 2;
+            }
         }
-        else if (A[mid] < x) {
-            l = mid + 1;
-        }
-        else {
-            cout << mid + 1 << ln;
-            return;
-        }
+
+
+        if (!found) cout << r + 1 << ln;
     }
 }
 
 signed main() {
-    fastio();
     docfile();
+    fastio();
 
-    cin >> n >> q;
-    A.resize(n);
-    for (int i = 0; i < n; ++i) cin >> A[i];
-
-    while (q--) {
-        int x; cin >> x;
-        solve(x);
+    int t = 1;
+    // cin >> t;
+    while (t--) {
+        solve();
     }
 
     time();

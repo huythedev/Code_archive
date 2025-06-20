@@ -1,9 +1,9 @@
-// Author: huythedev (https://huythedev.com)
+// Author: huythedev
 // Problem Link: https://marisaoj.com/problem/323
 #include <bits/stdc++.h>
 using namespace std;
 
-#define NAME "NAME"
+#define NAME "323"
 #define ln "\n"
 #define sz size()
 
@@ -28,25 +28,42 @@ void time() {
          << ln;
 }
 
-void solve(int n, int k, vector<int> &A, int i, int j) {
-    if(i == k) {
-        for(int x : A) cout << x << ' ';
+set<string> result;
+
+void print_result() {
+    for (string str : result) {
+        for (char c : str) {
+            cout << c << ' ';
+        }
         cout << ln;
-        return;
-    }
-    for(int x = j + 1; x <= n; ++x) {
-        A[i] = x;
-        solve(n, k, A, i + 1, x);
     }
 }
 
-int main() {
-    fastio();
-    docfile();
-
+void solve() {
     int n, k; cin >> n >> k;
-    vector<int> A(k);
-    solve(n, k, A, 0, 0);
+
+    int tmp = 1 << n;
+    for (int i = 0; i < tmp; ++i) {
+        string s = "";
+        for (int j = 0; j < n; ++j) {
+            if (i & (1 << j)) s += to_string(j + 1);
+        }
+        // cout << s << ln;
+        if ((int)s.sz == k) result.insert(s);
+    }
+
+    print_result();
+}
+
+signed main() {
+    docfile();
+    fastio();
+
+    int t = 1;
+    // cin >> t;
+    while (t--) {
+        solve();
+    }
 
     time();
     return 0;
