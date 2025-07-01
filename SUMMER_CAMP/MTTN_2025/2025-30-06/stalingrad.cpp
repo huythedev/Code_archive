@@ -86,7 +86,7 @@ void solve() {
                 cout << "0 0" << ln;
             else {
                 int min_v = *st.begin();
-                ll cost = (ll)n - min_v + 1 - st.size();
+                ll cost = (ll)n - min_v + 1 - st.sz;
                 cout << 1 << " " << cost << ln;
             }
         }
