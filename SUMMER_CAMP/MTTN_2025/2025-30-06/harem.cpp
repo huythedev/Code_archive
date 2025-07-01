@@ -64,10 +64,10 @@ void solve() {
         cout << -1 << ln;
         return;
     }
-    unordered_map<long long, int> edge_to_day;
+    unordered_map<ll, int> edge_to_day;
     for (int i = 0; i < m; ++i) {
         auto [x, y] = edges[i];
-        long long key = (static_cast<long long>(x) << 32) | y;
+        ll key = (static_cast<ll>(x) << 32) | y;
         if (!edge_to_day.count(key) || i < edge_to_day[key]) {
             edge_to_day[key] = i;
         }
@@ -76,7 +76,7 @@ void solve() {
     for (int i = 0; i < n - 1; ++i) {
         int x = full_order[i];
         int y = full_order[i + 1];
-        long long key = (static_cast<long long>(x) << 32) | y;
+        ll key = (static_cast<ll>(x) << 32) | y;
         if (!edge_to_day.count(key)) {
             cout << -1 << ln;
             return;

@@ -25,15 +25,16 @@ void docfile() {
 
 void time() {
     cerr << ln << "Time elapsed: " << 1.0 * clock() / CLOCKS_PER_SEC << "s." 
-         << ln;
+    << ln;
 }
 
-int n;
-vector<vector<int>> adj;
-vector<int> treeSize;
-vector<int> parent;
-vector<bool> is_occupied;
-vector<int> vec;
+const int MAXN = 400005;
+
+int n, q;
+vector<int> adj[MAXN];
+int parent[MAXN], treeSize[MAXN], cnt[MAXN];
+bool is_occupied[MAXN];
+pair<ll, ll> dp[MAXN], solution[MAXN];
 
 void dfs_precompute(int u, int p) {
     parent[u] = p;
@@ -45,83 +46,86 @@ void dfs_precompute(int u, int p) {
     }
 }
 
-pair<ll, ll> recursive(int u) {
-    vec[u] = is_occupied[u];
-
-    ll cuts = 0, cost = 0;
-
-    for (int v : adj[u]) {
-        if (v == parent[u]) 
-            continue;
-
-        pair<ll, ll> child_res = recursive(v);
-        vec[u] += vec[v];
-        cuts += child_res.first;
-        cost += child_res.second;
-    }
-
-    if (vec[u] == 0)
+pair<ll, ll> calc(int u) {
+    if (cnt[u] == 0) {
         return {0, 0};
-
-    ll cuts2 = 1;
-    ll cost2 = (ll)treeSize[u] - vec[u];
-
-    if (is_occupied[u])
-        return {cuts2, cost2};
-
-    if (cuts2 < cuts)
-        return {cuts2, cost2};
+    }
     
-    if (cuts < cuts2)
-        return {cuts, cost};
+    pair<ll, ll> propagate_option = {1, (ll)treeSize[u] - cnt[u]};
+    if (is_occupied[u]) {
+        return propagate_option;
+    }
     
-    if (cost2 < cost)
-        return {cuts2, cost2};
-    else
-        return {cuts, cost};
+    return min(propagate_option, solution[u]);
 }
 
 void solve() {
-    int subtask; cin >> subtask;
-    int q;
+    int subtask;
+    cin >> subtask;
     cin >> n >> q;
 
-    adj.resize(n + 1);
-    treeSize.resize(n + 1);
-    parent.resize(n + 1);
-    is_occupied.assign(n + 1, false);
-    vec.resize(n + 1);
-
+    vector<int> vec(n + 1);
+    bool ok = true;
     for (int i = 2; i <= n; ++i) {
-        int p;
-        cin >> p;
-        adj[p].push_back(i);
-        adj[i].push_back(p);
+        cin >> vec[i];
+        if (vec[i] != i - 1)
+            ok = false;
     }
 
-    dfs_precompute(1, 0);
-
-    for (int k = 0; k < q; ++k) {
-        char type;
-        int v;
-        cin >> type >> v;
-
-        if (type == '+')
-            is_occupied[v] = true;
-        else
-            is_occupied[v] = false;
-        
-        ll cuts = 0, cost = 0;
-        for (int i : adj[1]) {
-            if (i == parent[1]) 
-                continue;
-
-            pair<ll, ll> res = recursive(i);
-            cuts += res.first;
-            cost += res.second;
+    if (ok) {
+        set<int> st;
+        for (int k = 0; k < q; ++k) {
+            char type; int v;
+            cin >> type >> v;
+            if (type == '+')
+                st.insert(v);
+            else
+                st.erase(v);
+            
+            if (st.empty())
+                cout << "0 0" << ln;
+            else {
+                int min_v = *st.begin();
+                ll cost = (ll)n - min_v + 1 - st.size();
+                cout << 1 << " " << cost << ln;
+            }
+        }
+    } 
+    else {
+        for (int i = 2; i <= n; ++i) {
+            adj[vec[i]].push_back(i);
+            adj[i].push_back(vec[i]);
         }
 
-        cout << cuts << " " << cost << ln;
+        dfs_precompute(1, 0);
+
+        for (int k = 0; k < q; ++k) {
+            char type; int v;
+            cin >> type >> v;
+
+            int delta = (type == '+') ? 1 : -1;
+            is_occupied[v] = (type == '+');
+            
+            int curr = v;
+            while (curr != 0) {
+                pair<ll, ll> old_dp = dp[curr];
+                
+                cnt[curr] += delta;
+                
+                pair<ll, ll> new_dp = calc(curr);
+                
+                dp[curr] = new_dp;
+                
+                int p = parent[curr];
+                if (p != 0) {
+                    solution[p].first += new_dp.first - old_dp.first;
+                    solution[p].second += new_dp.second - old_dp.second;
+                }
+
+                curr = p;
+            }
+            cout << solution[1].first << " " << solution[1].second << ln;
+        }
     }
 }
 
@@ -129,12 +133,8 @@ signed main() {
     docfile();
     fastio();
 
-    int t = 1;
-    // cin >> t;
-    while (t--) {
-        solve();
-    }
-
+    solve();
+    
     time();
     return 0;
 }

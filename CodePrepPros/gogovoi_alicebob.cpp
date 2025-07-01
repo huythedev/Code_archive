@@ -95,7 +95,7 @@ void solve() {
             else state.bob.insert(j + 1);
         }
         memo.clear();
-        cout << (canAliceWin(state) ? "Alice" : "Bob") << endl;
+        cout << (canAliceWin(state) ? "Alice" : "Bob") << ln;
 }
 
 signed main() {

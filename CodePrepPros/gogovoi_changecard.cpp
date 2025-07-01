@@ -31,13 +31,56 @@ void time() {
 void solve() {
     int n, k; cin >> n >> k;
     vector<int> c(n);
-    map<int, int> freq;
-    for (int &x : c) {
-        cin >> x;
-        freq[x]++;
-    }
-
+    for (int i = 0; i < n; ++i)
+        cin >> c[i];
     
+    vector<int> freq(50101, 0);
+    for (int i = 0; i < n; ++i)
+        freq[c[i]]++;
+    
+    int nextVal = 101;
+    while (true) {
+        int max_freq = 0;
+        int v = -1;
+        for (int i = 0; i < (int)freq.size(); ++i) {
+            if (freq[i] > max_freq) {
+                max_freq = freq[i];
+                v = i;
+            }
+        }
+
+        if (max_freq < k)
+            break;
+        
+        freq[v] -= k;
+        if (freq[v] < 0) 
+            freq[v] = 0;
+
+        int tmp = 0;
+        int w = -1;
+        for (int i = 0; i < (int)freq.size(); ++i) {
+            if (freq[i] < k && freq[i] > tmp) {
+                tmp = freq[i];
+                w = i;
+            }
+        }
+
+        if (w != -1) {
+            freq[w] += (k - 1);
+        }
+        else {
+            for (int i = 0; i < k - 1; ++i) {
+                freq[nextVal] = 1;
+                nextVal++;
+            }
+        }
+    }
+    
+    int res = 0;
+    for (int i : freq)
+        res += i;
+
+    cout << res << ln;
 }
 
 signed main() {

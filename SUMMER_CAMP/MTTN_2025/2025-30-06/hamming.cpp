@@ -33,34 +33,32 @@ void solve() {
     ll m, n; cin >> m >> n;
     string a, b; cin >> a >> b;
  
-    ll len_a = a.length();
-    ll len_b = b.length();
+    ll len_a = a.length(), len_b = b.length();
  
     ll common_div = gcd(len_a, len_b);
     
-    __int128_t lcm = (__int128_t)len_a / common_div * len_b;
+    ll lcm = (ll)len_a / common_div * len_b;
  
     vector<vector<int>> vec(common_div, vector<int>(26, 0));
     for (int i = 0; i < len_a; ++i) {
         vec[i % common_div][a[i] - 'a']++;
     }
  
-    __int128_t diff = 0;
+    ll diff = 0;
     for (int i = 0; i < len_b; ++i) {
         int idx = b[i] - 'a';
         int remainder = i % common_div;
-        __int128_t tmp = len_a / common_div;
-        __int128_t same_chars = vec[remainder][idx];
+        ll tmp = len_a / common_div;
+        ll same_chars = vec[remainder][idx];
         diff += (tmp - same_chars);
     }
     
-    __int128_t total_len = (__int128_t)m * len_a;
-    __int128_t num_lcm_blocks = total_len / lcm;
+    ll total_len = (ll)m * len_a;
+    ll num_lcm_blocks = total_len / lcm;
     
-    __int128_t total = diff * num_lcm_blocks;
+    ll total = diff * num_lcm_blocks;
  
-    ll res = (ll)total;
-    cout << res << ln;
+    cout << total << ln;
 }
 
 signed main() {
