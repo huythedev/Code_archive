@@ -29,103 +29,124 @@ void time() {
 }
 
 const int MAXN = 400005;
+const int LOG = 19;
 
-int n, q;
+int n, q, cnt;
 vector<int> adj[MAXN];
-int parent[MAXN], treeSize[MAXN], cnt[MAXN];
-bool is_occupied[MAXN];
-pair<ll, ll> dp[MAXN], solution[MAXN];
+int sta[MAXN], fin[MAXN], node[MAXN], high[MAXN], par[MAXN][LOG + 1];
+int root[MAXN], curLCK[MAXN];
+set<int> blockedNodes[MAXN];
+int tmp2, ans1, tmp;
 
-void dfs_precompute(int u, int p) {
-    parent[u] = p;
-    treeSize[u] = 1;
+void dfs(int u, int p, int r) {
+    root[u] = r;
+    sta[u] = ++cnt;
+    node[cnt] = u;
     for (int v : adj[u]) {
-        if (v == p) continue;
-        dfs_precompute(v, u);
-        treeSize[u] += treeSize[v];
+        if (v != p) {
+            par[v][0] = u;
+            high[v] = high[u] + 1;
+            dfs(v, u, r);
+        }
     }
+    fin[u] = cnt;
 }
 
-pair<ll, ll> calc(int u) {
-    if (cnt[u] == 0) {
-        return {0, 0};
+void prepare() {
+    cnt = 0;
+    sta[1] = ++cnt;
+    for (int v : adj[1]) {
+        par[v][0] = 1;
+        high[v] = 1;
+        dfs(v, 1, v);
+    }
+    fin[1] = cnt;
+    
+    for (int j = 1; j <= LOG; j++)
+        for (int i = 1; i <= n; i++)
+            par[i][j] = par[par[i][j - 1]][j - 1];
+}
+
+int lca(int u, int v) {
+    if (high[u] < high[v]) swap(u, v);
+    for (int i = LOG; i >= 0; i--)
+        if (high[par[u][i]] >= high[v])
+            u = par[u][i];
+    if (u == v) return u;
+    for (int i = LOG; i >= 0; i--)
+        if (par[u][i] != par[v][i]) {
+            u = par[u][i];
+            v = par[v][i];
+        }
+    return par[u][0];
+}
+
+int subtreeSize(int u) {
+    return u ? fin[u] - sta[u] + 1 : 0;
+}
+
+void change(int u, char type) {
+    tmp2 += (type == '+') ? 1 : -1;
+    int r = root[u];
+    bool hasBefore = !blockedNodes[r].empty();
+    
+    if (type == '+') blockedNodes[r].insert(sta[u]);
+    else blockedNodes[r].erase(sta[u]);
+    
+    bool hasAfter = !blockedNodes[r].empty();
+    
+    if (!hasBefore && hasAfter) ans1++;
+    if (hasBefore && !hasAfter) ans1--;
+    
+    int oldLCK = curLCK[r];
+    if (!hasAfter) curLCK[r] = 0;
+    else {
+        int low = *blockedNodes[r].begin();
+        int high = *blockedNodes[r].rbegin();
+        curLCK[r] = lca(node[low], node[high]);
     }
     
-    pair<ll, ll> propagate_option = {1, (ll)treeSize[u] - cnt[u]};
-    if (is_occupied[u]) {
-        return propagate_option;
-    }
-    
-    return min(propagate_option, solution[u]);
+    tmp += subtreeSize(curLCK[r]) - subtreeSize(oldLCK);
+    cout << ans1 << " " << tmp - tmp2 << ln;
 }
 
 void solve() {
     int subtask;
-    cin >> subtask;
-    cin >> n >> q;
-
+    cin >> subtask >> n >> q;
+    
     vector<int> vec(n + 1);
-    bool ok = true;
-    for (int i = 2; i <= n; ++i) {
+    bool isChain = true;
+    for (int i = 2; i <= n; i++) {
         cin >> vec[i];
-        if (vec[i] != i - 1)
-            ok = false;
+        if (vec[i] != i - 1) isChain = false;
+        adj[vec[i]].push_back(i);
+        adj[i].push_back(vec[i]);
     }
-
-    if (ok) {
+    
+    if (isChain) {
         set<int> st;
-        for (int k = 0; k < q; ++k) {
+        while (q--) {
             char type; int v;
             cin >> type >> v;
-            if (type == '+')
-                st.insert(v);
-            else
-                st.erase(v);
+            if (type == '+') st.insert(v);
+            else st.erase(v);
             
-            if (st.empty())
-                cout << "0 0" << ln;
+            if (st.empty()) cout << "0 0" << ln;
             else {
                 int min_v = *st.begin();
-                ll cost = (ll)n - min_v + 1 - st.sz;
+                ll cost = (ll)n - min_v + 1 - st.size();
                 cout << 1 << " " << cost << ln;
             }
         }
-    } 
-    else {
-        for (int i = 2; i <= n; ++i) {
-            adj[vec[i]].push_back(i);
-            adj[i].push_back(vec[i]);
-        }
-
-        dfs_precompute(1, 0);
-
-        for (int k = 0; k < q; ++k) {
-            char type; int v;
-            cin >> type >> v;
-
-            int delta = (type == '+') ? 1 : -1;
-            is_occupied[v] = (type == '+');
-            
-            int curr = v;
-            while (curr != 0) {
-                pair<ll, ll> old_dp = dp[curr];
-                
-                cnt[curr] += delta;
-                
-                pair<ll, ll> new_dp = calc(curr);
-                
-                dp[curr] = new_dp;
-                
-                int p = parent[curr];
-                if (p != 0) {
-                    solution[p].first += new_dp.first - old_dp.first;
-                    solution[p].second += new_dp.second - old_dp.second;
-                }
-
-                curr = p;
-            }
-            cout << solution[1].first << " " << solution[1].second << ln;
-        }
+        return;
+    }
+    
+    prepare();
+    
+    while (q--) {
+        char type; int v;
+        cin >> type >> v;
+        change(v, type);
     }
 }
 
