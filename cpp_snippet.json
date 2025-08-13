@@ -14,13 +14,13 @@
             "typedef long long ll;",
             "typedef long double ld;",
             "",
-            "void fastio() {",
+            "void fastIO() {",
             "    ios_base::sync_with_stdio(false);",
             "    cin.tie(NULL);",
             "    cout.tie(NULL);",
             "}",
             "",
-            "void docfile() {",
+            "void fileIO() {",
             "    if (ifstream(NAME \".INP\")) {",
             "        freopen(NAME \".INP\", \"r\", stdin);",
             "        freopen(NAME \".OUT\", \"w\", stdout);",
@@ -34,13 +34,11 @@
             "",
             "void solve() {",
             "",
-            "",
-            "",
             "}",
             "",
             "signed main() {",
-            "    docfile();",
-            "    fastio();",
+            "    fastIO();",
+            "    fileIO();",
             "",
             "    int t = 1;",
             "    // cin >> t;",
@@ -55,4 +53,3 @@
         "description": "Competitive Programming Template"
     }
  }
- 
