@@ -1,0 +1,1 @@
+{"name":"Local: F","url":"e:\\Github\\Code\\CONTESTS\\CF_2131\\F.cpp","tests":[{"id":1754839745759,"input":"3\n2\n11\n00\n2\n01\n01\n4\n1010\n1101\n","output":"5\n4\n24\n"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"e:\\Github\\Code\\CONTESTS\\CF_2131\\F.cpp","group":"local","local":true}

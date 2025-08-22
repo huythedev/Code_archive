@@ -1,0 +1,1 @@
+{"name":"Local: gogovoi_coban_sort","url":"e:\\Github\\Code\\CodePrepPros\\gogovoi_coban_sort.cpp","tests":[{"id":1754907498101,"input":"5\n4 3 6 1 5\n4\n1 2\n2 5\n1 3\n2 5\n","output":"5\n4\n"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"e:\\Github\\Code\\CodePrepPros\\gogovoi_coban_sort.cpp","group":"local","local":true}

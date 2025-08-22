@@ -1,0 +1,1 @@
+{"name":"Local: A","url":"e:\\Github\\Code\\CONTESTS\\CF_2125\\A.cpp","tests":[{"id":1753194948153,"input":"5\nFFT\nABFBANTTA\nFFTNTT\nFFTFFTFFTNNTNNT\nAFFTBFFNTTFTTZ\n","output":"FTF\nABFBANATT\nNTFTFT\nTFFFFFFNTNTNTNT\nAFTFBTTFFNFTTZ\n"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"e:\\Github\\Code\\CONTESTS\\CF_2125\\A.cpp","group":"local","local":true}

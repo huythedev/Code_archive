@@ -1,0 +1,1 @@
+{"name":"Local: gogovoi_coban_doll","url":"e:\\Github\\Code\\CodePrepPros\\gogovoi_coban_doll.cpp","tests":[{"id":1754920039035,"input":"8 2\n8 4 2 1 1 3 5 9\n","output":"18\n"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"e:\\Github\\Code\\CodePrepPros\\gogovoi_coban_doll.cpp","group":"local","local":true}

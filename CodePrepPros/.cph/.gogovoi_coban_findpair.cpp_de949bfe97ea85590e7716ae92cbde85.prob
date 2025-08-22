@@ -1,0 +1,1 @@
+{"name":"Local: gogovoi_coban_findpair","url":"e:\\Github\\Code\\CodePrepPros\\gogovoi_coban_findpair.cpp","tests":[{"id":1754909879054,"input":"6 16\n2 3 5 7 9 12\n","output":"4 5\n"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"e:\\Github\\Code\\CodePrepPros\\gogovoi_coban_findpair.cpp","group":"local","local":true}

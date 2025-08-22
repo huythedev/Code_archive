@@ -1,0 +1,1 @@
+{"name":"Local: gogovoi_coban_mergesort","url":"e:\\Github\\Code\\CodePrepPros\\gogovoi_coban_mergesort.cpp","tests":[{"id":1754909226221,"input":"5\n3 1 2 2 1\n","output":"1 1 2 2 3\n"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"e:\\Github\\Code\\CodePrepPros\\gogovoi_coban_mergesort.cpp","group":"local","local":true}

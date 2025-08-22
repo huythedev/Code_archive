@@ -1,0 +1,1 @@
+{"name":"Local: pnumber","url":"e:\\Github\\Code\\CodePrepPros\\pnumber.cpp","tests":[{"id":1753107562215,"input":"1 10\n","output":"2\n3\n5\n7\n"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"e:\\Github\\Code\\CodePrepPros\\pnumber.cpp","group":"local","local":true}
