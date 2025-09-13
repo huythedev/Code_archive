@@ -82,14 +82,14 @@ void solve() {
         active[i] = false;
     }
     
-    vector<ii> ord;
+    vector<pair<int, int>> ord;
     ord.reserve(n);
     for (int i = 1; i <= n; i++) ord.emplace_back(a[i], i);
     sort(ord.rbegin(), ord.rend());
     
     for (auto &pr : ord) {
-        int w = pr.fi;
-        int u = pr.se;
+        int w = pr.first;
+        int u = pr.second;
         active[u] = true;
         for (int v : adj[u]) {
             if (active[v]) {

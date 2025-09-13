@@ -1,0 +1,1 @@
+{"name":"Local: WEATHER","url":"/Users/huythedev/Desktop/Code_archive/SCHOOL/2025-08-12/WEATHER.cpp","tests":[{"id":1754961500220,"input":"5\n5\n1 2\n4 2\n4 5\n3 2\n3 1","output":"10"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/Users/huythedev/Desktop/Code_archive/SCHOOL/2025-08-12/WEATHER.cpp","group":"local","local":true}
