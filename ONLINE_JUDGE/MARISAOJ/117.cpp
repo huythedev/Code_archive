@@ -37,11 +37,7 @@ void solve() {
         adj[v].push_back(u);
     }
 
-    for (int i = 1; i <= m; ++i) {
-        cout << i << ln;
-        for (auto x : adj[i]) cout << x << ' ';
-        cout << ln;
-    }
+    
 }
 
 signed main() {
