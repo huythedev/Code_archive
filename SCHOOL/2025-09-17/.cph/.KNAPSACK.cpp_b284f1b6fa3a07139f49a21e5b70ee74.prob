@@ -1,0 +1,1 @@
+{"name":"Local: KNAPSACK","url":"/Users/huythedev/Desktop/Code_archive/SCHOOL/2025-09-17/KNAPSACK.cpp","tests":[{"id":1758073340638,"input":"2\n2 30\n2 35\n2\n1 2 4\n1 2 3","output":"100"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/Users/huythedev/Desktop/Code_archive/SCHOOL/2025-09-17/KNAPSACK.cpp","group":"local","local":true}

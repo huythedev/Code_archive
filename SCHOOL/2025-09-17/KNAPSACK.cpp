@@ -33,8 +33,31 @@ void solve() {
     vector<int> w(n), v(n);
     for (int i = 0; i < n; ++i) 
         cin >> w[i] >> v[i];
+    
+    int q; cin >> q;
+    int res = 0;
+    while (q--) {
+        int l, r, t; cin >> l >> r >> t;
+        l--; r--;
 
-      
+        vector<int> w2(r - l + 1), v2(r - l + 1);
+        for (int i = l; i <= r; ++i) {
+            w2[i - l] = w[i];
+            v2[i - l] = v[i];
+        }
+
+        int m = (int)w2.size();
+        vector<int> dp(t + 1, 0);
+        for (int i = 0; i < m; ++i) {
+            for (int j = t; j >= w2[i]; --j) {
+                dp[j] = max(dp[j], dp[j - w2[i]] + v2[i]);
+            }
+        }
+
+        res += dp[t];
+    }
+
+    cout << res << ln;
 }
 
 signed main() {
