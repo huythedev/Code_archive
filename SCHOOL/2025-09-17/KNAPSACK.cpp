@@ -40,12 +40,6 @@ void solve() {
         int l, r, t; cin >> l >> r >> t;
         l--; r--;
 
-        // vector<int> w2(r - l + 1), v2(r - l + 1);
-        // for (int i = l; i <= r; ++i) {
-        //     w2[i - l] = w[i];
-        //     v2[i - l] = v[i];
-        // }
-
         int m = r - l + 1;
         vector<ll> dp(t + 1, 0);
         for (int i = 0; i < m; ++i) {
