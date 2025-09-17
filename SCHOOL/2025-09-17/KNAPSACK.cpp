@@ -35,7 +35,7 @@ void solve() {
         cin >> w[i] >> v[i];
     
     int q; cin >> q;
-    int res = 0;
+    ll res = 0;
     while (q--) {   
         int l, r, t; cin >> l >> r >> t;
         l--; r--;
@@ -47,7 +47,7 @@ void solve() {
         }
 
         int m = (int)w2.size();
-        vector<int> dp(t + 1, 0);
+        vector<ll> dp(t + 1, 0);
         for (int i = 0; i < m; ++i) {
             for (int j = t; j >= w2[i]; --j) {
                 dp[j] = max(dp[j], dp[j - w2[i]] + v2[i]);
