@@ -36,7 +36,7 @@ void solve() {
     
     int q; cin >> q;
     int res = 0;
-    while (q--) {
+    while (q--) {   
         int l, r, t; cin >> l >> r >> t;
         l--; r--;
 
