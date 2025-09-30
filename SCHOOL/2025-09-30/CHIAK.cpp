@@ -29,12 +29,11 @@ void time() {
 }
 
 void solve() {
-        long long n, k;
+    long long n, k;
     cin >> n >> k;
 
-    vector<long long> a;
-    a.reserve(static_cast<size_t>(n));
-    for (long long i = 0, x; i < n && (in >> x); ++i) a.push_back(x);
+    vector<long long> a(n);
+    for (ll &x : a) cin >> x;
 
     unordered_map<long long, long long> freq;
     freq.reserve(static_cast<size_t>(min(n + 5, 1000000LL)));
