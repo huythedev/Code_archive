@@ -29,9 +29,39 @@ void time() {
 }
 
 void solve() {
-    int n, k; cin >> n >> k;
-    vector<int> a(n);
-    for (int &x : a) cin >> x;
+        long long n, k;
+    cin >> n >> k;
+
+    vector<long long> a;
+    a.reserve(static_cast<size_t>(n));
+    for (long long i = 0, x; i < n && (in >> x); ++i) a.push_back(x);
+
+    unordered_map<long long, long long> freq;
+    freq.reserve(static_cast<size_t>(min(n + 5, 1000000LL)));
+    freq.max_load_factor(0.7f);
+
+    long long ans = 0;
+    long long pref = 0;
+
+    freq[0] = 1;
+
+    for (long long x : a) {
+        pref += x;
+
+        long long r = pref % k;             // may be negative
+        if (r < 0) r += ((-r / k) + 1) * k; // normalize without overflow assumptions
+        r %= k;                              // final normalize to [0, k-1]
+
+        auto it = freq.find(r);
+        if (it != freq.end()) {
+            ans += it->second; // each prior same remainder forms a valid subarray
+            ++(it->second);
+        } else {
+            freq[r] = 1;
+        }
+    }
+
+    cout << ans;
 }
 
 signed main() {
