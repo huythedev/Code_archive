@@ -29,38 +29,9 @@ void time() {
 }
 
 void solve() {
-    long long n, k;
-    if (!(cin >> n >> k)) { cout << 0; return; }
-    if (k <= 0) { cout << 0; return; } // guard (spec says k>0)
-
-    vector<long long> a(n);
-    for (ll &x : a) cin >> x;
-
-    unordered_map<long long, long long> freq;
-    freq.reserve(static_cast<size_t>(min(n + 5, 1000000LL)));
-    freq.max_load_factor(0.7f);
-
-    long long ans = 0;
-    long long pref = 0;
-
-    freq[0] = 1; // empty prefix
-
-    for (long long x : a) {
-        pref += x;
-
-        // Robust normalization for negatives:
-        long long r = ((pref % k) + k) % k;
-
-        auto it = freq.find(r);
-        if (it != freq.end()) {
-            ans += it->second;
-            ++(it->second);
-        } else {
-            freq[r] = 1;
-        }
-    }
-
-    cout << ans;
+    int n, k; cin >> n >> k;
+    vector<int> a(n);
+    for (int &x : a) cin >> x;
 }
 
 signed main() {
