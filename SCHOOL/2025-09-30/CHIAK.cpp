@@ -30,7 +30,8 @@ void time() {
 
 void solve() {
     long long n, k;
-    cin >> n >> k;
+    if (!(cin >> n >> k)) { cout << 0; return; }
+    if (k <= 0) { cout << 0; return; } // guard (spec says k>0)
 
     vector<long long> a(n);
     for (ll &x : a) cin >> x;
@@ -42,18 +43,17 @@ void solve() {
     long long ans = 0;
     long long pref = 0;
 
-    freq[0] = 1;
+    freq[0] = 1; // empty prefix
 
     for (long long x : a) {
         pref += x;
 
-        long long r = pref % k;             // may be negative
-        if (r < 0) r += ((-r / k) + 1) * k; // normalize without overflow assumptions
-        r %= k;                              // final normalize to [0, k-1]
+        // Robust normalization for negatives:
+        long long r = ((pref % k) + k) % k;
 
         auto it = freq.find(r);
         if (it != freq.end()) {
-            ans += it->second; // each prior same remainder forms a valid subarray
+            ans += it->second;
             ++(it->second);
         } else {
             freq[r] = 1;
