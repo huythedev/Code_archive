@@ -28,38 +28,31 @@ void time() {
          << ln;
 }
 
-static inline ll norm_mod(ll x, ll k) {
-    x %= k;
-    if (x < 0) x += k;
-    return x;
-}
-
 void solve() {
-    int n; ll k;
-    if (!(cin >> n >> k)) return;
-    vector<ll> a(n);
-    for (ll &x : a) cin >> x;
+    long long n, k;
+    cin >> n >> k;
 
-    unordered_map<ll, ll> cnt;
-    cnt.reserve((size_t)min<long long>(n + 5LL, 2000000LL));
-    cnt.max_load_factor(0.7f);
+    unordered_map<long long, long long> freq;
+    freq.reserve((size_t)min<long long>(n + 5, 2000000));
+    freq[0] = 1;
 
-    ll pref = 0;
-    ll ans = 0;
-    cnt[0] = 1; // tổng rỗng
+    long long ans = 0;
+    long long pref = 0;
 
-    for (int i = 0; i < n; ++i) {
-        pref = (pref + norm_mod(a[i], k)) % k;
-        auto it = cnt.find(pref);
-        if (it != cnt.end()) {
+    for (long long i = 0; i < n; ++i) {
+        long long x; cin >> x;
+        pref = (pref + x) % k;
+        if (pref < 0) pref += k;
+        auto it = freq.find(pref);
+        if (it != freq.end()) {
             ans += it->second;
             ++(it->second);
         } else {
-            cnt[pref] = 1;
+            freq[pref] = 1;
         }
     }
 
-    cout << ans << ln;
+    cout << ans;
 }
 
 signed main() {
