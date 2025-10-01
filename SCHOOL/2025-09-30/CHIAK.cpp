@@ -1,70 +1,67 @@
-// Author: huythedev
-// Problem Link: 
 #include <bits/stdc++.h>
 using namespace std;
 
-#define NAME "CHIAK"
-#define ln "\n"
-#define sz size()
+using i64 = long long;
 
-typedef long long ll;
-typedef long double ld;
-
-void fastIO() {
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
-    cout.tie(NULL);
-}
-
-void fileIO() {
-    if (ifstream(NAME ".INP")) {
-        freopen(NAME ".INP", "r", stdin);
-        freopen(NAME ".OUT", "w", stdout);
+// Hash an toàn cho unordered_map (tránh đụng độ gây TLE)
+struct SafeHash {
+    static uint64_t splitmix64(uint64_t x) {
+        x += 0x9e3779b97f4a7c15ULL;
+        x = (x ^ (x >> 30)) * 0xbf58476d1ce4e5b9ULL;
+        x = (x ^ (x >> 27)) * 0x94d049bb133111ebULL;
+        return x ^ (x >> 31);
     }
-}
+    size_t operator()(uint64_t x) const {
+        static const uint64_t FIXED_RANDOM =
+            chrono::steady_clock::now().time_since_epoch().count();
+        return splitmix64(x + FIXED_RANDOM);
+    }
+};
 
-void time() {
-    cerr << ln << "Time elapsed: " << 1.0 * clock() / CLOCKS_PER_SEC << "s." 
-         << ln;
-}
+int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
 
-void solve() {
-    long long n, k;
-    cin >> n >> k;
+    i64 n, k;
+    if (!(cin >> n >> k)) return 0;
 
-    unordered_map<long long, long long> freq;
-    freq.reserve((size_t)min<long long>(n + 5, 2000000));
-    freq[0] = 1;
+    // Ngưỡng dùng mảng đếm: 2e6 (≈16MB) — nhanh nhất khi k nhỏ
+    const i64 THRESH = 2000000;
 
-    long long ans = 0;
-    long long pref = 0;
+    i64 ans = 0;
+    i64 pref = 0;
 
-    for (long long i = 0; i < n; ++i) {
-        long long x; cin >> x;
-        pref = (pref + x) % k;
-        if (pref < 0) pref += k;
-        auto it = freq.find(pref);
-        if (it != freq.end()) {
-            ans += it->second;
-            ++(it->second);
-        } else {
-            freq[pref] = 1;
+    if (k <= THRESH) {
+        vector<i64> cnt((size_t)k, 0);
+        cnt[0] = 1; // tiền tố rỗng
+        for (i64 i = 0; i < n; ++i) {
+            i64 x; cin >> x;
+            // chuẩn hoá về [0..k-1]
+            pref = (pref + x) % k;
+            if (pref < 0) pref += k;
+            ans += cnt[(size_t)pref];
+            ++cnt[(size_t)pref];
+        }
+    } else {
+        unordered_map<uint64_t, i64, SafeHash> cnt;
+        // dự phòng đủ lớn để hạn chế rehash
+        cnt.reserve((size_t)min<i64>(n * 2 + 5, 4000000));
+        cnt[0] = 1; // tiền tố rỗng
+        for (i64 i = 0; i < n; ++i) {
+            i64 x; cin >> x;
+            i64 r = (pref + x) % k;
+            if (r < 0) r += k;
+            pref = r;
+            auto it = cnt.find((uint64_t)r);
+            if (it != cnt.end()) {
+                ans += it->second;
+                ++(it->second);
+            } else {
+                cnt[(uint64_t)r] = 1;
+            }
         }
     }
 
     cout << ans;
-}
-
-signed main() {
-    fastIO();
-    fileIO();
-
-    int t = 1;
-    // cin >> t;
-    while (t--) {
-        solve();
-    }
-
-    time();
     return 0;
 }
