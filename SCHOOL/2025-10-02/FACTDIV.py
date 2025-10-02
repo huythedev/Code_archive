@@ -1,12 +1,17 @@
-import math
+MOD = 10**9 + 7
 
-with open("FACTDIV.INP", "r") as stdin:
-    n, m = map(int, stdin.read().split())
+with open("FACTDIV.INP", "r") as f:
+    n, m = map(int, f.read().split())
 
-nFactorial = math.factorial(n)
-result = nFactorial // m
+lim = m * MOD
+fact = 1
 
-result %= int(1e9 + 7)
+for i in range(2, n + 1):
+    fact *= i
+    if fact >= lim:
+        fact %= lim
 
-with open("FACTDIV.OUT", "w") as stdout:
-    stdout.write(str(int(result)) + "\n")
+result = (fact // m) % MOD
+
+with open("FACTDIV.OUT", "w") as f:
+    f.write(str(result) + "\n")
