@@ -11,7 +11,10 @@ def run_file(filename):
         return f.read().strip()
 
 def main():
-    for _ in range(10):  # run 10 random tests
+    num_tests = 10
+    for t in range(1, num_tests + 1):
+        print(f"Test {t} running...")
+
         n = random.randint(1, 10**6)
         m = random.randint(1, 10**6)
         gen_input(n, m)
@@ -20,13 +23,15 @@ def main():
         out2 = run_file("FACTDIV2.py")
 
         if out1 != out2:
-            print("Mismatch!")
+            print(f"❌ Test {t} failed!")
             print(f"n={n}, m={m}")
             print(f"FACTDIV.py  -> {out1}")
             print(f"FACTDIV2.py -> {out2}")
             return
+        else:
+            print(f"✅ Test {t} passed")
 
-    print("All tests passed ✅")
+    print("\n🎉 All tests passed successfully!")
 
 if __name__ == "__main__":
     main()
