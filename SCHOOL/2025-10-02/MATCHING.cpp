@@ -37,25 +37,27 @@ void solve() {
 
     vector<int> L(n + 1, 0), R(n + 1, 0);
     vector<int> posVal(n + 1, 0);
-    set<int> seen;
+    set<int> st;
 
     for (int i = 1; i <= n; ++i) {
-        auto itPred = seen.lower_bound(S[i]);
-        if (itPred != seen.begin()) {
+        auto itPred = st.lower_bound(S[i]);
+        if (itPred != st.begin()) {
             --itPred;
             L[i] = posVal[*itPred];
         }
-        auto itSucc = seen.upper_bound(S[i]);
-        if (itSucc != seen.end()) {
-            R[i] = posVal[*itSucc];
-        }
-        seen.insert(S[i]);
+
+        auto tmp = st.upper_bound(S[i]);
+
+        if (tmp != st.end())
+            R[i] = posVal[*tmp];
+
+        st.insert(S[i]);
         posVal[S[i]] = i;
     }
 
     auto ok = [&](const vector<int>& T, int i, int q) -> bool {
         int base = i - q - 1;
-        
+
         int li = L[q + 1];
         if (li && !(T[base + li] < T[i])) 
             return false;
