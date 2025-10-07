@@ -1,0 +1,1 @@
+{"name":"Local: E","url":"e:\\Github\\Code\\CONTESTS\\CF_2133\\E.cpp","tests":[{"id":1756050465273,"input":"2\n2\n1 2\n4\n1 2\n2 3\n4 2\n","output":"2\n1 1\n1 2\n5\n1 2\n2 2\n1 1\n1 3\n1 4"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"e:\\Github\\Code\\CONTESTS\\CF_2133\\E.cpp","group":"local","local":true}

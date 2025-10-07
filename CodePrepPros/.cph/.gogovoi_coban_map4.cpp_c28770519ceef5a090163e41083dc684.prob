@@ -1,0 +1,1 @@
+{"name":"Local: gogovoi_coban_map4","url":"e:\\Github\\Code\\CodePrepPros\\gogovoi_coban_map4.cpp","tests":[{"id":1757341526707,"input":"5 6\n1 2 3 2 3\n1 3 4 6 4 5\n","output":"1 3\n"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"e:\\Github\\Code\\CodePrepPros\\gogovoi_coban_map4.cpp","group":"local","local":true}

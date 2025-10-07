@@ -1,0 +1,1 @@
+{"name":"Local: gogovoi_coban_stack1","url":"e:\\Github\\Code\\CodePrepPros\\gogovoi_coban_stack1.cpp","tests":[{"id":1757418824526,"input":"3\n{[()]}\n{[(])}\n{{[[(())]]}}\n","output":"YES\nNO\nYES\n"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"e:\\Github\\Code\\CodePrepPros\\gogovoi_coban_stack1.cpp","group":"local","local":true}

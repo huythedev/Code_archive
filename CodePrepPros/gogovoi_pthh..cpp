@@ -28,83 +28,57 @@ void time() {
          << ln;
 }
 
-ll cost(int x, ll v, const vector<ll>& prefixSum, const vector<ll>& suffixSum, int d) {
-    ll leftCost  = v * 1LL * x - (prefixSum[x] - prefixSum[0]);
-    ll rightCost = suffixSum[d - x] - v * 1LL * (d - x);
-    return leftCost + rightCost;
+const int MAXN = 2e5 + 5;
+
+vector<ll> a(MAXN);
+vector<ll> prefixSum(MAXN);
+int n, k;
+
+ll inc(ll t, int s) {
+    return 1LL * s * t - prefixSum[s];
+}
+
+ll dec(ll t, int r) {
+    return (prefixSum[n] - prefixSum[n - r]) - 1LL * r * t;
 }
 
 void solve() {
-    int n, k;
     cin >> n >> k;
-    vector<ll> a(n);
-    for (auto &x : a) cin >> x;
-
+    a.resize(n);
+    for (ll &x : a) cin >> x;
+    
     sort(a.begin(), a.end());
+    
+    prefixSum.resize(n + 1);
+    for (int i = 1; i <= n; ++i) 
+        prefixSum[i] = prefixSum[i - 1] + a[i - 1];
 
-    vector<pair<ll,int>> vec;
+    ll ans = (1LL << 62);
     for (int i = 0; i < n; ) {
         int j = i;
         while (j < n && a[j] == a[i]) 
             ++j;
 
-        vec.push_back({a[i], j - i});
+        int need = max(0, k - (j - i));
+        if (need == 0) {
+            cout << 0 << ln;
+            return;
+        }
+
+        int lo = max(0, need - (n - j));
+        int hi = min(need, i);
+        if (lo <= hi) {
+            auto cost = [&](int s) -> ll {
+                return inc(a[i], s) + dec(a[i], need - s);
+            };
+            ans = min(ans, min(cost(lo), cost(hi)));
+        }
+
         i = j;
     }
-    
-    int m = (int)vec.size();
-    int l = 0, r = m - 1;
-    ll cl = vec[l].second, cr = vec[r].second, ans = LLONG_MAX, cur = 0;
-    while (true) {
-        if (cl >= k || cr >= k) {
-            ans = min(ans, cur);
-            break;
-        }
 
-        if (l >= r) 
-            break;
-
-        if (cl <= cr) {
-            ll gap = vec[l+1].first - vec[l].first;
-            ll need = k - cl;
-
-            if (cl + need >= k) {
-                ans = min(ans, cur + need);
-            }
-
-            if (cl * gap < need) {
-                cur += cl * gap;
-                l++;
-                cl += vec[l].second;
-            } 
-            else {
-                ans = min(ans, cur + need);
-                break;
-            }
-        } 
-        else {
-            ll gap = vec[r].first - vec[r-1].first;
-            ll need = k - cr;
-
-            if (cr + need >= k) {
-                ans = min(ans, cur + need);
-            }
-
-            if (cr * gap < need) {
-                cur += cr * gap;
-                r--;
-                cr += vec[r].second;
-            } 
-            else {
-                ans = min(ans, cur + need);
-                break;
-            }
-        }
-    }
-    
     cout << ans << ln;
 }
-
 
 signed main() {
     docfile();
