@@ -29,33 +29,61 @@ void time() {
 }
 
 struct Job {
-    int a, b;
-    ll c;
+    int start;
+    int end;
+    int profit;
 };
+
+bool comp(const Job& a, const Job& b) {
+    return a.end < b.end;
+}
+
+int findjob(const vector<Job>& jobs, int idx) {
+    int low = 0, high = idx - 1;
+    int result = -1;
+
+    while (low <= high) {
+        int mid = low + (high - low) / 2;
+        if (jobs[mid].end <= jobs[idx].start) {
+            result = mid;
+            low = mid + 1;
+        } 
+        else {
+            high = mid - 1;
+        }
+    }
+    return result;
+}
 
 void solve() {
     int n;
     cin >> n;
-    vector<Job> jobs(n + 1);
-    for (int i = 1; i <= n; ++i)
-        cin >> jobs[i].a >> jobs[i].b >> jobs[i].c;
 
-    sort(jobs.begin() + 1, jobs.end(), [](const Job& x, const Job& y){
-        if (x.b != y.b) return x.b < y.b;
-        return x.a < y.a;
-    });
-
-    vector<int> ends(n + 1);
-    for (int i = 1; i <= n; ++i) ends[i] = jobs[i].b;
-
-    vector<ll> dp(n+1, 0);
-
-    for (int i = 1; i <= n; ++i) {
-        int p = int(upper_bound(ends.begin() + 1, ends.begin() + n + 1, jobs[i].a) - (ends.begin())) - 1;
-        dp[i] = max(dp[i - 1], dp[p] + jobs[i].c);
+    vector<Job> jobs(n);
+    for (int i = 0; i < n; ++i) {
+        cin >> jobs[i].start >> jobs[i].end >> jobs[i].profit;
     }
 
-    cout << dp[n] << ln;
+    sort(jobs.begin(), jobs.end(), comp);
+
+    vector<ll> dp(n);
+
+    dp[0] = jobs[0].profit;
+
+    for (int i = 1; i < n; ++i) {
+        ll profit = jobs[i].profit;
+        int idx = findjob(jobs, i);
+        
+        if (idx != -1) {
+            profit += dp[idx];
+        }
+
+        ll profit2 = dp[i - 1];
+        
+        dp[i] = max(profit, profit2);
+    }
+
+    cout << dp[n - 1] << ln;
 }
 
 signed main() {
