@@ -28,45 +28,119 @@ void time() {
          << ln;
 }
 
-void solve() {
-    int n;
-    cin >> n;
-    vector<int> a(n);
-    int maxA = 0;
-    for (int i = 0; i < n; ++i) {
-        cin >> a[i];
-        maxA = max(maxA, a[i]);
-    }
+#define int ll
 
-    vector<int> freq(maxA + 1, 0);
-    for (int x : a) freq[x]++;
+int solve_sub1(const vector<ll>& a) {
+    int n = a.size();
+    int cnt = 0;
+    unordered_set<ll> mids;
+    mids.reserve((size_t)n * n / 2);
 
-    int countMid = 0;
-    
+    for (int i = 0; i < n; ++i)
+        for (int j = i + 1; j < n; ++j) {
+            ll s = a[i] + a[j];
+            if ((s & 1LL) == 0) mids.insert(s / 2);
+        }
+
+    for (auto x : a)
+        if (mids.count(x)) ++cnt;
+
+    return cnt;
+}
+
+// ---------- SUBTASK 2: n ≤ 3000, ai ≤ 2e4 ----------
+int solve_sub2(const vector<ll>& a) {
+    int n = a.size();
+    int maxA = *max_element(a.begin(), a.end());
+    vector<int> freq(maxA + 1);
+    for (auto v : a) ++freq[v];
+    int ans = 0;
+
     for (int v = 1; v <= maxA; ++v) {
         if (!freq[v]) continue;
         bool ok = false;
-        
         int L = 1, R = maxA;
         int target = 2 * v;
         while (L <= R) {
             int sum = L + R;
             if (sum == target) {
                 if ((L != R && freq[L] && freq[R]) ||
-                    (L == R && freq[L] > 1)) {
-                    ok = true;
-                    break;
-                }
+                    (L == R && freq[L] > 1)) { ok = true; break; }
                 ++L; --R;
-            } else if (sum < target)
-                ++L;
-            else
-                --R;
+            } else if (sum < target) ++L;
+            else --R;
         }
-        if (ok) countMid += freq[v];
+        if (ok) ans += freq[v];
     }
+    return ans;
+}
 
-    cout << countMid;
+// ---------- SUBTASK 3: n ≤ 400, ai ≤ 1e9 ----------
+int solve_sub3(vector<ll> a) {
+    int n = a.size();
+    sort(a.begin(), a.end());
+    int cnt = 0;
+    for (int k = 0; k < n; ++k) {
+        ll target = 2 * a[k];
+        int i = 0, j = n - 1;
+        bool ok = false;
+        while (i < j) {
+            ll sum = a[i] + a[j];
+            if (sum == target) { ok = true; break; }
+            else if (sum < target) ++i;
+            else --j;
+        }
+        if (ok) ++cnt;
+    }
+    return cnt;
+}
+
+// ---------- SUBTASK 4: n ≤ 50000, ai ≤ 5e3 ----------
+int solve_sub4(const vector<ll>& a) {
+    int maxA = *max_element(a.begin(), a.end());
+    vector<int> freq(maxA + 1);
+    for (auto v : a) ++freq[v];
+    int ans = 0;
+    for (int v = 1; v <= maxA; ++v) {
+        if (!freq[v]) continue;
+        bool ok = false;
+        int L = 1, R = maxA;
+        int target = 2 * v;
+        while (L <= R) {
+            int sum = L + R;
+            if (sum == target) {
+                if ((L != R && freq[L] && freq[R]) ||
+                    (L == R && freq[L] > 1)) { ok = true; break; }
+                ++L; --R;
+            } else if (sum < target) ++L;
+            else --R;
+        }
+        if (ok) ans += freq[v];
+    }
+    return ans;
+}
+
+void solve() {
+    int n;
+    cin >> n;
+    vector<ll> a(n);
+    for (auto &x : a) cin >> x;
+
+    ll maxA = *max_element(a.begin(), a.end());
+    int ans = 0;
+
+    if (n <= 400 && maxA <= 20000)
+        ans = solve_sub1(a);               // O(n^2)
+    else if (n <= 3000 && maxA <= 20000)
+        ans = solve_sub2(a);               // O(U^2) with U≤2e4
+    else if (n <= 400 && maxA <= 1e9)
+        ans = solve_sub3(a);               // O(n^2) (small n)
+    else if (n <= 50000 && maxA <= 5000)
+        ans = solve_sub4(a);               // O(U^2) with U≤5e3
+    else
+        ans = solve_sub3(a);               // fallback safe choice
+
+    cout << ans;
 }
 
 signed main() {
