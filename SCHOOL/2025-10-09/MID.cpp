@@ -41,7 +41,7 @@ int solve_sub1(const vector<ll>& a) {
                 mids.insert(s / 2);
         }
 
-    for (auto x : a)
+    for (ll x : a)
         if (mids.count(x)) 
             ++cnt;
 
@@ -52,7 +52,7 @@ int solve_sub24(const vector<ll>& a) {
     int n = a.size();
     int maxA = *max_element(a.begin(), a.end());
     vector<int> freq(maxA + 1);
-    for (auto v : a) 
+    for (ll v : a) 
         ++freq[v];
     int ans = 0;
 
@@ -106,7 +106,7 @@ void solve() {
     int n;
     cin >> n;
     vector<ll> a(n);
-    for (auto &x : a) cin >> x;
+    for (ll &x : a) cin >> x;
 
     ll maxA = *max_element(a.begin(), a.end());
     int ans = 0;
