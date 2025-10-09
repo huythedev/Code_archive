@@ -28,8 +28,6 @@ void time() {
          << ln;
 }
 
-#define int ll
-
 int solve_sub1(const vector<ll>& a) {
     int n = a.size();
     int cnt = 0;
@@ -39,21 +37,23 @@ int solve_sub1(const vector<ll>& a) {
     for (int i = 0; i < n; ++i)
         for (int j = i + 1; j < n; ++j) {
             ll s = a[i] + a[j];
-            if ((s & 1LL) == 0) mids.insert(s / 2);
+            if ((s & 1LL) == 0) 
+                mids.insert(s / 2);
         }
 
     for (auto x : a)
-        if (mids.count(x)) ++cnt;
+        if (mids.count(x)) 
+            ++cnt;
 
     return cnt;
 }
 
-// ---------- SUBTASK 2: n ≤ 3000, ai ≤ 2e4 ----------
 int solve_sub24(const vector<ll>& a) {
     int n = a.size();
     int maxA = *max_element(a.begin(), a.end());
     vector<int> freq(maxA + 1);
-    for (auto v : a) ++freq[v];
+    for (auto v : a) 
+        ++freq[v];
     int ans = 0;
 
     for (int v = 1; v <= maxA; ++v) {
@@ -64,18 +64,25 @@ int solve_sub24(const vector<ll>& a) {
         while (L <= R) {
             int sum = L + R;
             if (sum == target) {
-                if ((L != R && freq[L] && freq[R]) ||
-                    (L == R && freq[L] > 1)) { ok = true; break; }
+                if ((L != R && freq[L] && freq[R]) || (L == R && freq[L] > 1)) { 
+                    ok = true;
+                    break; 
+                }
                 ++L; --R;
-            } else if (sum < target) ++L;
-            else --R;
+            } 
+            else if (sum < target) 
+                ++L;
+            else 
+            --R;
         }
-        if (ok) ans += freq[v];
+
+        if (ok) 
+            ans += freq[v];
     }
+    
     return ans;
 }
 
-// ---------- SUBTASK 3: n ≤ 400, ai ≤ 1e9 ----------
 int solve_sub3(vector<ll> a) {
     int n = a.size();
     sort(a.begin(), a.end());
@@ -105,15 +112,15 @@ void solve() {
     int ans = 0;
 
     if (n <= 400 && maxA <= 20000)
-        ans = solve_sub1(a);               // O(n^2)
+        ans = solve_sub1(a);
     else if (n <= 3000 && maxA <= 20000)
-        ans = solve_sub24(a);               // O(U^2) with U≤2e4
+        ans = solve_sub24(a);
     else if (n <= 400 && maxA <= 1e9)
-        ans = solve_sub3(a);               // O(n^2) (small n)
+        ans = solve_sub3(a);
     else if (n <= 50000 && maxA <= 5000)
-        ans = solve_sub24(a);               // O(U^2) with U≤5e3
+        ans = solve_sub24(a);
     else
-        ans = solve_sub3(a);               // fallback safe choice
+        ans = solve_sub3(a);
 
     cout << ans;
 }
