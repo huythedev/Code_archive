@@ -1,0 +1,1 @@
+{"name":"Local: NUMPRN","url":"/Users/huythedev/Desktop/Code_archive/SCHOOL/2025-10-07/NUMPRN.cpp","tests":[{"id":1759800046370,"input":"1\n35\n40\n50\n60","output":"-1\n1 4\n1\n1 2 3 4 5"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/Users/huythedev/Desktop/Code_archive/SCHOOL/2025-10-07/NUMPRN.cpp","group":"local","local":true}
