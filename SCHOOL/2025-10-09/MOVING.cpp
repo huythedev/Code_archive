@@ -53,7 +53,7 @@ vector<ll> dijkstra(int s, const vector<vector<pair<int, ll>>>& adj) {
             }
         }
     }
-    
+
     return dist;
 }
 
@@ -81,12 +81,12 @@ void solve() {
 
     vector<ll> Ans = dijkstra(S, grev);
 
-    for (int p = 2; p <= n; ++p) {
-        if (Ans[p] >= INF / 2) cout << -1;
-        else cout << Ans[p];
-        if (p < n) cout << ' ';
+    for (int i = 2; i <= n; ++i) {
+        if (Ans[i] >= INF / 2) cout << -1;
+        else cout << Ans[i];
+        cout << ' ';
     }
-    cout << '\n';
+    cout << ln;
 }
 
 signed main() {
