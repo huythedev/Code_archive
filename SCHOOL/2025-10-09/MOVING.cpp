@@ -73,19 +73,23 @@ void solve() {
     vector<ll> D = dijkstra(1, g);
 
     int S = n + 1;
-    for (int x = 1; x <= n; ++x) {
-        if (D[x] < INF / 2) {
-            grev[S].push_back({x, D[x]});
+    for (int i = 1; i <= n; ++i) {
+        if (D[i] < INF / 2) {
+            grev[S].push_back({i, D[i]});
         }
     }
 
     vector<ll> Ans = dijkstra(S, grev);
 
     for (int i = 2; i <= n; ++i) {
-        if (Ans[i] >= INF / 2) cout << -1;
-        else cout << Ans[i];
+        if (Ans[i] >= INF / 2) 
+            cout << -1;
+        else 
+            cout << Ans[i];
+        
         cout << ' ';
     }
+    
     cout << ln;
 }
 
