@@ -1,0 +1,1 @@
+{"name":"Local: tmp2","url":"/Users/huythedev/Desktop/Code_archive/tmp/tmp2.cpp","tests":[{"id":1760186578875,"input":"1\n3 2 4\n1 2 4\n2 3 3\n","output":"5\n"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/Users/huythedev/Desktop/Code_archive/tmp/tmp2.cpp","group":"local","local":true}

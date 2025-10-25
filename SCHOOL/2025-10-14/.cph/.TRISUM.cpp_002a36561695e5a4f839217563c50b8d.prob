@@ -1,0 +1,1 @@
+{"name":"Local: TRISUM","url":"/Users/huythedev/Desktop/Code_archive/SCHOOL/2025-10-14/TRISUM.cpp","tests":[{"id":1760402858684,"input":"5\n1\n2\n3\n-4\n-5","output":"77"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/Users/huythedev/Desktop/Code_archive/SCHOOL/2025-10-14/TRISUM.cpp","group":"local","local":true}

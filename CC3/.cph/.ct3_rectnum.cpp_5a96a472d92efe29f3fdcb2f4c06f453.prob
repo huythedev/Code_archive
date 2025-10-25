@@ -1,0 +1,1 @@
+{"name":"Local: ct3_rectnum","url":"/Users/huythedev/Desktop/Code_archive/CC3/ct3_rectnum.cpp","tests":[{"id":1760786052505,"input":"123456\n45678\n64321\n89053\n","output":"4"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/Users/huythedev/Desktop/Code_archive/CC3/ct3_rectnum.cpp","group":"local","local":true}

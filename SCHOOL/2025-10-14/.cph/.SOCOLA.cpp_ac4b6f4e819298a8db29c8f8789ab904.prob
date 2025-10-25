@@ -1,0 +1,1 @@
+{"name":"Local: SOCOLA","url":"/Users/huythedev/Desktop/Code_archive/SCHOOL/2025-10-14/SOCOLA.cpp","tests":[{"id":1760401293363,"input":"5 2\n1 9 22 10 19\n18 4\n5 2","output":"34\n-21"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/Users/huythedev/Desktop/Code_archive/SCHOOL/2025-10-14/SOCOLA.cpp","group":"local","local":true}

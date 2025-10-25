@@ -1,0 +1,1 @@
+{"name":"Local: ct3_training","url":"/Users/huythedev/Desktop/Code_archive/CC3/ct3_training.cpp","tests":[{"id":1760785630269,"input":"4 5 6\n1 1\n2 2\n3 2\n4 2\n","output":"3"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/Users/huythedev/Desktop/Code_archive/CC3/ct3_training.cpp","group":"local","local":true}
