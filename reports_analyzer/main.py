@@ -74,7 +74,7 @@ def load_and_clean(csv_path: str) -> pd.DataFrame:
 
     # Fill empty download/upload with 0 before processing
     for col in ["download_kbps", "upload_kbps"]:
-        if col in df.columns:
+        if col in df.columns:ø
             df[col] = df[col].fillna(0)
 
     # Derived Mbps (explicit SI conversion)
